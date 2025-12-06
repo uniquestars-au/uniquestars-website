@@ -234,23 +234,6 @@ export default function Home() {
     return () => clearInterval(interval);
   }, [testimonials.length]);
 
-  // 🔅 Smooth fade when testimonial changes
-  useEffect(() => {
-    const wrapper = document.getElementById('testimonial-wrapper');
-    if (!wrapper) return;
-
-    // We want to fade the card, not the wrapper
-    const card = wrapper.querySelector('.testimonial-fade') as HTMLElement | null;
-    if (!card) return;
-
-    card.classList.add('fade-out');
-
-    const timeout = setTimeout(() => {
-      card.classList.remove('fade-out');
-    }, 250); // half of CSS duration so it feels smooth
-
-    return () => clearTimeout(timeout);
-  }, [currentTestimonial]);
 
   // ⬅️ ➡️ Keyboard navigation for testimonials
   useEffect(() => {
@@ -1334,94 +1317,108 @@ export default function Home() {
             </div>
 
             <div className="relative max-w-4xl mx-auto" id="testimonial-wrapper">
-
-              {/* Animated testimonial card – content changes automatically */}
-              <div
-                key={currentTestimonial}
-                className="bg-white rounded-[50px] p-12 border-8 border-[#0A2A66] relative transition-opacity duration-500 opacity-100 testimonial-fade"
-
-                style={{
-                  boxShadow:
-                    '0 30px 70px rgba(10, 42, 102, 0.3), inset 0 -5px 20px rgba(51, 200, 255, 0.1)',
-                }}
-              >
+              {/* Slider viewport */}
+              <div className="overflow-hidden">
+                {/* Sliding row */}
                 <div
-                  className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-2 bg-gradient-to-r from-[#FFC837] via-[#FF4F87] to-[#33C8FF] rounded-full"
+                  className="flex transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)]"
                   style={{
-                    boxShadow: '0 4px 20px rgba(255, 200, 55, 0.6)',
+                    transform: `translateX(-${currentTestimonial * 100}%)`,
                   }}
-                ></div>
-
-                {/* Profile Image with Glow */}
-                <div className="flex justify-center mb-8">
-                  <div className="relative">
+                >
+                  {testimonials.map((testimonial, index) => (
                     <div
-                      className="absolute inset-0 rounded-full"
-                      style={{
-                        background:
-                          'linear-gradient(135deg, #FFC837, #FF4F87, #33C8FF)',
-                        filter: 'blur(20px)',
-                        opacity: 0.6,
-                      }}
-                    ></div>
-                    <img
-                      src={testimonials[currentTestimonial].image}
-                      alt={testimonials[currentTestimonial].name}
-                      className="relative w-24 h-24 rounded-full object-cover border-6 border-white"
-                      style={{
-                        boxShadow:
-                          '0 10px 30px rgba(0, 0, 0, 0.2)',
-                        backgroundColor: '#E3E6EB',
-                      }}
-                      loading="lazy"
-                      decoding="async"
-                      crossOrigin="anonymous"
-                      onError={handleImgError}
-                    />
-                  </div>
-                </div>
-
-                <div className="flex justify-center mb-8">
-                  {[...Array(testimonials[currentTestimonial].rating)].map(
-                    (_, i) => (
-                      <i
-                        key={i}
-                        className="ri-star-fill text-4xl text-[#FFC837]"
+                      key={index}
+                      className="w-full flex-shrink-0 px-1 sm:px-2"
+                    >
+                      {/* Whole CARD moves as a slide */}
+                      <div
+                        className="bg-white rounded-[50px] p-8 sm:p-10 md:p-12 border-8 border-[#0A2A66] relative"
                         style={{
-                          filter:
-                            'drop-shadow(0 2px 8px rgba(255, 200, 55, 0.6))',
+                          boxShadow:
+                            '0 30px 70px rgba(10, 42, 102, 0.3), inset 0 -5px 20px rgba(51, 200, 255, 0.1)',
                         }}
-                      ></i>
-                    ),
-                  )}
+                      >
+                        <div
+                          className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-2 bg-gradient-to-r from-[#FFC837] via-[#FF4F87] to-[#33C8FF] rounded-full"
+                          style={{
+                            boxShadow: '0 4px 20px rgba(255, 200, 55, 0.6)',
+                          }}
+                        ></div>
+
+                        {/* Profile Image with Glow */}
+                        <div className="flex justify-center mb-8">
+                          <div className="relative">
+                            <div
+                              className="absolute inset-0 rounded-full"
+                              style={{
+                                background:
+                                  'linear-gradient(135deg, #FFC837, #FF4F87, #33C8FF)',
+                                filter: 'blur(20px)',
+                                opacity: 0.6,
+                              }}
+                            ></div>
+                            <img
+                              src={testimonial.image}
+                              alt={testimonial.name}
+                              className="relative w-24 h-24 rounded-full object-cover border-6 border-white"
+                              style={{
+                                boxShadow: '0 10px 30px rgba(0, 0, 0, 0.2)',
+                                backgroundColor: '#E3E6EB',
+                                // move only the 2nd review image down a bit
+                                objectPosition: index === 1 ? 'center 10%' : 'center',
+                              }}
+                              loading="lazy"
+                              decoding="async"
+                              crossOrigin="anonymous"
+                              onError={handleImgError}
+                            />
+                          </div>
+                        </div>
+
+                        <div className="flex justify-center mb-8">
+                          {[...Array(testimonial.rating)].map((_, i) => (
+                            <i
+                              key={i}
+                              className="ri-star-fill text-4xl text-[#FFC837]"
+                              style={{
+                                filter:
+                                  'drop-shadow(0 2px 8px rgba(255, 200, 55, 0.6))',
+                              }}
+                            ></i>
+                          ))}
+                        </div>
+
+                        <p className="text-[#0A2A66] text-2xl leading-relaxed mb-10 text-center italic font-medium">
+                          &quot;{testimonial.text}&quot;
+                        </p>
+
+                        <div className="text-center">
+                          <div
+                            className="font-extrabold text-[#0A2A66] text-2xl mb-2"
+                            style={{ fontFamily: 'Nunito, sans-serif' }}
+                          >
+                            {testimonial.name}
+                          </div>
+                          <div className="text-[#A9B1C0] text-lg font-semibold">
+                            {testimonial.location}
+                          </div>
+                        </div>
+
+                        <div
+                          className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 w-32 h-2 bg-gradient-to-r from-[#33C8FF] via-[#4AD36D] to-[#FF8A3D] rounded-full"
+                          style={{
+                            boxShadow:
+                              '0 4px 20px rgba(51, 200, 255, 0.6)',
+                          }}
+                        ></div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-
-                <p className="text-[#0A2A66] text-2xl leading-relaxed mb-10 text-center italic font-medium">
-                  &quot;{testimonials[currentTestimonial].text}&quot;
-                </p>
-
-                <div className="text-center">
-                  <div
-                    className="font-extrabold text-[#0A2A66] text-2xl mb-2"
-                    style={{ fontFamily: 'Nunito, sans-serif' }}
-                  >
-                    {testimonials[currentTestimonial].name}
-                  </div>
-                  <div className="text-[#A9B1C0] text-lg font-semibold">
-                    {testimonials[currentTestimonial].location}
-                  </div>
-                </div>
-
-                <div
-                  className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 w-32 h-2 bg-gradient-to-r from-[#33C8FF] via-[#4AD36D] to-[#FF8A3D] rounded-full"
-                  style={{
-                    boxShadow:
-                      '0 4px 20px rgba(51, 200, 255, 0.6)',
-                  }}
-                ></div>
               </div>
 
-              {/* Dots – still clickable + auto-highlight current testimonial */}
+              {/* Dots – unchanged, still using currentTestimonial */}
               <div className="flex justify-center gap-4 mt-12">
                 {testimonials.map((_, index) => (
                   <button
@@ -1444,6 +1441,7 @@ export default function Home() {
                 ))}
               </div>
             </div>
+
 
             <div className="text-center mt-12">
               <Link
@@ -1606,8 +1604,10 @@ export default function Home() {
   .star-hero, .star-sticker, .star-behind { z-index: 0; }
   section > .max-w-[1280px] { position: relative; z-index: 10; }
 
-  /* Image fallback */
-  img[onerror], img { background-color: #E3E6EB; }
+  /* Image fallback – only content images, not navbar logo */
+main img { 
+  background-color: #E3E6EB;
+}
 
   /* Generic box-sizing helper */
   .sanaz-content, .sanaz-content * { box-sizing: border-box; }
@@ -1959,18 +1959,32 @@ export default function Home() {
       overflow-x: hidden !important;
     }
 
-    .sanaz-content .founder-pill {
-      padding: 0.5rem 0.9rem !important;
-      gap: 0.5rem !important;
-      margin-bottom: 0.9rem !important;
-    }
-    .sanaz-content .founder-pill i {
-      font-size: 1.1rem !important;
-    }
-    .sanaz-content .founder-pill span {
-      font-size: 0.8rem !important;
-      white-space: nowrap !important;
-    }
+    /* "Meet our founder" pill */
+.sanaz-content .founder-pill {
+  padding: 0.5rem 0.9rem !important;
+  gap: 0.5rem !important;
+  margin-bottom: 0.9rem !important;
+
+  display: inline-flex !important;
+  align-items: center !important;   /* vertical center icon + text */
+}
+
+/* icon */
+.sanaz-content .founder-pill i {
+  font-size: 1.1rem !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+  transform: translateY(8px) !important;      
+}
+
+/* text */
+.sanaz-content .founder-pill span {
+  font-size: 0.8rem !important;
+  white-space: nowrap !important;
+}
 
     .sanaz-content h3 {
       font-size: 2rem !important;
@@ -2078,18 +2092,34 @@ export default function Home() {
       overflow-x: hidden !important;
     }
 
-    .sanaz-content .founder-pill {
-      padding: 0.6rem 1rem !important;
-      gap: 0.55rem !important;
-      margin-bottom: 1rem !important;
-    }
-    .sanaz-content .founder-pill i {
-      font-size: 1.15rem !important;
-    }
-    .sanaz-content .founder-pill span {
-      font-size: 0.85rem !important;
-      white-space: nowrap !important;
-    }
+    /* "Meet our founder" pill */
+.sanaz-content .founder-pill {
+  padding: 0.6rem 1rem !important;
+  gap: 0.55rem !important;
+  margin-bottom: 1rem !important;
+
+  display: inline-flex !important;
+  align-items: center !important;   /* vertical center icon + text */
+}
+
+/* icon */
+.sanaz-content .founder-pill i {
+  font-size: 1.15rem !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+  /* transform: none !important; */  
+  transform: translateY(8px) !important;
+     
+}
+
+/* text */
+.sanaz-content .founder-pill span {
+  font-size: 0.85rem !important;
+  white-space: nowrap !important;
+}
 
     .sanaz-content h3 {
       font-size: 2.1rem !important;
@@ -2310,15 +2340,6 @@ export default function Home() {
       line-height: 1.35 !important;
     }
   }
-
-.testimonial-fade {
-  opacity: 1;
-  transition: opacity 0.5s ease-in-out;
-}
-
-.testimonial-fade.fade-out {
-  opacity: 0;
-}
 
 
 `}</style>

@@ -492,63 +492,66 @@ export default function About() {
 
 
       {/* ————— Meet Sanaz - Premium Profile ————— */}
-              <section className="py-24 bg-gradient-to-br from-[#EAF7FF] to-white relative overflow-hidden sanaz-section">
-                <div className="absolute top-10 left-10 w-32 h-32 opacity-10">
-                  <i className="ri-star-fill text-9xl text-[#FFC837]"></i>
-                </div>
-                <div className="absolute bottom-10 right-10 w-28 h-28 opacity-10">
-                  <i className="ri-star-fill text-8xl text-[#FF4F87]"></i>
-                </div>
-      
-                <div className="max-w-[1280px] mx-auto px-5 relative z-10">
-                  <div
-                    className="bg-gradient-to-r from-[#0A2A66] via-[#0480E8] to-[#0A2A66] rounded-[60px] overflow-hidden relative sanaz-container"
-                    style={{
-                      boxShadow: '0 30px 70px rgba(10, 42, 102, 0.4)'
-                    }}
-                  >
-                    <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-white/10 to-transparent"></div>
-      
-                    <div className="grid lg:grid-cols-5 gap-0">
-                      {/* Image Column */}
-                      <div className="lg:col-span-2 relative">
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#0A2A66]/50 z-10"></div>
-                        <img
-                          src={SanazAbout}
-                          alt="Sanaz - Therapist"
-                          className="w-full h-full object-cover object-top"
-                          loading="lazy"
-                          decoding="async"
-                          crossOrigin="anonymous"
-                          onError={handleImgError}
-                        />
-                      </div>
-      
-                      {/* Content Column */}
-                      <div className="lg:col-span-3 p-16 flex flex-col justify-center relative sanaz-content">
-                <div className="inline-flex items-center gap-3 bg-white/20 px-3 py-2 md:px-5 md:py-3 rounded-full mb-8 w-fit backdrop-blur-sm" style={{ boxShadow: '0 4px 15px rgba(255, 255, 255, 0.2)' }}>
+      <section className="py-24 bg-gradient-to-br from-[#EAF7FF] to-white relative overflow-hidden sanaz-section">
+        <div className="absolute top-10 left-10 w-32 h-32 opacity-10">
+          <i className="ri-star-fill text-9xl text-[#FFC837]"></i>
+        </div>
+        <div className="absolute bottom-10 right-10 w-28 h-28 opacity-10">
+          <i className="ri-star-fill text-8xl text-[#FF4F87]"></i>
+        </div>
+
+        <div className="max-w-[1280px] mx-auto px-5 relative z-10">
+          <div
+            className="bg-gradient-to-r from-[#0A2A66] via-[#0480E8] to-[#0A2A66] rounded-[60px] overflow-hidden relative sanaz-container"
+            style={{
+              boxShadow: '0 30px 70px rgba(10, 42, 102, 0.4)'
+            }}
+          >
+            <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-white/10 to-transparent"></div>
+
+            <div className="grid lg:grid-cols-5 gap-0">
+              {/* Image Column */}
+              <div className="lg:col-span-2 relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#0A2A66]/50 z-10"></div>
+                <img
+                  src={SanazAbout}
+                  alt="Sanaz - Therapist"
+                  className="w-full h-full object-cover object-top"
+                  loading="lazy"
+                  decoding="async"
+                  crossOrigin="anonymous"
+                  onError={handleImgError}
+                />
+              </div>
+
+              {/* Content Column */}
+              <div className="lg:col-span-3 p-16 flex flex-col justify-center relative sanaz-content">
+                <div
+                  className="founder-pill inline-flex items-center gap-3 bg-white/20 px-3 py-2 md:px-5 md:py-3 rounded-full mb-8 w-fit backdrop-blur-sm"
+                  style={{ boxShadow: '0 4px 15px rgba(255, 255, 255, 0.2)' }}
+                >
                   <i className="ri-user-heart-fill text-2xl text-[#FFC837]"></i>
                   <span className="text-white font-bold text-base">Meet Our Founder</span>
                 </div>
-      
-                        <h3
-                          className="text-5xl font-extrabold text-white mb-4"
-                          style={{
-                            fontFamily: 'Nunito, sans-serif',
-                            textShadow: '0 4px 20px rgba(0, 0, 0, 0.3)'
-                          }}
-                        >
-                          Sanaz
-                        </h3>
-                        <p
-                          className="text-[#FFC837] font-extrabold text-2xl mb-8"
-                          style={{
-                            textShadow: '0 2px 10px rgba(255, 200, 55, 0.5)'
-                          }}
-                        >
+
+                <h3
+                  className="text-5xl font-extrabold text-white mb-4"
+                  style={{
+                    fontFamily: 'Nunito, sans-serif',
+                    textShadow: '0 4px 20px rgba(0, 0, 0, 0.3)'
+                  }}
+                >
+                  Sanaz
+                </h3>
+                <p
+                  className="text-[#FFC837] font-extrabold text-2xl mb-8"
+                  style={{
+                    textShadow: '0 2px 10px rgba(255, 200, 55, 0.5)'
+                  }}
+                >
                   ESDM Certified Therapist & Founder
-                        </p>
-      
+                </p>
+
                 <p className="text-white/95 text-base md:text-lg leading-relaxed mb-6">
                   With over 5 years of dedicated experience in early intervention therapy, Sanaz has transformed the lives of hundreds of children and families across Sydney. Her passion for helping children with autism reach their full potential led her to pursue specialized certification in the Early Start Denver Model (ESDM).
                 </p>
@@ -556,66 +559,66 @@ export default function About() {
                 <p className="text-white/95 text-base md:text-lg leading-relaxed mb-10">
                   Sanaz's warm, family-centered approach combines evidence-based practices with genuine compassion, creating a safe and nurturing environment where children thrive. She believes that every child has unique strengths waiting to shine, and her mission is to help unlock that potential through play-based learning.
                 </p>
-      
-                        <div className="grid grid-cols-2 gap-5 mb-10 sanaz-highlights">
-                          <div
-                            className="flex items-center gap-3 bg-white/10 px-4 py-3 rounded-2xl backdrop-blur-sm"
-                            style={{ boxShadow: '0 4px 15px rgba(255, 255, 255, 0.1)' }}
-                          >
-                            <div
-                              className="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-[#4AD36D] to-[#33C8FF] rounded-full flex-shrink-0"
-                              style={{ boxShadow: '0 4px 15px rgba(74, 211, 109, 0.5)' }}
-                            >
-                              <i className="ri-checkbox-circle-fill text-2xl text-white check-icon-fix"></i>
-                            </div>
-                            <span className="text-white font-bold">Master's Degree</span>
-                          </div>
-      
-                          <div
-                            className="flex items-center gap-3 bg-white/10 px-4 py-3 rounded-2xl backdrop-blur-sm"
-                            style={{ boxShadow: '0 4px 15px rgba(255, 255, 255, 0.1)' }}
-                          >
-                            <div
-                              className="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-[#4AD36D] to-[#33C8FF] rounded-full flex-shrink-0"
-                              style={{ boxShadow: '0 4px 15px rgba(74, 211, 109, 0.5)' }}
-                            >
-                              <i className="ri-checkbox-circle-fill text-2xl text-white check-icon-fix"></i>
-                            </div>
-                            <span className="text-white font-bold">ESDM Certified</span>
-                          </div>
-      
-                          <div
-                            className="flex items-center gap-3 bg-white/10 px-4 py-3 rounded-2xl backdrop-blur-sm"
-                            style={{ boxShadow: '0 4px 15px rgba(255, 255, 255, 0.1)' }}
-                          >
-                            <div
-                              className="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-[#4AD36D] to-[#33C8FF] rounded-full flex-shrink-0"
-                              style={{ boxShadow: '0 4px 15px rgba(74, 211, 109, 0.5)' }}
-                            >
-                              <i className="ri-checkbox-circle-fill text-2xl text-white check-icon-fix"></i>
-                            </div>
-                            <span className="text-white font-bold">5+ Years Experience</span>
-                          </div>
-      
-                          <div
-                            className="flex items-center gap-3 bg-white/10 px-4 py-3 rounded-2xl backdrop-blur-sm"
-                            style={{ boxShadow: '0 4px 15px rgba(255, 255, 255, 0.1)' }}
-                          >
-                            <div
-                              className="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-[#4AD36D] to-[#33C8FF] rounded-full flex-shrink-0"
-                              style={{ boxShadow: '0 4px 15px rgba(74, 211, 109, 0.5)' }}
-                            >
-                              <i className="ri-checkbox-circle-fill text-2xl text-white check-icon-fix"></i>
-                            </div>
-                            <span className="text-white font-bold">500+ Families</span>
-                          </div>
-                        </div>
 
-                      </div>
+                <div className="grid grid-cols-2 gap-5 mb-10 sanaz-highlights">
+                  <div
+                    className="flex items-center gap-3 bg-white/10 px-4 py-3 rounded-2xl backdrop-blur-sm"
+                    style={{ boxShadow: '0 4px 15px rgba(255, 255, 255, 0.1)' }}
+                  >
+                    <div
+                      className="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-[#4AD36D] to-[#33C8FF] rounded-full flex-shrink-0"
+                      style={{ boxShadow: '0 4px 15px rgba(74, 211, 109, 0.5)' }}
+                    >
+                      <i className="ri-checkbox-circle-fill text-2xl text-white check-icon-fix"></i>
                     </div>
+                    <span className="text-white font-bold">Master's Degree</span>
+                  </div>
+
+                  <div
+                    className="flex items-center gap-3 bg-white/10 px-4 py-3 rounded-2xl backdrop-blur-sm"
+                    style={{ boxShadow: '0 4px 15px rgba(255, 255, 255, 0.1)' }}
+                  >
+                    <div
+                      className="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-[#4AD36D] to-[#33C8FF] rounded-full flex-shrink-0"
+                      style={{ boxShadow: '0 4px 15px rgba(74, 211, 109, 0.5)' }}
+                    >
+                      <i className="ri-checkbox-circle-fill text-2xl text-white check-icon-fix"></i>
+                    </div>
+                    <span className="text-white font-bold">ESDM Certified</span>
+                  </div>
+
+                  <div
+                    className="flex items-center gap-3 bg-white/10 px-4 py-3 rounded-2xl backdrop-blur-sm"
+                    style={{ boxShadow: '0 4px 15px rgba(255, 255, 255, 0.1)' }}
+                  >
+                    <div
+                      className="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-[#4AD36D] to-[#33C8FF] rounded-full flex-shrink-0"
+                      style={{ boxShadow: '0 4px 15px rgba(74, 211, 109, 0.5)' }}
+                    >
+                      <i className="ri-checkbox-circle-fill text-2xl text-white check-icon-fix"></i>
+                    </div>
+                    <span className="text-white font-bold">5+ Years Experience</span>
+                  </div>
+
+                  <div
+                    className="flex items-center gap-3 bg-white/10 px-4 py-3 rounded-2xl backdrop-blur-sm"
+                    style={{ boxShadow: '0 4px 15px rgba(255, 255, 255, 0.1)' }}
+                  >
+                    <div
+                      className="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-[#4AD36D] to-[#33C8FF] rounded-full flex-shrink-0"
+                      style={{ boxShadow: '0 4px 15px rgba(74, 211, 109, 0.5)' }}
+                    >
+                      <i className="ri-checkbox-circle-fill text-2xl text-white check-icon-fix"></i>
+                    </div>
+                    <span className="text-white font-bold">500+ Families</span>
                   </div>
                 </div>
-              </section>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
 
       {/* Our Approach */}
@@ -810,9 +813,8 @@ export default function About() {
           .cta-button i {
             font-size: 1.7rem !important;
           }
-        }
 
-        /* SANAZ container mobile reductions (shared) */
+          /* SANAZ container mobile reductions (shared) */
         .sanaz-container { }
         .grid.lg\\:grid-cols-5 { grid-template-columns: 1fr !important; }
         .lg\\:col-span-2, .lg\\:col-span-3 { width: 100% !important; }
@@ -823,6 +825,10 @@ export default function About() {
         .sanaz-container .lg\\:col-span-3 { padding-right: 1.5rem !important; padding-left: 1.5rem !important; }
         .sanaz-container .lg\\:col-span-2 { padding-right: 0 !important; }
         .sanaz-container a { margin-right: 0 !important; margin-left: 0 !important; }
+
+        }
+
+        
 
         /* === Sanaz section very small screens (<= 369px): 4 stacked, left aligned === */
         @media (max-width: 370px) {
@@ -844,18 +850,32 @@ export default function About() {
           }
 
           /* "Meet our founder" pill */
-          .sanaz-content .founder-pill {
-            padding: 0.5rem 0.9rem !important;
-            gap: 0.5rem !important;
-            margin-bottom: 0.9rem !important;
-          }
-          .sanaz-content .founder-pill i {
-            font-size: 1.1rem !important;
-          }
-          .sanaz-content .founder-pill span {
-            font-size: 0.8rem !important;
-            white-space: nowrap !important;
-          }
+.sanaz-content .founder-pill {
+  padding: 0.5rem 0.9rem !important;
+  gap: 0.5rem !important;
+  margin-bottom: 0.9rem !important;
+
+  display: inline-flex !important;
+  align-items: center !important;   /* vertical center icon + text */
+}
+
+/* icon */
+.sanaz-content .founder-pill i {
+  font-size: 1.1rem !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+  transform: translateY(8px) !important;      
+}
+
+/* text */
+.sanaz-content .founder-pill span {
+  font-size: 0.8rem !important;
+  white-space: nowrap !important;
+}
+
 
           /* Heading & subheading */
           .sanaz-content h3 {
@@ -971,18 +991,33 @@ export default function About() {
           }
 
           /* "Meet our founder" pill */
-          .sanaz-content .founder-pill {
-            padding: 0.6rem 1rem !important;
-            gap: 0.55rem !important;
-            margin-bottom: 1rem !important;
-          }
-          .sanaz-content .founder-pill i {
-            font-size: 1.15rem !important;
-          }
-          .sanaz-content .founder-pill span {
-            font-size: 0.85rem !important;
-            white-space: nowrap !important;
-          }
+.sanaz-content .founder-pill {
+  padding: 0.6rem 1rem !important;
+  gap: 0.55rem !important;
+  margin-bottom: 1rem !important;
+
+  display: inline-flex !important;
+  align-items: center !important;   /* vertical center icon + text */
+}
+
+/* icon */
+.sanaz-content .founder-pill i {
+  font-size: 1.15rem !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+  /* transform: none !important; */  
+  transform: translateY(8px) !important;
+     
+}
+
+/* text */
+.sanaz-content .founder-pill span {
+  font-size: 0.85rem !important;
+  white-space: nowrap !important;
+}
 
           /* Heading & subheading */
           .sanaz-content h3 {
