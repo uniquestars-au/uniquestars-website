@@ -10,20 +10,21 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 relative overflow-visible flex items-center justify-center">
+              <div className="w-14 h-14 flex items-center justify-center">
                 <img
                   src={logo}
                   alt="Unique Stars Logo"
-                  className="
-                    absolute left-1/2 top-1/2 
-                    -translate-x-1/2 -translate-y-1/2
-                    h-20 object-contain pointer-events-none
-                  "
+                  className="w-14 h-14 object-contain pointer-events-none"
+                  loading="lazy"
+                  decoding="async"
                   style={{ filter: "drop-shadow(0 0 10px rgba(255,200,55,0.4))" }}
                 />
               </div>
 
-              <div className="text-2xl font-bold text-[#0A2A66]" style={{ fontFamily: 'Nunito, sans-serif' }}>
+              <div
+                className="text-2xl font-bold text-[#0A2A66]"
+                style={{ fontFamily: 'Nunito, sans-serif' }}
+              >
                 Unique<span className="text-[#FFC837]">Stars</span>
               </div>
             </div>
@@ -34,7 +35,6 @@ export default function Footer() {
 
             {/* Social Icons */}
             <div className="flex gap-3">
-
               {/* Instagram */}
               <a
                 href="https://www.instagram.com/uniquestars_earlyintervention?utm_source=qr&igsh=OTIwZXNuMG53YjZn"
@@ -43,11 +43,11 @@ export default function Footer() {
                 aria-label="Unique Stars Instagram"
                 title="Instagram - @uniquestars_earlyintervention"
                 className="
-                  w-10 h-10 flex items-center justify-center
-                  bg-white rounded-full text-[#0A2A66]
-                  transition-all duration-300
-                  hover:bg-[#33C8FF] hover:text-white hover:shadow-lg
-                "
+        w-10 h-10 flex items-center justify-center
+        bg-white rounded-full text-[#0A2A66]
+        transition-all duration-300
+        hover:bg-[#33C8FF] hover:text-white hover:shadow-lg
+      "
               >
                 <i className="ri-instagram-fill text-xl" />
               </a>
@@ -60,11 +60,11 @@ export default function Footer() {
                 aria-label="Sanaz LinkedIn"
                 title="LinkedIn - Sanaz Montazer"
                 className="
-                  w-10 h-10 flex items-center justify-center
-                  bg-white rounded-full text-[#0A2A66]
-                  transition-all duration-300
-                  hover:bg-[#33C8FF] hover:text-white hover:shadow-lg
-                "
+        w-10 h-10 flex items-center justify-center
+        bg-white rounded-full text-[#0A2A66]
+        transition-all duration-300
+        hover:bg-[#33C8FF] hover:text-white hover:shadow-lg
+      "
               >
                 <i className="ri-linkedin-fill text-xl" />
               </a>
@@ -77,17 +77,17 @@ export default function Footer() {
                 aria-label="Unique Stars YouTube"
                 title="YouTube - Unique Stars"
                 className="
-                  w-10 h-10 flex items-center justify-center
-                  bg-white rounded-full text-[#0A2A66]
-                  transition-all duration-300
-                  hover:bg-[#33C8FF] hover:text-white hover:shadow-lg
-                "
+        w-10 h-10 flex items-center justify-center
+        bg-white rounded-full text-[#0A2A66]
+        transition-all duration-300
+        hover:bg-[#33C8FF] hover:text-white hover:shadow-lg
+      "
               >
                 <i className="ri-youtube-fill text-xl" />
               </a>
-
             </div>
           </div>
+
 
           {/* Quick Links */}
           <div>

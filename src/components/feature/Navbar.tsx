@@ -24,19 +24,23 @@ export default function Navbar() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3">
-            {/* keep parent at original size so navbar height doesn't change */}
-            <div className="w-12 h-12 relative overflow-visible">
+            {/* Stable container so navbar height doesn't jump */}
+            <div className="w-12 h-12 flex items-center justify-center">
               <img
                 src={logo}
                 alt="Unique Stars Logo"
-                // centered absolutely, larger than container but allowed to overflow
-                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-20 object-contain pointer-events-none"
-                style={{ filter: "drop-shadow(0 0 10px rgba(255,200,55,0.4))" }}
+                className="w-12 h-12 object-contain pointer-events-none"
+                loading="lazy"
+                decoding="async"
+                style={{ filter: 'drop-shadow(0 0 10px rgba(255,200,55,0.4))' }}
               />
             </div>
 
             <div>
-              <div className="text-2xl font-bold text-[#0A2A66]" style={{ fontFamily: 'Nunito, sans-serif' }}>
+              <div
+                className="text-2xl font-bold text-[#0A2A66]"
+                style={{ fontFamily: 'Nunito, sans-serif' }}
+              >
                 Unique<span className="text-[#FFC837]">Stars</span>
               </div>
               <div className="text-xs text-[#A9B1C0]">Early Start Denver Model</div>

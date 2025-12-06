@@ -220,7 +220,6 @@ Thank you,
 
       <Navbar />
 
-      {/* Premium Hero Section */}
       <section
         className="relative overflow-hidden"
         style={{
@@ -236,36 +235,71 @@ Thank you,
           >
             <i className="ri-star-fill text-5xl text-[#FFC837]"></i>
           </div>
-          <div className="absolute top-[25%] right-[12%] w-14 h-14 flex items-center justify-center animate-float-medium opacity-25" style={{ animationDelay: '1s' }}>
-            <i className="ri-star-fill text-4xl text-[#FF4F87]" style={{ filter: 'drop-shadow(0 0 12px rgba(255, 79, 135, 0.7))' }}></i>
+          <div
+            className="absolute top-[25%] right-[12%] w-14 h-14 flex items-center justify-center animate-float-medium opacity-25"
+            style={{ animationDelay: '1s' }}
+          >
+            <i
+              className="ri-star-fill text-4xl text-[#FF4F87]"
+              style={{ filter: 'drop-shadow(0 0 12px rgba(255, 79, 135, 0.7))' }}
+            ></i>
           </div>
-          <div className="absolute bottom-[30%] left-[15%] w-12 h-12 flex items-center justify-center animate-float-slow opacity-20" style={{ animationDelay: '2s' }}>
-            <i className="ri-star-fill text-3xl text-[#4AD36D]" style={{ filter: 'drop-shadow(0 0 10px rgba(74, 211, 109, 0.7))' }}></i>
+          <div
+            className="absolute bottom-[30%] left-[15%] w-12 h-12 flex items-center justify-center animate-float-slow opacity-20"
+            style={{ animationDelay: '2s' }}
+          >
+            <i
+              className="ri-star-fill text-3xl text-[#4AD36D]"
+              style={{ filter: 'drop-shadow(0 0 10px rgba(74, 211, 109, 0.7))' }}
+            ></i>
           </div>
-          <div className="absolute top-[40%] right-[6%] w-16 h-16 flex items-center justify-center animate-float-medium opacity-30" style={{ animationDelay: '1.5s' }}>
-            <i className="ri-star-fill text-5xl text-[#33C8FF]" style={{ filter: 'drop-shadow(0 0 15px rgba(51, 200, 255, 0.8))' }}></i>
+          <div
+            className="absolute top-[40%] right-[6%] w-16 h-16 flex items-center justify-center animate-float-medium opacity-30"
+            style={{ animationDelay: '1.5s' }}
+          >
+            <i
+              className="ri-star-fill text-5xl text-[#33C8FF]"
+              style={{ filter: 'drop-shadow(0 0 15px rgba(51, 200, 255, 0.8))' }}
+            ></i>
           </div>
         </div>
 
         <div className="max-w-[1280px] mx-auto px-6 py-24 relative z-10 text-center">
-          <div className="inline-flex items-center gap-3 bg-white px-6 py-4 rounded-full mb-8 border-4 border-[#33C8FF]" style={{ boxShadow: '0 8px 30px rgba(51, 200, 255, 0.4), inset 0 2px 10px rgba(51, 200, 255, 0.2)' }}>
-            <div className="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-[#33C8FF] to-[#0480E8] rounded-full" style={{ boxShadow: '0 4px 15px rgba(51, 200, 255, 0.5)' }}>
+          <div
+            className="inline-flex items-center gap-3 bg-white px-6 py-4 rounded-full mb-8 border-4 border-[#33C8FF]"
+            style={{
+              boxShadow:
+                '0 8px 30px rgba(51, 200, 255, 0.4), inset 0 2px 10px rgba(51, 200, 255, 0.2)'
+            }}
+          >
+            <div
+              className="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-[#33C8FF] to-[#0480E8] rounded-full"
+              style={{ boxShadow: '0 4px 15px rgba(51, 200, 255, 0.5)' }}
+            >
               <i className="ri-service-fill text-2xl text-white"></i>
             </div>
             <span className="text-[#0A2A66] font-bold text-base">Our Services</span>
           </div>
 
-          <h1 className="text-5xl lg:text-7xl font-extrabold text-[#0A2A66] mb-6 leading-tight" style={{ fontFamily: 'Nunito, sans-serif' }}>
+          <h1
+            className="services-hero-heading text-5xl lg:text-7xl font-extrabold text-[#0A2A66] mb-6 leading-tight"
+            style={{ fontFamily: 'Nunito, sans-serif' }}
+          >
             Comprehensive{' '}
-            <span className="bg-gradient-to-r from-[#33C8FF] via-[#0480E8] to-[#0A2A66] bg-clip-text text-transparent" style={{ filter: 'drop-shadow(0 4px 8px rgba(51, 200, 255, 0.3))' }}>
+            <span
+              className="bg-gradient-to-r from-[#33C8FF] via-[#0480E8] to-[#0A2A66] bg-clip-text text-transparent"
+              style={{ filter: 'drop-shadow(0 4px 8px rgba(51, 200, 255, 0.3))' }}
+            >
               Therapy Services
             </span>
           </h1>
           <p className="text-xl text-[#0A2A66] max-w-3xl mx-auto leading-relaxed">
-            Evidence-based early intervention programs designed to help your child reach their full potential through play-based learning.
+            Evidence-based early intervention programs designed to help your child reach their full potential
+            through play-based learning.
           </p>
         </div>
       </section>
+
 
       {/* Premium Services Grid */}
       <section className="py-24 bg-white relative overflow-hidden">
@@ -375,31 +409,62 @@ Thank you,
       </section>
 
       {/* Premium CTA Section */}
-      <section className="py-24 bg-gradient-to-br from-[#0A2A66] via-[#0480E8] to-[#0A2A66] relative overflow-hidden">
+      <section className="py-24 bg-gradient-to-br from-[#0A2A66] via-[#0480E8] to-[#0A2A66] relative overflow-hidden premium-cta-section">
         {/* Glowing Stars */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           {[...Array(20)].map((_, i) => (
-            <div key={i} className="absolute w-2 h-2 bg-white rounded-full animate-twinkle" style={{ top: `${Math.random() * 100}%`, left: `${Math.random() * 100}%`, animationDelay: `${Math.random() * 3}s`, boxShadow: '0 0 10px rgba(255,255,255,0.8)' }}></div>
+            <div
+              key={i}
+              className="absolute w-2 h-2 bg-white rounded-full animate-twinkle"
+              style={{
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 3}s`,
+                boxShadow: '0 0 10px rgba(255, 255, 255, 0.8)'
+              }}
+            ></div>
           ))}
         </div>
 
         <div className="max-w-[1280px] mx-auto px-6 text-center relative z-10">
-          <h2 className="text-5xl lg:text-7xl font-extrabold text-white mb-8" style={{ fontFamily: 'Nunito, sans-serif', textShadow: '0 4px 30px rgba(0,0,0,0.3)' }}>
-            Ready to Get <span className="bg-gradient-to-r from-[#FFC837] to-[#FFDD55] bg-clip-text text-transparent" style={{ filter: 'drop-shadow(0 0 20px rgba(255,200,55,0.6))' }}>Started?</span>
+          <h2
+            className="premium-cta-heading text-5xl lg:text-7xl font-extrabold text-white mb-8"
+            style={{
+              fontFamily: 'Nunito, sans-serif',
+              textShadow: '0 4px 30px rgba(0, 0, 0, 0.3)'
+            }}
+          >
+            Ready to Get {' '}
+            <span
+              className="bg-gradient-to-r from-[#FFC837] to-[#FFDD55] bg-clip-text text-transparent"
+              style={{ filter: 'drop-shadow(0 0 20px rgba(255, 200, 55, 0.6))' }}
+            >
+              Started?
+            </span>
           </h2>
-          <p className="text-white text-2xl mb-12 max-w-2xl mx-auto" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.3)' }}>
+          <p
+            className="text-white text-2xl mb-12 max-w-2xl mx-auto"
+            style={{ textShadow: '0 2px 10px rgba(0, 0, 0, 0.3)' }}
+          >
             Book a free consultation to discuss which services are right for your child
           </p>
           <a
-            href={mailtoFor('General Consultation')}
+            href={mailtoFor()}
             className="cta-button bg-gradient-to-r from-[#FFC837] to-[#FFDD55] text-[#0A2A66] px-14 py-7 rounded-full font-extrabold text-2xl hover:scale-110 transition-all inline-flex items-center gap-4 whitespace-nowrap cursor-pointer border-6 border-white mx-auto"
-            style={{ boxShadow: '0 15px 50px rgba(255,200,55,0.6), inset 0 2px 15px rgba(255,255,255,0.5)' }}
+            style={{
+              boxShadow:
+                '0 15px 50px rgba(255, 200, 55, 0.6), inset 0 2px 15px rgba(255, 255, 255, 0.5)'
+            }}
+            aria-label="Book Free Consultation"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <i className="ri-mail-fill text-4xl"></i>
             <span>Book Free Consultation</span>
           </a>
         </div>
       </section>
+
 
       <Footer />
 
@@ -413,11 +478,12 @@ Thank you,
 
         .animate-float-slow { animation: float-slow 4s ease-in-out infinite; }
         .animate-float-medium { animation: float-medium 3s ease-in-out infinite; }
-        .animate-bounce-slow { animation: bounce-slow 2s ease-in-out infinite; }
+        .animate-bounce-slow { animation: bounce-slow 3s ease-in-out infinite; }
         .animate-twinkle { animation: twinkle 3s ease-in-out infinite; }
 
         /* Mobile-only CTA adjustments (<= 768px) */
         @media (max-width: 768px) {
+          /* 3) CTA Button adjustments on mobile */
           .cta-button {
             width: calc(100% - 2rem) !important;
             max-width: 520px !important;
@@ -425,14 +491,67 @@ Thank you,
             font-size: 1.1rem !important;
             gap: 0.75rem !important;
             justify-content: center !important;
+
+            /* REMOVE BORDER ON MOBILE */
             border: none !important;
             border-width: 0 !important;
+
+            /* maintain the rounded look and shadow */
             border-radius: 9999px !important;
             box-sizing: border-box !important;
           }
-          .cta-button i { font-size: 1.7rem !important; }
+
+          /* slightly smaller icon on mobile */
+          .cta-button i {
+            font-size: 1.7rem !important;
+          }
+        }
+
+        /* === Premium CTA: 320px – 375px — slightly larger but still compact === */
+        @media (min-width: 320px) and (max-width: 375px) {
+          .premium-cta-section .premium-cta-heading {
+            font-size: 2.6rem !important;
+            line-height: 1.2 !important;
+            word-break: break-word !important;
+          }
+          .premium-cta-section .premium-cta-heading span {
+            font-size: 1em !important;
+          }
+
+          .premium-cta-section .cta-button {
+            font-size: 1.05rem !important;
+            padding: 0.85rem 1.2rem !important;
+          }
+          .premium-cta-section .cta-button i {
+            font-size: 1.6rem !important;
+          }
+        }
+
+        /* === Services Hero: <320px — smaller heading === */
+        @media (max-width: 319px) {
+          .services-hero-heading {
+            font-size: 2.1rem !important;
+            line-height: 1.2 !important;
+            word-break: break-word !important;
+          }
+          .services-hero-heading span {
+            font-size: 1em !important;
+          }
+        }
+
+        /* === Services Hero: 320px – 420px — slightly larger but still compact === */
+        @media (min-width: 320px) and (max-width: 420px) {
+          .services-hero-heading {
+            font-size: 2.1rem !important;
+            line-height: 1.2 !important;
+            word-break: break-word !important;
+          }
+          .services-hero-heading span {
+            font-size: 1em !important;
+          }
         }
       `}</style>
+
     </div>
   );
 }

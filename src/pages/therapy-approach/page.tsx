@@ -275,70 +275,130 @@ Thank you,
         {/* Star Confetti */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           {[...Array(15)].map((_, i) => (
-            <div key={i} className="absolute w-2 h-2 bg-white rounded-full animate-twinkle" style={{ top: `${Math.random() * 100}%`, left: `${Math.random() * 100}%`, animationDelay: `${Math.random() * 3}s`, boxShadow: '0 0 10px rgba(255,255,255,0.8)' }}></div>
+            <div
+              key={i}
+              className="absolute w-2 h-2 bg-white rounded-full animate-twinkle"
+              style={{
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 3}s`,
+                boxShadow: '0 0 10px rgba(255,255,255,0.8)'
+              }}
+            ></div>
           ))}
         </div>
 
         <div className="max-w-[1280px] mx-auto px-6 relative z-10 what-esdm-hero">
           <div className="text-center mb-16">
-            <h2 className="text-5xl lg:text-6xl font-extrabold text-white mb-6" style={{ fontFamily: 'Nunito, sans-serif', textShadow: '0 4px 20px rgba(0,0,0,0.3)' }}>
-              What is <span className="bg-gradient-to-r from-[#FFC837] to-[#FFDD55] bg-clip-text text-transparent" style={{ filter: 'drop-shadow(0 0 20px rgba(255,200,55,0.6))' }}>ESDM?</span>
+            <h2
+              className="text-5xl lg:text-6xl font-extrabold text-white mb-6"
+              style={{
+                fontFamily: 'Nunito, sans-serif',
+                textShadow: '0 4px 20px rgba(0,0,0,0.3)'
+              }}
+            >
+              What is{' '}
+              <span
+                className="bg-gradient-to-r from-[#FFC837] to-[#FFDD55] bg-clip-text text-transparent"
+                style={{ filter: 'drop-shadow(0 0 20px rgba(255,200,55,0.6))' }}
+              >
+                ESDM?
+              </span>
             </h2>
-            <p className="text-white/95 text-xl max-w-3xl mx-auto" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.3)' }}>
-              The Early Start Denver Model is a comprehensive, evidence-based early intervention approach for young children with autism, combining developmental and behavioral strategies.
+            <p
+              className="text-white/95 text-xl max-w-3xl mx-auto"
+              style={{ textShadow: '0 2px 10px rgba(0,0,0,0.3)' }}
+            >
+              The Early Start Denver Model is a comprehensive, evidence-based early intervention approach for
+              young children with autism, combining developmental and behavioral strategies.
             </p>
           </div>
 
-          <div className="bg-white/10 backdrop-blur-sm rounded-[50px] p-12 border-4 border-white/30" style={{ boxShadow: '0 30px 70px rgba(0,0,0,0.3), inset 0 2px 20px rgba(255,255,255,0.2)' }}>
+          <div
+            className="what-esdm-box bg-white/10 backdrop-blur-sm rounded-[50px] p-12 border-4 border-white/30"
+            style={{
+              boxShadow:
+                '0 30px 70px rgba(0,0,0,0.3), inset 0 2px 20px rgba(255,255,255,0.2)'
+            }}
+          >
             <div className="grid md:grid-cols-2 gap-8 text-white">
               <div>
-                <h3 className="text-2xl font-extrabold mb-4 flex items-center gap-3" style={{ fontFamily: 'Nunito, sans-serif' }}>
-                  <div className="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-[#FFC837] to-[#FFDD55] rounded-full" style={{ boxShadow: '0 4px 15px rgba(255,200,55,0.5)' }}>
+                <h3
+                  className="text-2xl font-extrabold mb-4 flex items-center gap-3"
+                  style={{ fontFamily: 'Nunito, sans-serif' }}
+                >
+                  <div
+                    className="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-[#FFC837] to-[#FFDD55] rounded-full"
+                    style={{ boxShadow: '0 4px 15px rgba(255,200,55,0.5)' }}
+                  >
                     <i className="ri-checkbox-circle-fill text-2xl text-[#0A2A66]"></i>
                   </div>
                   Research-Backed
                 </h3>
                 <p className="text-white/90 leading-relaxed">
-                  ESDM is supported by extensive research showing significant improvements in IQ, language, and social skills in young children with autism.
+                  ESDM is supported by extensive research showing significant improvements in IQ, language, and
+                  social skills in young children with autism.
                 </p>
               </div>
               <div>
-                <h3 className="text-2xl font-extrabold mb-4 flex items-center gap-3" style={{ fontFamily: 'Nunito, sans-serif' }}>
-                  <div className="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-[#FFC837] to-[#FFDD55] rounded-full" style={{ boxShadow: '0 4px 15px rgba(255,200,55,0.5)' }}>
+                <h3
+                  className="text-2xl font-extrabold mb-4 flex items-center gap-3"
+                  style={{ fontFamily: 'Nunito, sans-serif' }}
+                >
+                  <div
+                    className="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-[#FFC837] to-[#FFDD55] rounded-full"
+                    style={{ boxShadow: '0 4px 15px rgba(255,200,55,0.5)' }}
+                  >
                     <i className="ri-checkbox-circle-fill text-2xl text-[#0A2A66]"></i>
                   </div>
                   Comprehensive
                 </h3>
                 <p className="text-white/90 leading-relaxed">
-                  ESDM targets all developmental domains: communication, social skills, play, cognition, fine and gross motor skills, and adaptive behavior.
+                  ESDM targets all developmental domains: communication, social skills, play, cognition, fine and
+                  gross motor skills, and adaptive behavior.
                 </p>
               </div>
               <div>
-                <h3 className="text-2xl font-extrabold mb-4 flex items-center gap-3" style={{ fontFamily: 'Nunito, sans-serif' }}>
-                  <div className="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-[#FFC837] to-[#FFDD55] rounded-full" style={{ boxShadow: '0 4px 15px rgba(255,200,55,0.5)' }}>
+                <h3
+                  className="text-2xl font-extrabold mb-4 flex items-center gap-3"
+                  style={{ fontFamily: 'Nunito, sans-serif' }}
+                >
+                  <div
+                    className="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-[#FFC837] to-[#FFDD55] rounded-full"
+                    style={{ boxShadow: '0 4px 15px rgba(255,200,55,0.5)' }}
+                  >
                     <i className="ri-checkbox-circle-fill text-2xl text-[#0A2A66]"></i>
                   </div>
                   Individualized
                 </h3>
                 <p className="text-white/90 leading-relaxed">
-                  Every child receives a personalized treatment plan based on their unique strengths, needs, and family priorities.
+                  Every child receives a personalized treatment plan based on their unique strengths, needs, and
+                  family priorities.
                 </p>
               </div>
               <div>
-                <h3 className="text-2xl font-extrabold mb-4 flex items-center gap-3" style={{ fontFamily: 'Nunito, sans-serif' }}>
-                  <div className="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-[#FFC837] to-[#FFDD55] rounded-full" style={{ boxShadow: '0 4px 15px rgba(255,200,55,0.5)' }}>
+                <h3
+                  className="text-2xl font-extrabold mb-4 flex items-center gap-3"
+                  style={{ fontFamily: 'Nunito, sans-serif' }}
+                >
+                  <div
+                    className="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-[#FFC837] to-[#FFDD55] rounded-full"
+                    style={{ boxShadow: '0 4px 15px rgba(255,200,55,0.5)' }}
+                  >
                     <i className="ri-checkbox-circle-fill text-2xl text-[#0A2A66]"></i>
                   </div>
                   Family-Centered
                 </h3>
                 <p className="text-white/90 leading-relaxed">
-                  Parents are active partners in therapy, learning strategies to support their child's development throughout daily routines.
+                  Parents are active partners in therapy, learning strategies to support their child's development
+                  throughout daily routines.
                 </p>
               </div>
             </div>
           </div>
         </div>
       </section>
+
 
       {/* How ESDM Works */}
       <section className="py-24 bg-gradient-to-br from-[#EAF7FF] via-white to-[#FFF7DA] relative overflow-hidden">
@@ -461,35 +521,93 @@ Thank you,
       <section className="py-24 bg-white relative overflow-hidden">
         <div className="max-w-[1280px] mx-auto px-6 relative z-10">
           <div className="text-center mb-20">
-            <h2 className="text-5xl lg:text-6xl font-extrabold text-[#0A2A66] mb-6" style={{ fontFamily: 'Nunito, sans-serif' }}>
-              ESDM <span className="bg-gradient-to-r from-[#FF4F87] to-[#FF8A3D] bg-clip-text text-transparent">Session Flow</span>
+            <h2
+              className="text-5xl lg:text-6xl font-extrabold text-[#0A2A66] mb-6"
+              style={{ fontFamily: 'Nunito, sans-serif' }}
+            >
+              ESDM{' '}
+              <span className="bg-gradient-to-r from-[#FF4F87] to-[#FF8A3D] bg-clip-text text-transparent">
+                Session Flow
+              </span>
             </h2>
-            <p className="text-[#0A2A66] text-xl max-w-2xl mx-auto">Our structured approach to every therapy session</p>
+            <p className="text-[#0A2A66] text-xl max-w-2xl mx-auto">
+              Our structured approach to every therapy session
+            </p>
           </div>
 
           <div className="relative">
             {/* Curved Path */}
-            <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-[#33C8FF] via-[#FFC837] via-[#FF4F87] to-[#4AD36D] transform -translate-x-1/2 hidden lg:block" style={{ boxShadow: '0 0 20px rgba(255,200,55,0.5)' }}></div>
+            <div
+              className="absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-[#33C8FF] via-[#FFC837] via-[#FF4F87] to-[#4AD36D] transform -translate-x-1/2 hidden lg:block"
+              style={{ boxShadow: '0 0 20px rgba(255,200,55,0.5)' }}
+            ></div>
 
             <div className="space-y-16">
               {sessionSteps.map((step, index) => (
-                <div key={index} className={`flex items-center gap-8 ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}>
+                <div
+                  key={index}
+                  className={`flex items-center gap-8 ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
+                    }`}
+                >
                   {/* Card */}
                   <div className="flex-1">
-                    <div className={`bg-white rounded-[40px] p-10 border-6 hover:scale-105 transition-all duration-300 cursor-pointer ${index % 2 === 0 ? 'lg:ml-auto lg:mr-8' : 'lg:mr-auto lg:ml-8'}`} style={{ borderColor: step.color, boxShadow: `0 20px 50px ${step.color}30, inset 0 -5px 20px ${step.color}10`, maxWidth: '500px' }}>
-                      <div className="flex items-center gap-6">
-                        <div className="w-20 h-20 flex items-center justify-center rounded-3xl flex-shrink-0" style={{ background: `linear-gradient(135deg, ${step.color}20 0%, white 100%)`, border: `4px solid ${step.color}`, boxShadow: `0 10px 30px ${step.color}40, inset 0 2px 10px ${step.color}20`, color: step.color }}>
+                    <div
+                      className={`session-flow-card bg-white rounded-[40px] p-10 border-6 hover:scale-105 transition-all duration-300 cursor-pointer ${index % 2 === 0 ? 'lg:ml-auto lg:mr-8' : 'lg:mr-auto lg:ml-8'
+                        }`}
+                      style={{
+                        borderColor: step.color,
+                        boxShadow: `0 20px 50px ${step.color}30, inset 0 -5px 20px ${step.color}10`,
+                        maxWidth: '500px'
+                      }}
+                    >
+                      <div className="session-flow-inner flex items-center gap-6">
+                        <div
+                          className="session-flow-icon-wrapper w-20 h-20 flex items-center justify-center rounded-3xl flex-shrink-0"
+                          style={{
+                            background: `linear-gradient(135deg, ${step.color}20 0%, white 100%)`,
+                            border: `4px solid ${step.color}`,
+                            boxShadow: `0 10px 30px ${step.color}40, inset 0 2px 10px ${step.color}20`,
+                            color: step.color
+                          }}
+                        >
                           {step.imgSrc ? (
-                            <div style={{ width: '44px', height: '44px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: step.color }}>
-                              <img src={step.imgSrc} alt={`${step.title} icon`} style={{ width: '44px', height: '44px', objectFit: 'contain' }} />
+                            <div
+                              style={{
+                                width: '44px',
+                                height: '44px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                color: step.color
+                              }}
+                            >
+                              <img
+                                src={step.imgSrc}
+                                alt={`${step.title} icon`}
+                                style={{
+                                  width: '44px',
+                                  height: '44px',
+                                  objectFit: 'contain'
+                                }}
+                              />
                             </div>
                           ) : (
-                            <i className={`${step.icon} text-5xl`} style={{ color: step.color }}></i>
+                            <i
+                              className={`${step.icon} text-5xl`}
+                              style={{ color: step.color }}
+                            ></i>
                           )}
                         </div>
                         <div className="flex-1">
-                          <h3 className="text-2xl font-extrabold text-[#0A2A66] mb-2" style={{ fontFamily: 'Nunito, sans-serif' }}>{step.title}</h3>
-                          <p className="text-[#0A2A66] leading-relaxed">{step.description}</p>
+                          <h3
+                            className="session-flow-title text-2xl font-extrabold text-[#0A2A66] mb-2"
+                            style={{ fontFamily: 'Nunito, sans-serif' }}
+                          >
+                            {step.title}
+                          </h3>
+                          <p className="session-flow-text text-[#0A2A66] leading-relaxed">
+                            {step.description}
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -497,7 +615,14 @@ Thank you,
 
                   {/* Center Circle with Number */}
                   <div className="hidden lg:flex items-center justify-center flex-shrink-0 relative z-10">
-                    <div className="w-20 h-20 flex items-center justify-center rounded-full text-3xl font-extrabold text-white animate-pulse-glow" style={{ backgroundColor: step.color, boxShadow: `0 0 30px ${step.color}, 0 10px 30px ${step.color}60`, fontFamily: 'Nunito, sans-serif' }}>
+                    <div
+                      className="w-20 h-20 flex items-center justify-center rounded-full text-3xl font-extrabold text-white animate-pulse-glow"
+                      style={{
+                        backgroundColor: step.color,
+                        boxShadow: `0 0 30px ${step.color}, 0 10px 30px ${step.color}60`,
+                        fontFamily: 'Nunito, sans-serif'
+                      }}
+                    >
                       {index + 1}
                     </div>
                   </div>
@@ -575,47 +700,192 @@ Thank you,
       <Footer />
 
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
 
-        @keyframes float-slow { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-30px); } }
-        @keyframes float-medium { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
-        @keyframes bounce-slow { 0%, 100% { transform: translateY(0px) scale(1); } 50% { transform: translateY(-15px) scale(1.1); } }
-        @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 1; transform: scale(1.5); } }
-        @keyframes pulse-glow { 0%, 100% { box-shadow: 0 0 30px currentColor, 0 10px 30px currentColor; } 50% { box-shadow: 0 0 50px currentColor, 0 10px 50px currentColor; } }
+  @keyframes float-slow { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-30px); } }
+  @keyframes float-medium { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
+  @keyframes bounce-slow { 0%, 100% { transform: translateY(0px) scale(1); } 50% { transform: translateY(-15px) scale(1.1); } }
+  @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 1; transform: scale(1.5); } }
+  @keyframes pulse-glow { 0%, 100% { box-shadow: 0 0 30px currentColor, 0 10px 30px currentColor; } 50% { box-shadow: 0 0 50px currentColor, 0 10px 50px currentColor; } }
 
-        .animate-float-slow { animation: float-slow 4s ease-in-out infinite; }
-        .animate-float-medium { animation: float-medium 3s ease-in-out infinite; }
-        .animate-bounce-slow { animation: bounce-slow 2s ease-in-out infinite; }
-        .animate-twinkle { animation: twinkle 3s ease-in-out infinite; }
-        .animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+  .animate-float-slow { animation: float-slow 4s ease-in-out infinite; }
+  .animate-float-medium { animation: float-medium 4s ease-in-out infinite; }
+  .animate-bounce-slow { animation: bounce-slow 4s ease-in-out infinite; }
+  .animate-twinkle { animation: twinkle 3s ease-in-out infinite; }
+  .animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
 
-        /* Mobile-only CTA adjustments (<= 768px) */
-        @media (max-width: 768px) {
-          /* 1) Keep "What is ESDM?" on single line on mobile */
-          .what-esdm-hero h2 { white-space: nowrap !important; overflow: visible !important; text-overflow: clip !important; font-size: 3rem !important; line-height: 1.02 !important; }
-          .what-esdm-hero h2 span { display: inline-block !important; }
+  /* Mobile-only CTA adjustments (<= 768px) */
+  @media (max-width: 768px) {
+    /* 1) Keep "What is ESDM?" on single line on mobile */
+    .what-esdm-hero h2 {
+      white-space: nowrap !important;
+      overflow: visible !important;
+      text-overflow: clip !important;
+      font-size: 3rem !important;
+      line-height: 1.02 !important;
+    }
+    .what-esdm-hero h2 span {
+      display: inline-block !important;
+    }
 
-          /* 2) Center "Benefits of ESDM" heading on mobile only */
-          .benefits-hero h2 { text-align: center !important; font-size: 3rem !important; line-height: 1.05 !important; }
+    /* 2) Center "Benefits of ESDM" heading on mobile only */
+    .benefits-hero h2 {
+      text-align: center !important;
+      font-size: 3rem !important;
+      line-height: 1.05 !important;
+    }
 
-          .what-esdm-hero, .benefits-hero { padding-left: 1rem !important; padding-right: 1rem !important; }
+    .what-esdm-hero,
+    .benefits-hero {
+      padding-left: 1rem !important;
+      padding-right: 1rem !important;
+    }
 
-          /* 3) CTA Button adjustments on mobile */
-          .cta-button {
-            width: calc(100% - 2rem) !important;
-            max-width: 520px !important;
-            padding: 0.85rem 1rem !important;
-            font-size: 1.1rem !important;
-            gap: 0.75rem !important;
-            justify-content: center !important;
-            border: none !important;
-            border-width: 0 !important;
-            border-radius: 9999px !important;
-            box-sizing: border-box !important;
-          }
-          .cta-button i { font-size: 1.7rem !important; }
-        }
-      `}</style>
+    /* 3) CTA Button adjustments on mobile */
+    .cta-button {
+      width: calc(100% - 2rem) !important;
+      max-width: 520px !important;
+      padding: 0.85rem 1rem !important;
+      font-size: 1.1rem !important;
+      gap: 0.75rem !important;
+      justify-content: center !important;
+      border: none !important;
+      border-width: 0 !important;
+      border-radius: 9999px !important;
+      box-sizing: border-box !important;
+    }
+    .cta-button i {
+      font-size: 1.7rem !important;
+    }
+  }
+
+  /* === What is ESDM: <320px — smaller title & box padding/text === */
+  @media (max-width: 319px) {
+    .what-esdm-hero h2 {
+      font-size: 2.2rem !important;
+      line-height: 1.15 !important;
+    }
+    .what-esdm-hero h2 span {
+      font-size: 1em !important;
+    }
+
+    .what-esdm-box {
+      padding-left: 1.25rem !important;
+      padding-right: 1.25rem !important;
+    }
+
+    .what-esdm-box p {
+      font-size: 0.9rem !important;
+      line-height: 1.5 !important;
+    }
+
+    /* Session Flow cards — tiny screens */
+    .session-flow-card {
+      padding: 0.85rem 0.9rem !important;
+      border-radius: 26px !important;
+    }
+    .session-flow-inner {
+      gap: 0.85rem !important;
+    }
+    .session-flow-icon-wrapper {
+      width: 3.1rem !important;
+      height: 3.1rem !important;
+      min-width: 3.1rem !important;
+      min-height: 3.1rem !important;
+    }
+    .session-flow-icon-wrapper i,
+    .session-flow-icon-wrapper img {
+      font-size: 1.5rem !important;
+      width: 1.5rem !important;
+      height: 1.5rem !important;
+    }
+    .session-flow-title {
+      font-size: 1rem !important;
+      margin-bottom: 0.25rem !important;
+    }
+    .session-flow-text {
+      font-size: 0.86rem !important;
+      line-height: 1.45 !important;
+    }
+
+    /* Book Free Consultation CTA on this page — smaller text & icon */
+    .cta-button {
+      font-size: 0.95rem !important;
+      padding: 0.8rem 1.4rem !important;
+      gap: 0.6rem !important;
+    }
+    .cta-button i {
+      font-size: 1.4rem !important;
+    }
+    .cta-button span {
+      font-size: 0.95rem !important;
+    }
+  }
+
+  /* === What is ESDM: 320px – 370px — slightly larger but still compact === */
+  @media (min-width: 320px) and (max-width: 370px) {
+    .what-esdm-hero h2 {
+      font-size: 2.3rem !important;
+      line-height: 1.15 !important;
+    }
+    .what-esdm-hero h2 span {
+      font-size: 1em !important;
+    }
+
+    .what-esdm-box {
+      padding-left: 1.75rem !important;
+      padding-right: 1.75rem !important;
+    }
+
+    .what-esdm-box p {
+      font-size: 0.95rem !important;
+      line-height: 1.55 !important;
+    }
+
+    /* Session Flow cards — 320–375px */
+    .session-flow-card {
+      padding: 1rem 1rem !important;
+      border-radius: 28px !important;
+    }
+    .session-flow-inner {
+      gap: 1rem !important;
+    }
+    .session-flow-icon-wrapper {
+      width: 3.4rem !important;
+      height: 3.4rem !important;
+      min-width: 3.4rem !important;
+      min-height: 3.4rem !important;
+    }
+    .session-flow-icon-wrapper i,
+    .session-flow-icon-wrapper img {
+      font-size: 1.7rem !important;
+      width: 1.7rem !important;
+      height: 1.7rem !important;
+    }
+    .session-flow-title {
+      font-size: 1.05rem !important;
+      margin-bottom: 0.3rem !important;
+    }
+    .session-flow-text {
+      font-size: 0.9rem !important;
+      line-height: 1.5 !important;
+    }
+
+    /* Book Free Consultation CTA on this page — 320–375px */
+    .cta-button {
+      font-size: 1rem !important;
+      padding: 0.85rem 1.6rem !important;
+      gap: 0.65rem !important;
+    }
+    .cta-button i {
+      font-size: 1.6rem !important;
+    }
+    .cta-button span {
+      font-size: 1rem !important;
+    }
+  }
+`}</style>
+
     </div>
   );
 }

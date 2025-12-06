@@ -25,13 +25,15 @@ function handleImgError(e: React.SyntheticEvent<HTMLImageElement, Event>) {
   img.style.backgroundColor = '#E3E6EB';
 }
 
+/* ---------- Helpers ---------- */
+
 function formatNumber(num: number) {
   return num.toLocaleString();
 }
 
 function getStartValue(target: number, isPercent: boolean) {
   // sensible heuristics so counters start near the target (not from 0)
-  if (isPercent && target > 50) return Math.max(target - 3, 0); // e.g. 95 -> 92 or 98 -> 95 (user asked for close)
+  if (isPercent && target > 50) return Math.max(target - 3, 0); // e.g. 95 -> 92 or 98 -> 95
   if (target >= 1000) return Math.max(target - 100, 0); // e.g. 1000 -> 900
   if (target >= 500) return Math.max(target - 50, 0); // e.g. 500 -> 450
   if (target >= 100) return Math.max(target - 10, 0); // e.g. 150 -> 140
@@ -43,29 +45,41 @@ function easeOutCubic(t: number) {
   return 1 - Math.pow(1 - t, 3);
 }
 
-/* CountUp component */
+/* ---------- CountUp component ---------- */
+
+type CountUpProps = {
+  end: number;
+  suffix?: string;
+  duration?: number;
+  className?: string;
+  play?: boolean;
+  /** Optional explicit start value (overrides getStartValue for this counter) */
+  start?: number;
+};
+
 export function CountUp({
   end,
   suffix = '',
   duration = 1400,
   className = '',
   play = true,
-}: {
-  end: number;
-  suffix?: string;
-  duration?: number;
-  className?: string;
-  play?: boolean;
-}) {
-  const [value, setValue] = useState(() => getStartValue(end, suffix === '%'));
+  start,
+}: CountUpProps) {
+  const isPercent = suffix === '%';
+  const initialStart = start !== undefined ? start : getStartValue(end, isPercent);
+
+  const [value, setValue] = useState(initialStart);
   const rafRef = useRef<number | null>(null);
   const playedRef = useRef(false); // ensure runs once if desired
 
   useEffect(() => {
+    const isPercentLocal = suffix === '%';
+    const startVal = start !== undefined ? start : getStartValue(end, isPercentLocal);
+
     // If play is false, reset to start value and do not animate
     if (!play) {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
-      setValue(getStartValue(end, suffix === '%'));
+      setValue(startVal);
       playedRef.current = false;
       return;
     }
@@ -76,14 +90,13 @@ export function CountUp({
       return;
     }
 
-    const start = getStartValue(end, suffix === '%');
     const startTime = performance.now();
 
     function step(now: number) {
       const elapsed = now - startTime;
       const t = Math.min(1, elapsed / duration);
       const eased = easeOutCubic(t);
-      const current = Math.round(start + (end - start) * eased);
+      const current = Math.round(startVal + (end - startVal) * eased);
       setValue(current);
 
       if (t < 1) {
@@ -99,7 +112,7 @@ export function CountUp({
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
-  }, [end, suffix, duration, play]);
+  }, [end, suffix, duration, play, start]);
 
   return (
     <div className={className}>
@@ -109,6 +122,7 @@ export function CountUp({
   );
 }
 
+/* ---------- StatsCard component ---------- */
 /**
  * StatsCard component
  * - Handles IntersectionObserver to trigger CountUp when the card is visible
@@ -135,7 +149,7 @@ function StatsCard({ stat, duration = 1400 }: { stat: any; duration?: number }) 
       {
         root: null,
         rootMargin: '0px',
-        threshold: 0.35, // visible when ~35% in view (medium sensitivity)
+        threshold: 0.35, // visible when ~35% in view
       }
     );
 
@@ -152,6 +166,23 @@ function StatsCard({ stat, duration = 1400 }: { stat: any; duration?: number }) 
   const numericStr = match ? match[1].replace(/,/g, '') : raw;
   const suffix = match && match[2] ? match[2] : '';
   const end = Math.round(Number(numericStr));
+
+  // ----- Custom starts for specific stats -----
+  const label: string = String(stat.label ?? '');
+  const lowerLabel = label.toLowerCase();
+  const isPercent = suffix === '%';
+
+  let startOverride: number | undefined = undefined;
+
+  // 1) Years stat: e.g. "Years of Experience" with end=5 → start at 1
+  if (lowerLabel.includes('year') && end === 5 && !isPercent) {
+    startOverride = 1;
+  }
+
+  // 2) Success rate stat: e.g. "Success Rate" 100% → start at 90%
+  if (isPercent && end === 100 && lowerLabel.includes('success')) {
+    startOverride = 90;
+  }
 
   return (
     <div ref={ref} className="text-center group">
@@ -182,8 +213,13 @@ function StatsCard({ stat, duration = 1400 }: { stat: any; duration?: number }) 
           fontFamily: 'Nunito, sans-serif',
         }}
       >
-        {/* play prop controls when animation runs */}
-        <CountUp end={end} suffix={suffix} duration={duration} play={visible} />
+        <CountUp
+          end={end}
+          suffix={suffix}
+          duration={duration}
+          play={visible}
+          start={startOverride}
+        />
       </div>
 
       <div className="text-[#0A2A66] text-lg">{stat.label}</div>
@@ -452,42 +488,67 @@ export default function About() {
         </div>
       </section>
 
-      {/* Meet Sanaz - Premium Profile */}
-      <section className="py-12 md:py-24 bg-white relative overflow-hidden">
-        <div className="max-w-[1280px] mx-auto px-6 relative z-10">
-          <div className="bg-gradient-to-r from-[#0A2A66] via-[#0480E8] to-[#0A2A66] rounded-[60px] overflow-hidden relative" style={{ boxShadow: '0 30px 70px rgba(10, 42, 102, 0.4)' }}>
-            {/* Wave Top Edge */}
-            <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-white/10 to-transparent"></div>
 
-            <div className="grid lg:grid-cols-5 gap-0">
-              {/* Image Column */}
-              <div className="lg:col-span-2 relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#0A2A66]/50 z-10"></div>
-                <img
-                  src={SanazAbout}
-                  alt="Sanaz - Therapist"
-                  className="w-full h-full object-cover object-top"
-                  loading="lazy"
-                  decoding="async"
-                  crossOrigin="anonymous"
-                  onError={handleImgError}
-                />
-              </div>
 
-              {/* Content Column */}
-              <div className="lg:col-span-3 p-8 md:p-16 flex flex-col justify-center relative">
+
+      {/* ————— Meet Sanaz - Premium Profile ————— */}
+              <section className="py-24 bg-gradient-to-br from-[#EAF7FF] to-white relative overflow-hidden sanaz-section">
+                <div className="absolute top-10 left-10 w-32 h-32 opacity-10">
+                  <i className="ri-star-fill text-9xl text-[#FFC837]"></i>
+                </div>
+                <div className="absolute bottom-10 right-10 w-28 h-28 opacity-10">
+                  <i className="ri-star-fill text-8xl text-[#FF4F87]"></i>
+                </div>
+      
+                <div className="max-w-[1280px] mx-auto px-5 relative z-10">
+                  <div
+                    className="bg-gradient-to-r from-[#0A2A66] via-[#0480E8] to-[#0A2A66] rounded-[60px] overflow-hidden relative sanaz-container"
+                    style={{
+                      boxShadow: '0 30px 70px rgba(10, 42, 102, 0.4)'
+                    }}
+                  >
+                    <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-white/10 to-transparent"></div>
+      
+                    <div className="grid lg:grid-cols-5 gap-0">
+                      {/* Image Column */}
+                      <div className="lg:col-span-2 relative">
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#0A2A66]/50 z-10"></div>
+                        <img
+                          src={SanazAbout}
+                          alt="Sanaz - Therapist"
+                          className="w-full h-full object-cover object-top"
+                          loading="lazy"
+                          decoding="async"
+                          crossOrigin="anonymous"
+                          onError={handleImgError}
+                        />
+                      </div>
+      
+                      {/* Content Column */}
+                      <div className="lg:col-span-3 p-16 flex flex-col justify-center relative sanaz-content">
                 <div className="inline-flex items-center gap-3 bg-white/20 px-3 py-2 md:px-5 md:py-3 rounded-full mb-8 w-fit backdrop-blur-sm" style={{ boxShadow: '0 4px 15px rgba(255, 255, 255, 0.2)' }}>
                   <i className="ri-user-heart-fill text-2xl text-[#FFC837]"></i>
                   <span className="text-white font-bold text-base">Meet Our Founder</span>
                 </div>
-
-                <h3 className="text-4xl md:text-5xl font-extrabold text-white mb-4" style={{ fontFamily: 'Nunito, sans-serif', textShadow: '0 4px 20px rgba(0, 0, 0, 0.3)' }}>
-                  Sanaz
-                </h3>
-                <p className="text-[#FFC837] font-extrabold text-xl md:text-2xl mb-8" style={{ textShadow: '0 2px 10px rgba(255, 200, 55, 0.5)' }}>
+      
+                        <h3
+                          className="text-5xl font-extrabold text-white mb-4"
+                          style={{
+                            fontFamily: 'Nunito, sans-serif',
+                            textShadow: '0 4px 20px rgba(0, 0, 0, 0.3)'
+                          }}
+                        >
+                          Sanaz
+                        </h3>
+                        <p
+                          className="text-[#FFC837] font-extrabold text-2xl mb-8"
+                          style={{
+                            textShadow: '0 2px 10px rgba(255, 200, 55, 0.5)'
+                          }}
+                        >
                   ESDM Certified Therapist & Founder
-                </p>
-
+                        </p>
+      
                 <p className="text-white/95 text-base md:text-lg leading-relaxed mb-6">
                   With over 5 years of dedicated experience in early intervention therapy, Sanaz has transformed the lives of hundreds of children and families across Sydney. Her passion for helping children with autism reach their full potential led her to pursue specialized certification in the Early Start Denver Model (ESDM).
                 </p>
@@ -495,41 +556,67 @@ export default function About() {
                 <p className="text-white/95 text-base md:text-lg leading-relaxed mb-10">
                   Sanaz's warm, family-centered approach combines evidence-based practices with genuine compassion, creating a safe and nurturing environment where children thrive. She believes that every child has unique strengths waiting to shine, and her mission is to help unlock that potential through play-based learning.
                 </p>
+      
+                        <div className="grid grid-cols-2 gap-5 mb-10 sanaz-highlights">
+                          <div
+                            className="flex items-center gap-3 bg-white/10 px-4 py-3 rounded-2xl backdrop-blur-sm"
+                            style={{ boxShadow: '0 4px 15px rgba(255, 255, 255, 0.1)' }}
+                          >
+                            <div
+                              className="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-[#4AD36D] to-[#33C8FF] rounded-full flex-shrink-0"
+                              style={{ boxShadow: '0 4px 15px rgba(74, 211, 109, 0.5)' }}
+                            >
+                              <i className="ri-checkbox-circle-fill text-2xl text-white check-icon-fix"></i>
+                            </div>
+                            <span className="text-white font-bold">Master's Degree</span>
+                          </div>
+      
+                          <div
+                            className="flex items-center gap-3 bg-white/10 px-4 py-3 rounded-2xl backdrop-blur-sm"
+                            style={{ boxShadow: '0 4px 15px rgba(255, 255, 255, 0.1)' }}
+                          >
+                            <div
+                              className="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-[#4AD36D] to-[#33C8FF] rounded-full flex-shrink-0"
+                              style={{ boxShadow: '0 4px 15px rgba(74, 211, 109, 0.5)' }}
+                            >
+                              <i className="ri-checkbox-circle-fill text-2xl text-white check-icon-fix"></i>
+                            </div>
+                            <span className="text-white font-bold">ESDM Certified</span>
+                          </div>
+      
+                          <div
+                            className="flex items-center gap-3 bg-white/10 px-4 py-3 rounded-2xl backdrop-blur-sm"
+                            style={{ boxShadow: '0 4px 15px rgba(255, 255, 255, 0.1)' }}
+                          >
+                            <div
+                              className="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-[#4AD36D] to-[#33C8FF] rounded-full flex-shrink-0"
+                              style={{ boxShadow: '0 4px 15px rgba(74, 211, 109, 0.5)' }}
+                            >
+                              <i className="ri-checkbox-circle-fill text-2xl text-white check-icon-fix"></i>
+                            </div>
+                            <span className="text-white font-bold">5+ Years Experience</span>
+                          </div>
+      
+                          <div
+                            className="flex items-center gap-3 bg-white/10 px-4 py-3 rounded-2xl backdrop-blur-sm"
+                            style={{ boxShadow: '0 4px 15px rgba(255, 255, 255, 0.1)' }}
+                          >
+                            <div
+                              className="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-[#4AD36D] to-[#33C8FF] rounded-full flex-shrink-0"
+                              style={{ boxShadow: '0 4px 15px rgba(74, 211, 109, 0.5)' }}
+                            >
+                              <i className="ri-checkbox-circle-fill text-2xl text-white check-icon-fix"></i>
+                            </div>
+                            <span className="text-white font-bold">500+ Families</span>
+                          </div>
+                        </div>
 
-                <div className="grid grid-cols-2 gap-4 md:gap-5 mb-10">
-                  <div className="flex items-center gap-3 bg-white/10 px-3 py-2 rounded-2xl backdrop-blur-sm" style={{ boxShadow: '0 4px 15px rgba(255, 255, 255, 0.1)' }}>
-                    <div className="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-[#4AD36D] to-[#33C8FF] rounded-full flex-shrink-0" style={{ boxShadow: '0 4px 15px rgba(74, 211, 109, 0.5)' }}>
-                      <i className="ri-checkbox-circle-fill text-xl text-white"></i>
+                      </div>
                     </div>
-                    <span className="text-white text-sm md:text-base">Master's Degree</span>
-                  </div>
-
-                  <div className="flex items-center gap-3 bg-white/10 px-3 py-2 rounded-2xl backdrop-blur-sm" style={{ boxShadow: '0 4px 15px rgba(255, 255, 255, 0.1)' }}>
-                    <div className="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-[#4AD36D] to-[#33C8FF] rounded-full flex-shrink-0" style={{ boxShadow: '0 4px 15px rgba(74, 211, 109, 0.5)' }}>
-                      <i className="ri-checkbox-circle-fill text-xl text-white"></i>
-                    </div>
-                    <span className="text-white text-sm md:text-base">ESDM Certified</span>
-                  </div>
-
-                  <div className="flex items-center gap-3 bg-white/10 px-3 py-2 rounded-2xl backdrop-blur-sm" style={{ boxShadow: '0 4px 15px rgba(255, 255, 255, 0.1)' }}>
-                    <div className="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-[#4AD36D] to-[#33C8FF] rounded-full flex-shrink-0" style={{ boxShadow: '0 4px 15px rgba(74, 211, 109, 0.5)' }}>
-                      <i className="ri-checkbox-circle-fill text-xl text-white"></i>
-                    </div>
-                    <span className="text-white text-sm md:text-base">5+ Years Experience</span>
-                  </div>
-
-                  <div className="flex items-center gap-3 bg-white/10 px-3 py-2 rounded-2xl backdrop-blur-sm" style={{ boxShadow: '0 4px 15px rgba(255, 255, 255, 0.1)' }}>
-                    <div className="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-[#4AD36D] to-[#33C8FF] rounded-full flex-shrink-0" style={{ boxShadow: '0 4px 15px rgba(74, 211, 109, 0.5)' }}>
-                      <i className="ri-checkbox-circle-fill text-xl text-white"></i>
-                    </div>
-                    <span className="text-white text-sm md:text-base">500+ Families</span>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+              </section>
+
 
       {/* Our Approach */}
       <section className="py-24 bg-gradient-to-br from-[#FFF7DA] via-white to-[#EAF7FF] relative overflow-hidden">
@@ -579,8 +666,14 @@ export default function About() {
       <section className="py-24 bg-white relative overflow-hidden">
         <div className="max-w-[1280px] mx-auto px-6 relative z-10">
           <div className="text-center mb-20">
-            <h2 className="text-5xl lg:text-6xl font-extrabold text-[#0A2A66] mb-6" style={{ fontFamily: 'Nunito, sans-serif' }}>
-              Our <span className="bg-gradient-to-r from-[#FF8A3D] to-[#FFC837] bg-clip-text text-transparent">Impact</span>
+            <h2
+              className="text-5xl lg:text-6xl font-extrabold text-[#0A2A66] mb-6"
+              style={{ fontFamily: 'Nunito, sans-serif' }}
+            >
+              Our{' '}
+              <span className="bg-gradient-to-r from-[#FF8A3D] to-[#FFC837] bg-clip-text text-transparent">
+                Impact
+              </span>
             </h2>
             <p className="text-[#0A2A66] text-xl max-w-2xl mx-auto">
               Making a real difference in children's lives every day
@@ -596,26 +689,51 @@ export default function About() {
       </section>
 
       {/* Premium CTA Section */}
-      <section className="py-24 bg-gradient-to-br from-[#0A2A66] via-[#0480E8] to-[#0A2A66] relative overflow-hidden">
+      <section className="py-24 bg-gradient-to-br from-[#0A2A66] via-[#0480E8] to-[#0A2A66] relative overflow-hidden premium-cta-section">
         {/* Glowing Stars */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           {[...Array(20)].map((_, i) => (
-            <div key={i} className="absolute w-2 h-2 bg-white rounded-full animate-twinkle" style={{ top: `${Math.random() * 100}%`, left: `${Math.random() * 100}%`, animationDelay: `${Math.random() * 3}s`, boxShadow: '0 0 10px rgba(255, 255, 255, 0.8)' }}></div>
+            <div
+              key={i}
+              className="absolute w-2 h-2 bg-white rounded-full animate-twinkle"
+              style={{
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 3}s`,
+                boxShadow: '0 0 10px rgba(255, 255, 255, 0.8)'
+              }}
+            ></div>
           ))}
         </div>
 
         <div className="max-w-[1280px] mx-auto px-6 text-center relative z-10">
-          <h2 className="text-5xl lg:text-7xl font-extrabold text-white mb-8" style={{ fontFamily: 'Nunito, sans-serif', textShadow: '0 4px 30px rgba(0, 0, 0, 0.3)' }}>
-            Ready to Start Your <span className="bg-gradient-to-r from-[#FFC837] to-[#FFDD55] bg-clip-text text-transparent" style={{ filter: 'drop-shadow(0 0 20px rgba(255, 200, 55, 0.6))' }}>Journey?</span>
+          <h2
+            className="premium-cta-heading text-5xl lg:text-7xl font-extrabold text-white mb-8"
+            style={{
+              fontFamily: 'Nunito, sans-serif',
+              textShadow: '0 4px 30px rgba(0, 0, 0, 0.3)'
+            }}
+          >
+            Ready to Start Your{' '}
+            <span
+              className="bg-gradient-to-r from-[#FFC837] to-[#FFDD55] bg-clip-text text-transparent"
+              style={{ filter: 'drop-shadow(0 0 20px rgba(255, 200, 55, 0.6))' }}
+            >
+              Journey?
+            </span>
           </h2>
-          <p className="text-white text-2xl mb-12 max-w-2xl mx-auto" style={{ textShadow: '0 2px 10px rgba(0, 0, 0, 0.3)' }}>
+          <p
+            className="text-white text-2xl mb-12 max-w-2xl mx-auto"
+            style={{ textShadow: '0 2px 10px rgba(0, 0, 0, 0.3)' }}
+          >
             Let's work together to help your child shine bright
           </p>
           <a
             href={mailtoFor()}
             className="cta-button bg-gradient-to-r from-[#FFC837] to-[#FFDD55] text-[#0A2A66] px-14 py-7 rounded-full font-extrabold text-2xl hover:scale-110 transition-all inline-flex items-center gap-4 whitespace-nowrap cursor-pointer border-6 border-white mx-auto"
             style={{
-              boxShadow: "0 15px 50px rgba(255, 200, 55, 0.6), inset 0 2px 15px rgba(255, 255, 255, 0.5)",
+              boxShadow:
+                '0 15px 50px rgba(255, 200, 55, 0.6), inset 0 2px 15px rgba(255, 255, 255, 0.5)'
             }}
             aria-label="Book Free Consultation"
             target="_blank"
@@ -626,6 +744,7 @@ export default function About() {
           </a>
         </div>
       </section>
+
 
       <Footer />
 
@@ -666,6 +785,7 @@ export default function About() {
           100% { transform: translateY(0); }
         }
 
+
         /* Mobile-only CTA adjustments (<= 768px) */
         @media (max-width: 768px) {
           /* 3) CTA Button adjustments on mobile */
@@ -692,7 +812,321 @@ export default function About() {
           }
         }
 
+        /* SANAZ container mobile reductions (shared) */
+        .sanaz-container { }
+        .grid.lg\\:grid-cols-5 { grid-template-columns: 1fr !important; }
+        .lg\\:col-span-2, .lg\\:col-span-3 { width: 100% !important; }
+        .lg\\:col-span-3 { padding: 1rem !important; }
+        .rounded-[60px] { border-radius: 1rem !important; }
+        .sanaz-container .p-16 { padding: 1rem !important; }
+        .sanaz-container { padding-right: 0rem !important; padding-bottom: 24px !important; }
+        .sanaz-container .lg\\:col-span-3 { padding-right: 1.5rem !important; padding-left: 1.5rem !important; }
+        .sanaz-container .lg\\:col-span-2 { padding-right: 0 !important; }
+        .sanaz-container a { margin-right: 0 !important; margin-left: 0 !important; }
+
+        /* === Sanaz section very small screens (<= 369px): 4 stacked, left aligned === */
+        @media (max-width: 370px) {
+          .sanaz-section {
+            padding-top: 2.5rem !important;
+            padding-bottom: 2.5rem !important;
+          }
+
+          .sanaz-container {
+            border-radius: 1.5rem !important;
+          }
+
+          .sanaz-content {
+            padding-right: 1rem !important;
+            padding-left: 1rem !important;
+            padding-top: 1.25rem !important;
+            padding-bottom: 1.5rem !important;
+            overflow-x: hidden !important;
+          }
+
+          /* "Meet our founder" pill */
+          .sanaz-content .founder-pill {
+            padding: 0.5rem 0.9rem !important;
+            gap: 0.5rem !important;
+            margin-bottom: 0.9rem !important;
+          }
+          .sanaz-content .founder-pill i {
+            font-size: 1.1rem !important;
+          }
+          .sanaz-content .founder-pill span {
+            font-size: 0.8rem !important;
+            white-space: nowrap !important;
+          }
+
+          /* Heading & subheading */
+          .sanaz-content h3 {
+            font-size: 2rem !important;
+            margin-bottom: 0.6rem !important;
+          }
+          .sanaz-content .text-2xl {
+            font-size: 1.25rem !important;
+            margin-bottom: 0.9rem !important;
+          }
+
+          /* Paragraph text */
+          .sanaz-content p {
+            font-size: 0.95rem !important;
+            line-height: 1.5 !important;
+            margin-bottom: 0.9rem !important;
+          }
+
+          /* Highlights: 1 column (4 cards stacked), left aligned */
+          .sanaz-content .sanaz-highlights {
+            grid-template-columns: 1fr !important;
+            gap: 0.75rem !important;
+            margin-bottom: 1.2rem !important;
+          }
+
+          .sanaz-content .sanaz-highlights > div {
+            display: flex !important;
+            align-items: center !important;          /* icon vertically centered with text */
+            justify-content: flex-start !important;  /* left align content */
+            text-align: left !important;
+          }
+
+          /* Green circle with check — icon centered */
+          .sanaz-content .sanaz-highlights .w-12.h-12 {
+            width: 2.5rem !important;
+            height: 2.5rem !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            flex-shrink: 0 !important;
+          }
+
+          .sanaz-content .sanaz-highlights i {
+            font-size: 1.1rem !important;
+          }
+
+          /* Text: slightly smaller, wraps, no overflow */
+          .sanaz-content .sanaz-highlights span {
+            font-size: 0.85rem !important;
+            display: block !important;
+            white-space: normal !important;
+            word-break: break-word !important;
+            overflow-wrap: anywhere !important;
+          }
+
+          /* CTA button: Learn More About Sanaz */
+          .sanaz-content .founder-cta {
+            white-space: normal !important;
+            padding-left: 0.9rem !important;
+            padding-right: 0.9rem !important;
+            padding-top: 0.8rem !important;
+            padding-bottom: 0.8rem !important;
+            font-size: 0.95rem !important;
+            border-width: 3.5px !important;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            display: flex !important;
+            justify-content: center !important;
+            text-align: center !important;
+            min-width: 100% !important;
+            max-width: 100% !important;
+          }
+          .sanaz-content .founder-cta i {
+            margin-left: 0.4rem !important;
+            margin-top: 0.05rem !important;
+            font-size: 1.1rem !important;
+          }
+
+          /* Safety: prevent overflow of any child */
+          .sanaz-content p,
+          .sanaz-content .feature-card,
+          .sanaz-content .feature-card span {
+            max-width: 100% !important;
+            word-break: break-word !important;
+            overflow-wrap: anywhere !important;
+          }
+
+          .sanaz-content .inline-flex.w-fit {
+            max-width: 100% !important;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+        }
+
+        /* === Sanaz section small mobiles (370px – 440px): 2x2 grid, left aligned, smaller circles === */
+        @media (min-width: 370px) and (max-width: 440px) {
+          .sanaz-section {
+            padding-top: 2.75rem !important;
+            padding-bottom: 2.75rem !important;
+          }
+
+          .sanaz-container {
+            border-radius: 1.7rem !important;
+          }
+
+          .sanaz-content {
+            padding-right: 1.25rem !important;
+            padding-left: 1.25rem !important;
+            padding-top: 1.4rem !important;
+            padding-bottom: 1.6rem !important;
+            overflow-x: hidden !important;
+          }
+
+          /* "Meet our founder" pill */
+          .sanaz-content .founder-pill {
+            padding: 0.6rem 1rem !important;
+            gap: 0.55rem !important;
+            margin-bottom: 1rem !important;
+          }
+          .sanaz-content .founder-pill i {
+            font-size: 1.15rem !important;
+          }
+          .sanaz-content .founder-pill span {
+            font-size: 0.85rem !important;
+            white-space: nowrap !important;
+          }
+
+          /* Heading & subheading */
+          .sanaz-content h3 {
+            font-size: 2.1rem !important;
+            margin-bottom: 0.7rem !important;
+          }
+          .sanaz-content .text-2xl {
+            font-size: 1.3rem !important;
+            margin-bottom: 1rem !important;
+          }
+
+          /* Paragraph text */
+          .sanaz-content p {
+            font-size: 0.98rem !important;
+            line-height: 1.55 !important;
+            margin-bottom: 1rem !important;
+          }
+
+          /* Highlights: 2 columns (2 per row), left aligned */
+          .sanaz-content .sanaz-highlights {
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            column-gap: 0.8rem !important;
+            row-gap: 0.8rem !important;
+            margin-bottom: 1.3rem !important;
+          }
+
+          .sanaz-content .sanaz-highlights > div {
+            display: flex !important;
+            align-items: center !important;          /* icon vertically centered */
+            justify-content: flex-start !important;  /* left align content in each card */
+            text-align: left !important;
+          }
+
+          /* Smaller green circle, icon centered */
+          .sanaz-content .sanaz-highlights .w-12.h-12 {
+            width: 2.2rem !important;
+            height: 2.2rem !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            flex-shrink: 0 !important;
+          }
+
+          .sanaz-content .sanaz-highlights i {
+            font-size: 1rem !important;
+          }
+
+          /* Smaller text, wrapping inside card */
+          .sanaz-content .sanaz-highlights span {
+            font-size: 0.8rem !important;
+            display: block !important;
+            white-space: normal !important;
+            word-break: break-word !important;
+            overflow-wrap: anywhere !important;
+          }
+
+          /* CTA button: Learn More About Sanaz */
+          .sanaz-content .founder-cta {
+            white-space: normal !important;
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+            padding-top: 0.85rem !important;
+            padding-bottom: 0.85rem !important;
+            font-size: 1rem !important;
+            border-width: 3.5px !important;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            display: flex !important;
+            justify-content: center !important;
+            text-align: center !important;
+            min-width: 100% !important;
+            max-width: 100% !important;
+          }
+          .sanaz-content .founder-cta i {
+            margin-left: 0.45rem !important;
+            margin-top: 0.06rem !important;
+            font-size: 1.15rem !important;
+          }
+
+          /* Safety: prevent overflow */
+          .sanaz-content p,
+          .sanaz-content .feature-card,
+          .sanaz-content .feature-card span {
+            max-width: 100% !important;
+            word-break: break-word !important;
+            overflow-wrap: anywhere !important;
+          }
+
+          .sanaz-content .inline-flex.w-fit {
+            max-width: 100% !important;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+        }
+
+        @media (max-width: 440px) {
+          .sanaz-highlights .check-icon-fix {
+            transform: translateY(7px) !important;  /* slight downward shift */
+            display: inline-block !important;
+          }
+        }
+
+        /* === Premium CTA: <320px — smaller title & button === */
+        @media (max-width: 319px) {
+          .premium-cta-section .premium-cta-heading {
+            font-size: 2.3rem !important;
+            line-height: 1.2 !important;
+            word-break: break-word !important;
+          }
+          .premium-cta-section .premium-cta-heading span {
+            font-size: 1em !important;
+          }
+
+          .premium-cta-section .cta-button {
+            font-size: 0.95rem !important;
+            padding: 0.75rem 1.5rem !important;
+          }
+          .premium-cta-section .cta-button i {
+            font-size: 1.4rem !important;
+          }
+        }
+
+        /* === Premium CTA: 320px – 375px — slightly larger but still compact === */
+        @media (min-width: 320px) and (max-width: 375px) {
+          .premium-cta-section .premium-cta-heading {
+            font-size: 2.6rem !important;
+            line-height: 1.2 !important;
+            word-break: break-word !important;
+          }
+          .premium-cta-section .premium-cta-heading span {
+            font-size: 1em !important;
+          }
+
+          .premium-cta-section .cta-button {
+            font-size: 1.05rem !important;
+            padding: 0.85rem 1.9rem !important;
+          }
+          .premium-cta-section .cta-button i {
+            font-size: 1.6rem !important;
+          }
+        }
       `}</style>
+
     </div>
   );
 }

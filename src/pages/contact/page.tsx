@@ -356,7 +356,7 @@ Thank you,
                               <span className="hours-end">{parts.end}&nbsp; &nbsp; </span>
                             </>
                           ) : (
-                              <span className="hours-start">{schedule.hours}&nbsp;&nbsp;</span>
+                            <span className="hours-start">{schedule.hours}&nbsp;&nbsp;</span>
                           )}
                         </div>
                       </div>
@@ -387,16 +387,16 @@ Thank you,
                 </h2>
               </div>
 
-              <div className="grid grid-cols-2 gap-5">
+              <div className="grid grid-cols-2 gap-5 service-areas-grid">
                 {serviceAreas.map((area, index) => (
                   <div
                     key={index}
-                    className="bg-white rounded-3xl p-6 border-4 border-[#33C8FF] hover:scale-105 transition-all cursor-pointer"
+                    className="bg-white rounded-3xl p-6 border-4 border-[#33C8FF] hover:scale-105 transition-all cursor-pointer service-area-card"
                     style={{ boxShadow: '0 10px 30px rgba(51,200,255,0.2)' }}
                   >
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-3 service-area-inner">
                       <div
-                        className="w-10 h-10 flex items-center justify-center rounded-full flex-shrink-0"
+                        className="service-area-icon-circle w-10 h-10 flex items-center justify-center rounded-full flex-shrink-0"
                         style={{
                           backgroundColor: '#33C8FF',
                           boxShadow: '0 4px 15px rgba(51,200,255,0.6)',
@@ -404,7 +404,9 @@ Thank you,
                       >
                         <i className="ri-map-pin-fill text-xl text-white"></i>
                       </div>
-                      <span className="text-[#0A2A66] text-lg">{area}</span>
+                      <span className="service-area-label text-[#0A2A66] text-lg">
+                        {area}
+                      </span>
                     </div>
                   </div>
                 ))}
@@ -567,7 +569,7 @@ Thank you,
             rel="noopener noreferrer"
           >
             <i className="ri-mail-fill text-4xl"></i>
-            <span>Book Free Consultation</span>
+            <span className="contact-cta-text">Book Free Consultation</span>
           </a>
         </div>
       </section>
@@ -584,7 +586,7 @@ Thank you,
         @keyframes twinkle { 0%,100% { opacity:.3; transform:scale(1);} 50% { opacity:1; transform:scale(1.5);} }
 
         .animate-float-slow { animation: float-slow 4s ease-in-out infinite; }
-        .animate-float-medium { animation: float-medium 3s ease-in-out infinite; }
+        .animate-float-medium { animation: float-medium 4s ease-in-out infinite; }
         .animate-bounce-slow { animation: bounce-slow 2s ease-in-out infinite; }
         .animate-twinkle { animation: twinkle 3s ease-in-out infinite; }
 
@@ -599,30 +601,37 @@ Thank you,
         .hours-inline { display: block; }
         .hours-vertical { display: none; }
 
+        /* Ensure CTA content (icon + text) is always centered on all screens */
+        .cta-button {
+          justify-content: center !important;
+          align-items: center !important;
+          text-align: center !important;
+        }
+
         @media (max-width: 440px) {
           /* Layout the hours row so left (day) and right (hours) are spaced */
           .hours-row { gap: 12px; }
           .hours-inline { display: none; }
           .hours-vertical {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-end;
-          justify-content: center;
-          gap: 2px;
-          min-width: 88px;
-          line-height: 1;
-        }
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 2px;
+            min-width: 88px;
+            line-height: 1;
+          }
 
-        /* ensure both lines don't wrap and have no extra margin/indent */
-        .hours-vertical .hours-start,
-        .hours-vertical .hours-end {
-          display: block;
-          white-space: nowrap;
-          margin: 0;
-          padding: 0;
-          text-align: right;
-        }
-          
+          /* ensure both lines don't wrap and have no extra margin/indent */
+          .hours-vertical .hours-start,
+          .hours-vertical .hours-end {
+            display: block;
+            white-space: nowrap;
+            margin: 0;
+            padding: 0;
+            text-align: right;
+          }
+
           /* Slightly reduce padding for tiny screens to keep cards compact */
           .contact-card-wrapper { flex: 0 0 100%; max-width: 100%; }
           .contact-card { height: auto; }
@@ -647,6 +656,102 @@ Thank you,
             border-radius:9999px !important;
           }
           .cta-button i { font-size:1.7rem !important; }
+        }
+
+        /* ===== Service Areas small screens: avoid overflow, shrink text & icon ===== */
+
+        /* < 320px */
+        @media (max-width: 319px) {
+          .service-areas-grid {
+            grid-template-columns: 1fr !important;
+            row-gap: 0.75rem !important;
+            column-gap: 0.75rem !important;
+          }
+
+          .service-area-card {
+            padding: 0.75rem 0.9rem !important;
+          }
+
+          .service-area-icon-circle {
+            width: 1.9rem !important;
+            height: 1.9rem !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+          }
+
+          .service-area-icon-circle i {
+            font-size: 0.95rem !important;
+          }
+
+          .service-area-label {
+            font-size: 0.9rem !important;
+            line-height: 1.3 !important;
+            white-space: normal !important;
+            word-break: break-word !important;
+            overflow-wrap: anywhere !important;
+          }
+
+          .contact-cta-text {
+            font-size: 0.9rem !important;
+            white-space: nowrap !important;
+          }
+
+          .cta-button {
+            font-size: 1rem !important;
+            padding: 0.75rem 1rem !important;
+          }
+
+          .cta-button i {
+            font-size: 1.4rem !important;
+          }
+        }
+
+        /* 320px – 400px */
+        @media (min-width: 320px) and (max-width: 400px) {
+          .service-areas-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            column-gap: 0.75rem !important;
+            row-gap: 0.75rem !important;
+          }
+
+          .service-area-card {
+            padding: 0.85rem 1rem !important;
+          }
+
+          .service-area-icon-circle {
+            width: 2rem !important;
+            height: 2rem !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+          }
+
+          .service-area-icon-circle i {
+            font-size: 1rem !important;
+          }
+
+          .service-area-label {
+            font-size: 0.95rem !important;
+            line-height: 1.35 !important;
+            white-space: normal !important;
+            word-break: break-word !important;
+            overflow-wrap: anywhere !important;
+          }
+
+          .contact-cta-text {
+            font-size: 1rem !important;
+            white-space: nowrap !important;
+          }
+
+          .cta-button {
+            font-size: 1.05rem !important;
+            padding: 0.8rem 1.1rem !important;
+          }
+
+          .cta-button i {
+            font-size: 1.55rem !important;
+          }
         }
       `}</style>
     </div>

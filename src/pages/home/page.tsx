@@ -6,6 +6,9 @@ import Footer from '../../components/feature/Footer';
 import { useState, useMemo, useEffect, useRef } from 'react';
 import SanazAbout from '../../assets/Sanaz About Section.png';
 import WhiteTarget from "../../assets/icons/white-target.png";
+import TestimonialMarieImg from '../../assets/testimonial-marie.jpg';
+import TestimonialMichaelImg from '../../assets/testimonial-michael.jpg';
+import TestimonialMadhuImg from '../../assets/testimonial-madhu.jpg';
 
 /**
  * Helpers + CountUp component
@@ -40,21 +43,30 @@ function CountUp({
   duration = 1400,
   className = '',
   play = true,
+  start,
 }: {
   end: number;
   suffix?: string;
   duration?: number;
   className?: string;
   play?: boolean;
+  /** optional explicit start value for this counter */
+  start?: number;
 }) {
-  const [value, setValue] = useState<number>(() => getStartValue(end, suffix === '%'));
+  const isPercent = suffix === '%';
+  const initialStart = start !== undefined ? start : getStartValue(end, isPercent);
+
+  const [value, setValue] = useState<number>(initialStart);
   const rafRef = useRef<number | null>(null);
   const playedRef = useRef(false);
 
   useEffect(() => {
+    const isPercentLocal = suffix === '%';
+    const startValue = start !== undefined ? start : getStartValue(end, isPercentLocal);
+
     if (!play) {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
-      setValue(getStartValue(end, suffix === '%'));
+      setValue(startValue);
       playedRef.current = false;
       return;
     }
@@ -64,14 +76,13 @@ function CountUp({
       return;
     }
 
-    const start = getStartValue(end, suffix === '%');
     const startTime = performance.now();
 
     function step(now: number) {
       const elapsed = now - startTime;
       const t = Math.min(1, elapsed / duration);
       const eased = easeOutCubic(t);
-      const current = Math.round(start + (end - start) * eased);
+      const current = Math.round(startValue + (end - startValue) * eased);
       setValue(current);
 
       if (t < 1) {
@@ -87,7 +98,7 @@ function CountUp({
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
-  }, [end, suffix, duration, play]);
+  }, [end, suffix, duration, play, start]);
 
   return (
     <div aria-live="polite" className={className}>
@@ -97,11 +108,24 @@ function CountUp({
   );
 }
 
+
 /**
  * StatsInline - small wrapper to animate when visible
  * props: children (will render CountUp)
  */
-function StatsInline({ end, suffix = '', duration = 1400, className = '' }: { end: number; suffix?: string; duration?: number; className?: string; }) {
+function StatsInline({
+  end,
+  suffix = '',
+  duration = 1400,
+  className = '',
+  start,
+}: {
+  end: number;
+  suffix?: string;
+  duration?: number;
+  className?: string;
+  start?: number;
+}) {
   const ref = useRef<HTMLDivElement | null>(null);
   const [visible, setVisible] = useState(false);
 
@@ -123,16 +147,25 @@ function StatsInline({ end, suffix = '', duration = 1400, className = '' }: { en
 
     io.observe(el);
     return () => {
-      try { if (io && el) io.unobserve(el); } catch { }
+      try {
+        if (io && el) io.unobserve(el);
+      } catch { }
     };
   }, []);
 
   return (
     <div ref={ref} className={className}>
-      <CountUp end={end} suffix={suffix} duration={duration} play={visible} />
+      <CountUp
+        end={end}
+        suffix={suffix}
+        duration={duration}
+        play={visible}
+        start={start}
+      />
     </div>
   );
 }
+
 
 /**
  * safe mailto generator (no literal newlines)
@@ -212,9 +245,27 @@ export default function Home() {
   ];
 
   const testimonials = [
-    { name: 'Marie', location: 'Castle Hill, Sydney', text: 'In just four sessions, the progress has been wonderful. My son is making great eye contact and is much more responsive to the educators. He is communicating well and, most importantly, he is now socializing with his peers. We are thrilled with the changes!', rating: 5, image: 'https://readdy.ai/api/search-image?query=Professional%20portrait%20of%20happy%20Australian%20mother%20in%20her%2030s%2C%20warm%20smile%2C%20casual%20modern%20clothing%2C%20natural%20outdoor%20lighting%2C%20clean%20simple%20background%2C%20high%20quality%20professional%20photography&width=150&height=150&seq=testimonial-sarah-premium&orientation=squarish' },
-    { name: 'Michael', location: 'Parramatta, Sydney', text: 'In just three sessions, we have seen incredible changes. My daughter is already showing more independence, like brushing her teeth by herself, and she is spending much less time alone in her room. She is significantly more vocal and, best of all, she actively wants to play with her dad and brother now. The progress has been amazing to watch!', rating: 5, image: 'https://readdy.ai/api/search-image?query=Professional%20portrait%20of%20happy%20Australian%20father%20in%20his%2030s%2C%20warm%20smile%2C%20casual%20modern%20clothing%2C%20natural%20outdoor%20lighting%2C%20clean%20simple%20background%2C%20high%20quality%20professional%20photography&width=150&height=150&seq=testimonial-michael-premium&orientation=squarish' },
-    { name: 'Madhu', location: 'Chatswood, Sydney', text: 'My son has improved a lot on eye contact, answering questions, listening and understanding as well. He is able to understand and follow instructions better. I am so glad he is learning to play different new games, following the rules of the games as well.Thank you for all your hard work and supporting him in his journey!', rating: 5, image: 'https://readdy.ai/api/search-image?query=Professional%20portrait%20of%20happy%20Australian%20father%20in%20his%2030s%2C%20warm%20smile%2C%20casual%20modern%20clothing%2C%20natural%20outdoor%20lighting%2C%20clean%20simple%20background%2C%20high%20quality%20professional%20photography&width=150&height=150&seq=testimonial-david-premium&orientation=squarish' }
+    {
+      name: 'Marie',
+      location: 'Castle Hill, Sydney',
+      text: 'In just four sessions, the progress has been wonderful. My son is making great eye contact and is much more responsive to the educators. He is communicating well and, most importantly, he is now socializing with his peers. We are thrilled with the changes!',
+      rating: 5,
+      image: TestimonialMarieImg,
+    },
+    {
+      name: 'Michael',
+      location: 'Parramatta, Sydney',
+      text: 'In just three sessions, we have seen incredible changes. My daughter is already showing more independence, like brushing her teeth by herself, and she is spending much less time alone in her room. She is significantly more vocal and, best of all, she actively wants to play with her dad and brother now. The progress has been amazing to watch!',
+      rating: 5,
+      image: TestimonialMichaelImg,
+    },
+    {
+      name: 'Madhu',
+      location: 'Chatswood, Sydney',
+      text: 'My son has improved a lot on eye contact, answering questions, listening and understanding as well. He is able to understand and follow instructions better. I am so glad he is learning to play different new games, following the rules of the games as well.Thank you for all your hard work and supporting him in his journey!',
+      rating: 5,
+      image: TestimonialMadhuImg,
+    },
   ];
 
   const faqs = [
@@ -246,95 +297,199 @@ export default function Home() {
 
       <main>
         {/* Premium Hero Section */}
-        <section className="relative overflow-hidden" style={{
-          background: 'linear-gradient(135deg, #EAF7FF 0%, #FFF7DA 50%, #E0F7FF 100%)',
-          minHeight: '90vh'
-        }}>
+        <section
+          className="hero-section relative overflow-hidden min-h-[80vh] sm:min-h-[90vh] flex items-center"
+          style={{
+            background:
+              'linear-gradient(135deg, #EAF7FF 0%, #FFF7DA 50%, #E0F7FF 100%)',
+          }}
+        >
           {/* Animated Floating Stars */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute top-[15%] left-[8%] w-20 h-20 flex items-center justify-center animate-float-slow opacity-40 star-hero" style={{ zIndex: 0 }}>
-              <i className="ri-star-fill text-6xl text-[#FFC837]" style={{ filter: 'drop-shadow(0 0 20px rgba(255, 200, 55, 0.8))' }}></i>
+            <div className="absolute top-[15%] left-[8%] w-20 h-20 flex items-center justify-center animate-float-slow opacity-40 star-hero">
+              <i
+                className="ri-star-fill text-6xl text-[#FFC837]"
+                style={{
+                  filter:
+                    'drop-shadow(0 0 20px rgba(255, 200, 55, 0.8))',
+                }}
+              ></i>
             </div>
-            <div className="absolute top-[25%] right-[12%] w-16 h-16 flex items-center justify-center animate-float-medium opacity-35 star-hero" style={{ animationDelay: '1s', zIndex: 0 }}>
-              <i className="ri-star-fill text-5xl text-[#FF4F87]" style={{ filter: 'drop-shadow(0 0 15px rgba(255, 79, 135, 0.7))' }}></i>
+            <div
+              className="absolute top-[25%] right-[12%] w-16 h-16 flex items-center justify-center animate-float-medium opacity-35 star-hero"
+              style={{ animationDelay: '1s' }}
+            >
+              <i
+                className="ri-star-fill text-5xl text-[#FF4F87]"
+                style={{
+                  filter:
+                    'drop-shadow(0 0 15px rgba(255, 79, 135, 0.7))',
+                }}
+              ></i>
             </div>
-            <div className="absolute bottom-[30%] left-[15%] w-14 h-14 flex items-center justify-center animate-float-slow opacity-30 star-hero" style={{ animationDelay: '2s', zIndex: 0 }}>
-              <i className="ri-star-fill text-4xl text-[#4AD36D]" style={{ filter: 'drop-shadow(0 0 12px rgba(74, 211, 109, 0.7))' }}></i>
+            <div
+              className="absolute bottom-[30%] left-[15%] w-14 h-14 flex items-center justify-center animate-float-slow opacity-30 star-hero"
+              style={{ animationDelay: '2s' }}
+            >
+              <i
+                className="ri-star-fill text-4xl text-[#4AD36D]"
+                style={{
+                  filter:
+                    'drop-shadow(0 0 12px rgba(74, 211, 109, 0.7))',
+                }}
+              ></i>
             </div>
-            <div className="absolute top-[40%] right-[6%] w-18 h-18 flex items-center justify-center animate-float-medium opacity-35 star-hero" style={{ animationDelay: '1.5s', zIndex: 0 }}>
-              <i className="ri-star-fill text-5xl text-[#33C8FF]" style={{ filter: 'drop-shadow(0 0 18px rgba(51, 200, 255, 0.8))' }}></i>
+            <div
+              className="absolute top-[40%] right-[6%] w-18 h-18 flex items-center justify-center animate-float-medium opacity-35 star-hero"
+              style={{ animationDelay: '1.5s' }}
+            >
+              <i
+                className="ri-star-fill text-5xl text-[#33C8FF]"
+                style={{
+                  filter:
+                    'drop-shadow(0 0 18px rgba(51, 200, 255, 0.8))',
+                }}
+              ></i>
             </div>
-            <div className="absolute bottom-[20%] right-[20%] w-12 h-12 flex items-center justify-center animate-float-slow opacity-25 star-hero" style={{ animationDelay: '0.5s', zIndex: 0 }}>
-              <i className="ri-star-fill text-3xl text-[#FF8A3D]" style={{ filter: 'drop-shadow(0 0 10px rgba(255, 138, 61, 0.7))' }}></i>
+            <div
+              className="absolute bottom-[20%] right-[20%] w-12 h-12 flex items-center justify-center animate-float-slow opacity-25 star-hero"
+              style={{ animationDelay: '0.5s' }}
+            >
+              <i
+                className="ri-star-fill text-3xl text-[#FF8A3D]"
+                style={{
+                  filter:
+                    'drop-shadow(0 0 10px rgba(255, 138, 61, 0.7))',
+                }}
+              ></i>
             </div>
           </div>
 
           {/* Spotlight Glow Effects */}
-          <div className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full opacity-20 blur-3xl" style={{ background: 'radial-gradient(circle, #FFC837 0%, transparent 70%)', zIndex: 0 }}></div>
-          <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] rounded-full opacity-15 blur-3xl" style={{ background: 'radial-gradient(circle, #33C8FF 0%, transparent 70%)', zIndex: 0 }}></div>
+          <div
+            className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full opacity-20 blur-3xl"
+            style={{
+              background:
+                'radial-gradient(circle, #FFC837 0%, transparent 70%)',
+            }}
+          ></div>
+          <div
+            className="absolute bottom-0 right-1/4 w-[500px] h-[500px] rounded-full opacity-15 blur-3xl"
+            style={{
+              background:
+                'radial-gradient(circle, #33C8FF 0%, transparent 70%)',
+            }}
+          ></div>
 
-          <div className="max-w-[1280px] mx-auto px-6 py-20 relative z-10">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="max-w-[1280px] mx-auto px-4 sm:px-6 py-16 sm:py-20 relative z-10 w-full">
+            <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
               {/* Left Content */}
-              <div>
-                <div className="inline-flex items-center gap-3 bg-white px-6 py-4 rounded-full mb-10 border-4 border-[#FFC837]" style={{
-                  boxShadow: '0 8px 30px rgba(255, 200, 55, 0.4), inset 0 2px 10px rgba(255, 200, 55, 0.2)'
-                }}>
-                  <div className="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-[#FFC837] to-[#FFDD55] rounded-full" style={{ boxShadow: '0 4px 15px rgba(255, 200, 55, 0.5)' }}>
-                    <i className="ri-star-fill text-2xl text-white"></i>
+              <div className="sanaz-content">
+                {/* Badge */}
+                <div
+                  className="inline-flex items-center gap-3 bg-white px-4 sm:px-6 py-3 sm:py-4 rounded-full mb-8 sm:mb-10 border-4 border-[#FFC837] max-w-full"
+                  style={{
+                    boxShadow:
+                      '0 8px 30px rgba(255, 200, 55, 0.4), inset 0 2px 10px rgba(255, 200, 55, 0.2)',
+                  }}
+                >
+                  <div
+                    className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center bg-gradient-to-br from-[#FFC837] to-[#FFDD55] rounded-full flex-shrink-0"
+                    style={{
+                      boxShadow:
+                        '0 4px 15px rgba(255, 200, 55, 0.5)',
+                    }}
+                  >
+                    <i className="ri-star-fill text-xl sm:text-2xl text-white"></i>
                   </div>
-                  <span className="text-[#0A2A66] font-bold text-base">ESDM Certified • Sydney Based</span>
+                  <span className="text-[#0A2A66] font-bold text-xs xs:text-sm sm:text-base leading-snug max-w-[210px] sm:max-w-none">
+                    ESDM Certified • Sydney Based
+                  </span>
                 </div>
 
-                <h1 className="text-6xl lg:text-7xl font-extrabold text-[#0A2A66] mb-8 leading-tight hero-heading" style={{ fontFamily: 'Nunito, sans-serif' }}>
+                {/* Heading */}
+                <h1
+                  className="hero-heading text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-[#0A2A66] mb-6 sm:mb-8 leading-tight"
+                  style={{ fontFamily: 'Nunito, sans-serif' }}
+                >
                   Every Child Deserves to
-                  <span className="block mt-3 bg-gradient-to-r from-[#FFC837] via-[#FFDD55] to-[#FF8A3D] bg-clip-text text-transparent" style={{
-                    textShadow: '0 0 40px rgba(255, 200, 55, 0.4)',
-                    filter: 'drop-shadow(0 4px 8px rgba(255, 200, 55, 0.3))'
-                  }}>
+                  <span
+                    className="block mt-2 sm:mt-3 bg-gradient-to-r from-[#FFC837] via-[#FFDD55] to-[#FF8A3D] bg-clip-text text-transparent"
+                    style={{
+                      textShadow:
+                        '0 0 40px rgba(255, 200, 55, 0.4)',
+                      filter:
+                        'drop-shadow(0 4px 8px rgba(255, 200, 55, 0.3))',
+                    }}
+                  >
                     Shine Bright ✨
                   </span>
                 </h1>
 
-                <p className="text-xl text-[#0A2A66] mb-10 leading-relaxed" style={{ textShadow: '0 1px 2px rgba(10, 42, 102, 0.1)' }}>
-                  Specialized early intervention therapy for young children with autism. Using play-based ESDM approach to unlock your child's full potential in a warm, supportive environment.
+                {/* Description */}
+                <p
+                  className="text-sm sm:text-lg lg:text-xl text-[#0A2A66] mb-8 sm:mb-10 leading-relaxed max-w-xl"
+                  style={{
+                    textShadow:
+                      '0 1px 2px rgba(10, 42, 102, 0.1)',
+                  }}
+                >
+                  Specialized early intervention therapy for young
+                  children with autism. Using play-based ESDM
+                  approach to unlock your child&apos;s full potential
+                  in a warm, supportive environment.
                 </p>
 
-                <div className="flex flex-wrap gap-5 mb-10">
+                {/* CTAs */}
+                <div className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-5 mb-8 sm:mb-10">
                   <a
-                    href={mailtoFor('Home - Free Consultation', 'info@uniquestars.com.au')}
+                    href={mailtoFor(
+                      'Home - Free Consultation',
+                      'admin@uniquestars.com.au',
+                    )}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-gradient-to-r from-[#FFC837] to-[#FFDD55] text-[#0A2A66] px-10 py-5 rounded-full font-bold text-lg hover:scale-105 transition-all inline-flex items-center gap-3 whitespace-nowrap cursor-pointer border-4 border-[#0A2A66]"
+                    className="cta-button cta-button-primary bg-gradient-to-r from-[#FFC837] to-[#FFDD55] text-[#0A2A66] px-5 sm:px-8 lg:px-10 py-3.5 sm:py-4 lg:py-5 rounded-full font-bold text-xs sm:text-sm md:text-base lg:text-lg hover:scale-105 transition-all inline-flex items-center gap-2 sm:gap-3 cursor-pointer border-4 border-[#0A2A66] w-full sm:w-auto justify-center"
                     style={{
-                      boxShadow: '0 10px 35px rgba(255, 200, 55, 0.5), inset 0 2px 10px rgba(255, 255, 255, 0.5)',
-                      filter: 'drop-shadow(0 0 20px rgba(255, 200, 55, 0.6))'
+                      boxShadow:
+                        '0 10px 35px rgba(255, 200, 55, 0.5), inset 0 2px 10px rgba(255, 255, 255, 0.5)',
+                      filter:
+                        'drop-shadow(0 0 20px rgba(255, 200, 55, 0.6))',
                     }}
                     aria-label="Book free consultation"
                   >
-                    <i className="ri-mail-fill text-2xl"></i>
-                    Book Free Consultation
+                    <i className="cta-primary-icon ri-mail-fill text-base sm:text-lg md:text-xl lg:text-2xl"></i>
+                    <span className="cta-primary-text">
+                      Book Free Consultation
+                    </span>
                   </a>
+
                   <Link
                     to="/services"
-                    className="bg-[#0A2A66] text-white px-10 py-5 rounded-full font-bold text-lg hover:scale-105 transition-all inline-flex items-center gap-3 whitespace-nowrap cursor-pointer border-4 border-[#33C8FF]"
+                    className="cta-button bg-[#0A2A66] text-white px-5 sm:px-8 lg:px-10 py-3.5 sm:py-4 lg:py-5 rounded-full font-bold text-sm sm:text-base lg:text-lg hover:scale-105 transition-all inline-flex items-center gap-2 sm:gap-3 cursor-pointer border-4 border-[#33C8FF] w-full sm:w-auto justify-center"
                     style={{
-                      boxShadow: '0 10px 35px rgba(10, 42, 102, 0.4), inset 0 2px 10px rgba(51, 200, 255, 0.3)'
+                      boxShadow:
+                        '0 10px 35px rgba(10, 42, 102, 0.4), inset 0 2px 10px rgba(51, 200, 255, 0.3)',
                     }}
                     aria-label="Explore services"
                   >
-                    Explore Services
-                    <i className="ri-arrow-right-line text-xl"></i>
+                    <span>Explore Services</span>
+                    <i className="ri-arrow-right-line text-lg sm:text-xl"></i>
                   </Link>
                 </div>
               </div>
 
               {/* Right Premium Card */}
-              <div className="relative">
-                <div className="relative rounded-[50px] overflow-hidden border-8 border-[#0A2A66] bg-white" style={{
-                  boxShadow: '0 25px 60px rgba(10, 42, 102, 0.3), inset 0 -5px 20px rgba(51, 200, 255, 0.2)',
-                  transform: 'perspective(1000px) rotateY(-5deg)'
-                }}>
+              <div className="hero-image-wrapper relative mt-6 lg:mt-0 flex justify-center">
+                <div
+                  className="hero-image-card rounded-[46px] sm:rounded-[50px] overflow-hidden border-8 border-[#0A2A66] bg-white w-full"
+                  style={{
+                    boxShadow:
+                      '0 25px 60px rgba(10, 42, 102, 0.3), inset 0 -5px 20px rgba(51, 200, 255, 0.2)',
+                    transform:
+                      'perspective(1000px) rotateY(-3deg)',
+                  }}
+                >
                   <img
                     src="https://readdy.ai/api/search-image?query=Joyful%20young%20child%20with%20autism%20playing%20with%20colorful%20building%20blocks%20and%20educational%20toys%20during%20therapy%20session%2C%20bright%20modern%20therapy%20room%20with%20soft%20natural%20window%20lighting%2C%20warm%20welcoming%20atmosphere%2C%20child%20smiling%20with%20genuine%20happiness%20and%20engagement%2C%20professional%20therapist%20hands%20visible%20guiding%20play%20activity%2C%20pastel%20colored%20walls%20with%20simple%20clean%20background%2C%20high%20quality%20professional%20photography%20showing%20authentic%20moment%20of%20learning%20and%20development&width=600&height=700&seq=hero-home-premium-1&orientation=portrait"
                     alt="Child in therapy"
@@ -342,59 +497,104 @@ export default function Home() {
                     decoding="async"
                     crossOrigin="anonymous"
                     onError={handleImgError}
-                    style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover', backgroundColor: '#F6F8FA' }}
+                    style={{
+                      display: 'block',
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      backgroundColor: '#F6F8FA',
+                    }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0A2A66]/30 via-transparent to-transparent"></div>
                 </div>
 
                 {/* Floating Star Stickers */}
-                <div className="absolute -top-8 -right-8 w-16 h-16 flex items-center justify-center animate-bounce-slow star-sticker" style={{ zIndex: 0 }}>
-                  <i className="ri-star-fill text-6xl text-[#FFC837]" style={{ filter: 'drop-shadow(0 0 20px rgba(255, 200, 55, 0.9))' }}></i>
+                <div className="absolute -top-6 sm:-top-8 -right-4 sm:-right-8 w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center animate-bounce-slow star-sticker">
+                  <i
+                    className="ri-star-fill text-4xl sm:text-6xl text-[#FFC837]"
+                    style={{
+                      filter:
+                        'drop-shadow(0 0 20px rgba(255, 200, 55, 0.9))',
+                    }}
+                  ></i>
                 </div>
-                <div className="absolute -bottom-6 -left-6 w-14 h-14 flex items-center justify-center animate-bounce-slow star-sticker" style={{ animationDelay: '0.5s', zIndex: 0 }}>
-                  <i className="ri-star-fill text-5xl text-[#FF4F87]" style={{ filter: 'drop-shadow(0 0 18px rgba(255, 79, 135, 0.9))' }}></i>
+                <div
+                  className="absolute -bottom-4 sm:-bottom-6 -left-4 sm:-left-6 w-11 h-11 sm:w-14 sm:h-14 flex items-center justify-center animate-bounce-slow star-sticker"
+                  style={{ animationDelay: '0.5s' }}
+                >
+                  <i
+                    className="ri-star-fill text-3xl sm:text-5xl text-[#FF4F87]"
+                    style={{
+                      filter:
+                        'drop-shadow(0 0 18px rgba(255, 79, 135, 0.9))',
+                    }}
+                  ></i>
                 </div>
 
-                {/* Premium Stat Cards (left-top & right-bottom) */}
+                {/* Premium Stat Cards */}
                 <div
-                  className="absolute -top-10 -left-10 premium-stat-left bg-white p-6 rounded-3xl border-4 border-[#33C8FF]"
+                  className="premium-stat-left bg-white p-4 sm:p-6 rounded-2xl sm:rounded-3xl border-4 border-[#33C8FF]"
                   style={{
-                    boxShadow: '0 15px 40px rgba(51, 200, 255, 0.4), inset 0 2px 8px rgba(51, 200, 255, 0.2)'
+                    boxShadow:
+                      '0 15px 40px rgba(51, 200, 255, 0.4), inset 0 2px 8px rgba(51, 200, 255, 0.2)',
                   }}
                 >
                   <div className="text-center">
-                    <div className="text-4xl font-extrabold bg-gradient-to-r from-[#0A2A66] to-[#0480E8] bg-clip-text text-transparent">
-                      {/* animate 8+ when visible */}
-                      <StatsInline end={5} suffix="+" duration={1200} className="inline-block" />
+                    <div className="text-2xl sm:text-4xl font-extrabold bg-gradient-to-r from-[#0A2A66] to-[#0480E8] bg-clip-text text-transparent">
+                      <StatsInline
+                        end={5}
+                        suffix="+"
+                        duration={1200}
+                        start={1}            
+                        className="inline-block"
+                      />
+
                     </div>
-                    <div className="text-sm text-[#A9B1C0] font-bold">Years Experience</div>
+                    <div className="text-[10px] sm:text-sm text-[#A9B1C0] font-bold">
+                      Years Experience
+                    </div>
                   </div>
                 </div>
 
                 <div
-                  className="absolute -bottom-10 -right-10 premium-stat-right bg-white p-6 rounded-3xl border-4 border-[#FFC837]"
+                  className="premium-stat-right bg-white p-4 sm:p-6 rounded-2xl sm:rounded-3xl border-4 border-[#FFC837]"
                   style={{
-                    boxShadow: '0 15px 40px rgba(255, 200, 55, 0.4), inset 0 2px 8px rgba(255, 200, 55, 0.2)'
+                    boxShadow:
+                      '0 15px 40px rgba(255, 200, 55, 0.4), inset 0 2px 8px rgba(255, 200, 55, 0.2)',
                   }}
                 >
-                  <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 flex items-center justify-center bg-gradient-to-br from-[#FFC837] to-[#FFDD55] rounded-full" style={{ boxShadow: '0 6px 20px rgba(255, 200, 55, 0.5)' }}>
-                      <i className="ri-emotion-happy-fill text-3xl text-white"></i>
+                  <div className="flex items-center gap-3 sm:gap-4">
+                    <div
+                      className="w-11 h-11 sm:w-14 sm:h-14 flex items-center justify-center bg-gradient-to-br from-[#FFC837] to-[#FFDD55] rounded-full flex-shrink-0"
+                      style={{
+                        boxShadow:
+                          '0 6px 20px rgba(255, 200, 55, 0.5)',
+                      }}
+                    >
+                      <i className="ri-emotion-happy-fill text-2xl sm:text-3xl text-white"></i>
                     </div>
                     <div>
-                      <div className="text-3xl font-extrabold bg-gradient-to-r from-[#0A2A66] to-[#0480E8] bg-clip-text text-transparent">
-                        {/* animate 100% when visible */}
-                        <StatsInline end={100} suffix="%" duration={1400} className="inline-block" />
+                      <div className="text-2xl sm:text-3xl font-extrabold bg-gradient-to-r from-[#0A2A66] to-[#0480E8] bg-clip-text text-transparent">
+                        <StatsInline
+                          end={100}
+                          suffix="%"
+                          duration={1400}
+                          start={95}          
+                          className="inline-block"
+                        />
+
                       </div>
-                      <div className="text-xs text-[#A9B1C0] font-bold">Success Rate</div>
+                      <div className="text-[10px] sm:text-xs text-[#A9B1C0] font-bold">
+                        Success Rate
+                      </div>
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
         </section>
+
 
         {/* Premium Brand Badges */}
         <section className="py-12 bg-white relative overflow-hidden">
@@ -602,8 +802,8 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ————— Meet Sanaz - Premium Profile (REPLACE THIS SECTION ONLY) ————— */}
-        <section className="py-24 bg-gradient-to-br from-[#EAF7FF] to-white relative overflow-hidden">
+        {/* ————— Meet Sanaz - Premium Profile ————— */}
+        <section className="py-24 bg-gradient-to-br from-[#EAF7FF] to-white relative overflow-hidden sanaz-section">
           <div className="absolute top-10 left-10 w-32 h-32 opacity-10">
             <i className="ri-star-fill text-9xl text-[#FFC837]"></i>
           </div>
@@ -638,7 +838,7 @@ export default function Home() {
                 {/* Content Column */}
                 <div className="lg:col-span-3 p-16 flex flex-col justify-center relative sanaz-content">
                   <div
-                    className="inline-flex items-center gap-3 bg-white/20 px-5 py-3 rounded-full mb-8 w-fit backdrop-blur-sm"
+                    className="inline-flex items-center gap-3 bg-white/20 px-5 py-3 rounded-full mb-8 w-fit backdrop-blur-sm founder-pill"
                     style={{
                       boxShadow: '0 4px 15px rgba(255, 255, 255, 0.2)'
                     }}
@@ -669,31 +869,55 @@ export default function Home() {
                     With a Master's in Special and Inclusive Education from the University of Sydney, a Master's in Linguistics, and an ESDM certification, Sanaz has over 5 years of experience helping children with autism have fun while they learn and grow in both India and Australia.
                   </p>
 
-                  <div className="grid grid-cols-2 gap-5 mb-10">
-                    <div className="flex items-center gap-3 bg-white/10 px-4 py-3 rounded-2xl backdrop-blur-sm" style={{ boxShadow: '0 4px 15px rgba(255, 255, 255, 0.1)' }}>
-                      <div className="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-[#4AD36D] to-[#33C8FF] rounded-full flex-shrink-0" style={{ boxShadow: '0 4px 15px rgba(74, 211, 109, 0.5)' }}>
-                        <i className="ri-checkbox-circle-fill text-2xl text-white"></i>
+                  <div className="grid grid-cols-2 gap-5 mb-10 sanaz-highlights">
+                    <div
+                      className="flex items-center gap-3 bg-white/10 px-4 py-3 rounded-2xl backdrop-blur-sm"
+                      style={{ boxShadow: '0 4px 15px rgba(255, 255, 255, 0.1)' }}
+                    >
+                      <div
+                        className="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-[#4AD36D] to-[#33C8FF] rounded-full flex-shrink-0"
+                        style={{ boxShadow: '0 4px 15px rgba(74, 211, 109, 0.5)' }}
+                      >
+                        <i className="ri-checkbox-circle-fill text-2xl text-white check-icon-fix"></i>
                       </div>
                       <span className="text-white font-bold">Master's Degree</span>
                     </div>
 
-                    <div className="flex items-center gap-3 bg-white/10 px-4 py-3 rounded-2xl backdrop-blur-sm" style={{ boxShadow: '0 4px 15px rgba(255, 255, 255, 0.1)' }}>
-                      <div className="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-[#4AD36D] to-[#33C8FF] rounded-full flex-shrink-0" style={{ boxShadow: '0 4px 15px rgba(74, 211, 109, 0.5)' }}>
-                        <i className="ri-checkbox-circle-fill text-2xl text-white"></i>
+                    <div
+                      className="flex items-center gap-3 bg-white/10 px-4 py-3 rounded-2xl backdrop-blur-sm"
+                      style={{ boxShadow: '0 4px 15px rgba(255, 255, 255, 0.1)' }}
+                    >
+                      <div
+                        className="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-[#4AD36D] to-[#33C8FF] rounded-full flex-shrink-0"
+                        style={{ boxShadow: '0 4px 15px rgba(74, 211, 109, 0.5)' }}
+                      >
+                        <i className="ri-checkbox-circle-fill text-2xl text-white check-icon-fix"></i>
                       </div>
                       <span className="text-white font-bold">ESDM Certified</span>
                     </div>
 
-                    <div className="flex items-center gap-3 bg-white/10 px-4 py-3 rounded-2xl backdrop-blur-sm" style={{ boxShadow: '0 4px 15px rgba(255, 255, 255, 0.1)' }}>
-                      <div className="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-[#4AD36D] to-[#33C8FF] rounded-full flex-shrink-0" style={{ boxShadow: '0 4px 15px rgba(74, 211, 109, 0.5)' }}>
-                        <i className="ri-checkbox-circle-fill text-2xl text-white"></i>
+                    <div
+                      className="flex items-center gap-3 bg-white/10 px-4 py-3 rounded-2xl backdrop-blur-sm"
+                      style={{ boxShadow: '0 4px 15px rgba(255, 255, 255, 0.1)' }}
+                    >
+                      <div
+                        className="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-[#4AD36D] to-[#33C8FF] rounded-full flex-shrink-0"
+                        style={{ boxShadow: '0 4px 15px rgba(74, 211, 109, 0.5)' }}
+                      >
+                        <i className="ri-checkbox-circle-fill text-2xl text-white check-icon-fix"></i>
                       </div>
                       <span className="text-white font-bold">5+ Years Experience</span>
                     </div>
 
-                    <div className="flex items-center gap-3 bg-white/10 px-4 py-3 rounded-2xl backdrop-blur-sm" style={{ boxShadow: '0 4px 15px rgba(255, 255, 255, 0.1)' }}>
-                      <div className="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-[#4AD36D] to-[#33C8FF] rounded-full flex-shrink-0" style={{ boxShadow: '0 4px 15px rgba(74, 211, 109, 0.5)' }}>
-                        <i className="ri-checkbox-circle-fill text-2xl text-white"></i>
+                    <div
+                      className="flex items-center gap-3 bg-white/10 px-4 py-3 rounded-2xl backdrop-blur-sm"
+                      style={{ boxShadow: '0 4px 15px rgba(255, 255, 255, 0.1)' }}
+                    >
+                      <div
+                        className="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-[#4AD36D] to-[#33C8FF] rounded-full flex-shrink-0"
+                        style={{ boxShadow: '0 4px 15px rgba(74, 211, 109, 0.5)' }}
+                      >
+                        <i className="ri-checkbox-circle-fill text-2xl text-white check-icon-fix"></i>
                       </div>
                       <span className="text-white font-bold">500+ Families</span>
                     </div>
@@ -716,6 +940,7 @@ export default function Home() {
           </div>
         </section>
 
+
         {/* Premium Services Grid */}
         <section className="py-24 bg-white relative overflow-hidden">
           <div className="absolute inset-0 opacity-5">
@@ -729,14 +954,23 @@ export default function Home() {
 
           <div className="max-w-[1280px] mx-auto px-6 relative z-10">
             <div className="text-center mb-20">
-              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#EAF7FF] to-[#FFF7DA] px-6 py-3 rounded-full mb-6 border-2 border-[#33C8FF]" style={{
-                boxShadow: '0 6px 20px rgba(51, 200, 255, 0.2)'
-              }}>
+              <div
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-[#EAF7FF] to-[#FFF7DA] px-6 py-3 rounded-full mb-6 border-2 border-[#33C8FF]"
+                style={{
+                  boxShadow: '0 6px 20px rgba(51, 200, 255, 0.2)'
+                }}
+              >
                 <i className="ri-service-fill text-xl text-[#0480E8]"></i>
                 <span className="text-[#0480E8] font-bold text-sm uppercase tracking-wide">Our Services</span>
               </div>
-              <h2 className="text-5xl lg:text-6xl font-extrabold text-[#0A2A66] mb-6" style={{ fontFamily: 'Nunito, sans-serif' }}>
-                Comprehensive <span className="bg-gradient-to-r from-[#33C8FF] to-[#0480E8] bg-clip-text text-transparent">Therapy Services</span>
+              <h2
+                className="services-heading text-5xl lg:text-6xl font-extrabold text-[#0A2A66] mb-6"
+                style={{ fontFamily: 'Nunito, sans-serif' }}
+              >
+                Comprehensive{' '}
+                <span className="bg-gradient-to-r from-[#33C8FF] to-[#0480E8] bg-clip-text text-transparent">
+                  Therapy Services
+                </span>
               </h2>
               <p className="text-[#0A2A66] text-xl max-w-2xl mx-auto">
                 Tailored programs designed to support your child's unique developmental journey
@@ -745,13 +979,16 @@ export default function Home() {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
               {services.map((service, index) => (
-                <div
-                  key={index}
-                  className="group relative"
-                >
+                <div key={index} className="group relative">
                   {/* Corner Stars (kept hover reveal behavior) */}
-                  <div className="absolute -top-2 -right-2 w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity" style={{ zIndex: 1 }}>
-                    <i className="ri-star-fill text-2xl" style={{ color: service.color, filter: `drop-shadow(0 0 8px ${service.color})` }}></i>
+                  <div
+                    className="absolute -top-2 -right-2 w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                    style={{ zIndex: 1 }}
+                  >
+                    <i
+                      className="ri-star-fill text-2xl"
+                      style={{ color: service.color, filter: `drop-shadow(0 0 8px ${service.color})` }}
+                    ></i>
                   </div>
 
                   <div
@@ -769,15 +1006,16 @@ export default function Home() {
                     >
                       <i className={`${service.icon} text-5xl`} style={{ color: service.color }}></i>
                     </div>
-                    <h3 className="text-2xl font-extrabold text-white mb-4 text-center" style={{
-                      fontFamily: 'Nunito, sans-serif',
-                      textShadow: '0 2px 10px rgba(0, 0, 0, 0.3)'
-                    }}>
+                    <h3
+                      className="text-2xl font-extrabold text-white mb-4 text-center"
+                      style={{
+                        fontFamily: 'Nunito, sans-serif',
+                        textShadow: '0 2px 10px rgba(0, 0, 0, 0.3)'
+                      }}
+                    >
                       {service.title}
                     </h3>
-                    <p className="text-white/95 leading-relaxed text-center mb-6">
-                      {service.description}
-                    </p>
+                    <p className="text-white/95 leading-relaxed text-center mb-6">{service.description}</p>
                     <div className="text-center">
                       <div className="inline-flex items-center gap-2 text-white font-bold group-hover:gap-4 transition-all">
                         <span>View Service</span>
@@ -792,7 +1030,7 @@ export default function Home() {
             <div className="text-center mt-16">
               <Link
                 to="/services"
-                className="bg-gradient-to-r from-[#FFC837] to-[#FFDD55] text-[#0A2A66] px-12 py-6 rounded-full font-extrabold text-xl hover:scale-105 transition-all inline-flex items-center gap-3 whitespace-nowrap cursor-pointer border-4 border-[#0A2A66]"
+                className="services-cta bg-gradient-to-r from-[#FFC837] to-[#FFDD55] text-[#0A2A66] px-12 py-6 rounded-full font-extrabold text-xl hover:scale-105 transition-all inline-flex items-center gap-3 whitespace-nowrap cursor-pointer border-4 border-[#0A2A66]"
                 style={{
                   boxShadow: '0 15px 45px rgba(255, 200, 55, 0.5), inset 0 2px 10px rgba(255, 255, 255, 0.5)'
                 }}
@@ -814,7 +1052,7 @@ export default function Home() {
                 className="absolute w-16 h-16 flex items-center justify-center"
                 style={{
                   top: `${Math.random() * 100}%`,
-                  left: `${Math.random() * 100}%`,
+                  left: `${Math.random() * 100}%`
                 }}
               >
                 <i className="ri-star-fill text-6xl text-[#FFC837]"></i>
@@ -824,8 +1062,14 @@ export default function Home() {
 
           <div className="max-w-[1280px] mx-auto px-6 relative z-10">
             <div className="text-center mb-20">
-              <h2 className="text-5xl lg:text-6xl font-extrabold text-[#0A2A66] mb-6" style={{ fontFamily: 'Nunito, sans-serif' }}>
-                Why Parents <span className="bg-gradient-to-r from-[#FF4F87] to-[#FF8A3D] bg-clip-text text-transparent">Trust Us</span>
+              <h2
+                className="text-5xl lg:text-6xl font-extrabold text-[#0A2A66] mb-6"
+                style={{ fontFamily: 'Nunito, sans-serif' }}
+              >
+                Why Parents{' '}
+                <span className="bg-gradient-to-r from-[#FF4F87] to-[#FF8A3D] bg-clip-text text-transparent">
+                  Trust Us
+                </span>
               </h2>
               <p className="text-[#0A2A66] text-xl max-w-2xl mx-auto">
                 We're committed to providing the highest quality care for your child
@@ -843,17 +1087,21 @@ export default function Home() {
                       boxShadow: `0 15px 40px ${reason.color}40, inset 0 2px 15px ${reason.color}20`
                     }}
                   >
-                    <i className={`${reason.icon} text-5xl`} style={{
-                      color: reason.color,
-                      filter: `drop-shadow(0 4px 10px ${reason.color}60)`
-                    }}></i>
+                    <i
+                      className={`${reason.icon} text-5xl`}
+                      style={{
+                        color: reason.color,
+                        filter: `drop-shadow(0 4px 10px ${reason.color}60)`
+                      }}
+                    ></i>
                   </div>
-                  <h3 className="text-2xl font-extrabold text-[#0A2A66] mb-4" style={{ fontFamily: 'Nunito, sans-serif' }}>
+                  <h3
+                    className="text-2xl font-extrabold text-[#0A2A66] mb-4"
+                    style={{ fontFamily: 'Nunito, sans-serif' }}
+                  >
                     {reason.title}
                   </h3>
-                  <p className="text-[#0A2A66] text-lg leading-relaxed">
-                    {reason.description}
-                  </p>
+                  <p className="text-[#0A2A66] text-lg leading-relaxed">{reason.description}</p>
                 </div>
               ))}
             </div>
@@ -873,14 +1121,25 @@ export default function Home() {
 
           <div className="max-w-[1280px] mx-auto px-6 relative z-10">
             <div className="text-center mb-20">
-              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#FFF7DA] to-[#EAF7FF] px-6 py-3 rounded-full mb-6 border-2 border-[#FFC837]" style={{
-                boxShadow: '0 6px 20px rgba(255, 200, 55, 0.2)'
-              }}>
+              <div
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-[#FFF7DA] to-[#EAF7FF] px-6 py-3 rounded-full mb-6 border-2 border-[#FFC837]"
+                style={{
+                  boxShadow: '0 6px 20px rgba(255, 200, 55, 0.2)',
+                }}
+              >
                 <i className="ri-route-fill text-xl text-[#FF8A3D]"></i>
-                <span className="text-[#FF8A3D] font-bold text-sm uppercase tracking-wide">Our Process</span>
+                <span className="text-[#FF8A3D] font-bold text-sm uppercase tracking-wide">
+                  Our Process
+                </span>
               </div>
-              <h2 className="text-5xl lg:text-6xl font-extrabold text-[#0A2A66] mb-6" style={{ fontFamily: 'Nunito, sans-serif' }}>
-                Your <span className="bg-gradient-to-r from-[#33C8FF] to-[#0480E8] bg-clip-text text-transparent">Therapy Journey</span>
+              <h2
+                className="text-5xl lg:text-6xl font-extrabold text-[#0A2A66] mb-6"
+                style={{ fontFamily: 'Nunito, sans-serif' }}
+              >
+                Your{' '}
+                <span className="bg-gradient-to-r from-[#33C8FF] to-[#0480E8] bg-clip-text text-transparent">
+                  Therapy Journey
+                </span>
               </h2>
               <p className="text-[#0A2A66] text-xl max-w-2xl mx-auto">
                 A simple, supportive process designed around your family's needs
@@ -889,26 +1148,35 @@ export default function Home() {
 
             <div className="relative max-w-5xl mx-auto therapy-timeline">
               {/* Curved Path Background - desktop behavior unchanged */}
-              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-2 h-full center-line bg-gradient-to-b from-[#FF4F87] via-[#FFC837] via-[#33C8FF] via-[#4AD36D] to-[#FF8A3D] rounded-full" style={{
-                boxShadow: '0 0 30px rgba(255, 200, 55, 0.5)'
-              }}></div>
+              <div
+                className="absolute top-0 left-1/2 transform -translate-x-1/2 w-2 h-full center-line bg-gradient-to-b from-[#FF4F87] via-[#FFC837] via-[#33C8FF] via-[#4AD36D] to-[#FF8A3D] rounded-full"
+                style={{
+                  boxShadow: '0 0 30px rgba(255, 200, 55, 0.5)',
+                }}
+              ></div>
 
               {therapySteps.map((step, index) => (
-                <div key={index} className="flex gap-8 mb-16 last:mb-0 items-center therapy-step">
-                  {/* Alternating Layout for desktop (kept) */}
+                <div
+                  key={index}
+                  className="flex gap-8 mb-16 last:mb-0 items-center therapy-step"
+                >
                   {index % 2 === 0 ? (
                     <>
                       <div className="flex-1 text-right">
-                        <div className="bg-white rounded-[30px] p-8 border-4 inline-block" style={{
-                          borderColor: step.color,
-                          boxShadow: `0 15px 40px ${step.color}30, inset 0 2px 10px ${step.color}20`
-                        }}>
-                          <h3 className="text-2xl font-extrabold text-[#0A2A66] mb-3" style={{ fontFamily: 'Nunito, sans-serif' }}>
+                        <div
+                          className="bg-white rounded-[30px] p-8 border-4 inline-block"
+                          style={{
+                            borderColor: step.color,
+                            boxShadow: `0 15px 40px ${step.color}30, inset 0 2px 10px ${step.color}20`,
+                          }}
+                        >
+                          <h3
+                            className="text-2xl font-extrabold text-[#0A2A66] mb-3"
+                            style={{ fontFamily: 'Nunito, sans-serif' }}
+                          >
                             {step.title}
                           </h3>
-                          <p className="text-[#0A2A66] text-lg">
-                            {step.description}
-                          </p>
+                          <p className="text-[#0A2A66] text-lg">{step.description}</p>
                         </div>
                       </div>
 
@@ -918,11 +1186,15 @@ export default function Home() {
                           style={{
                             background: `linear-gradient(135deg, ${step.color} 0%, ${step.color}CC 100%)`,
                             boxShadow: `0 10px 35px ${step.color}60, inset 0 2px 15px rgba(255, 255, 255, 0.4)`,
-                            border: '4px solid white'
+                            border: '4px solid white',
                           }}
                         >
                           {step.icon === 'custom-target' ? (
-                            <img src={WhiteTarget} alt="Goal Icon" className="therapy-goal-icon" />
+                            <img
+                              src={WhiteTarget}
+                              alt="Goal Icon"
+                              className="therapy-goal-icon"
+                            />
                           ) : (
                             <i className={`${step.icon} text-4xl`} />
                           )}
@@ -941,28 +1213,36 @@ export default function Home() {
                           style={{
                             background: `linear-gradient(135deg, ${step.color} 0%, ${step.color}CC 100%)`,
                             boxShadow: `0 10px 35px ${step.color}60, inset 0 2px 15px rgba(255, 255, 255, 0.4)`,
-                            border: '4px solid white'
+                            border: '4px solid white',
                           }}
                         >
-                            {step.icon === 'custom-target' ? (
-                              <img src={WhiteTarget} alt="Goal Icon" className="therapy-goal-icon" />
-                            ) : (
-                              <i className={`${step.icon} text-4xl`}></i>
-                            )}
+                          {step.icon === 'custom-target' ? (
+                            <img
+                              src={WhiteTarget}
+                              alt="Goal Icon"
+                              className="therapy-goal-icon"
+                            />
+                          ) : (
+                            <i className={`${step.icon} text-4xl`}></i>
+                          )}
                         </div>
                       </div>
 
                       <div className="flex-1 text-left">
-                        <div className="bg-white rounded-[30px] p-8 border-4 inline-block step-card" style={{
-                          borderColor: step.color,
-                          boxShadow: `0 15px 40px ${step.color}30, inset 0 2px 10px ${step.color}20`
-                        }}>
-                          <h3 className="text-2xl font-extrabold text-[#0A2A66] mb-3" style={{ fontFamily: 'Nunito, sans-serif' }}>
+                        <div
+                          className="bg-white rounded-[30px] p-8 border-4 inline-block step-card"
+                          style={{
+                            borderColor: step.color,
+                            boxShadow: `0 15px 40px ${step.color}30, inset 0 2px 10px ${step.color}20`,
+                          }}
+                        >
+                          <h3
+                            className="text-2xl font-extrabold text-[#0A2A66] mb-3"
+                            style={{ fontFamily: 'Nunito, sans-serif' }}
+                          >
                             {step.title}
                           </h3>
-                          <p className="text-[#0A2A66] text-lg">
-                            {step.description}
-                          </p>
+                          <p className="text-[#0A2A66] text-lg">{step.description}</p>
                         </div>
                       </div>
                     </>
@@ -1238,7 +1518,7 @@ export default function Home() {
   /* Generic box-sizing helper */
   .sanaz-content, .sanaz-content * { box-sizing: border-box; }
 
-  /* CTA helpers (kept both classes because both are used) */
+  /* CTA helpers */
   .cta-cta { max-width: 100%; box-sizing: border-box; }
   .cta-button { box-sizing: border-box; }
 
@@ -1257,22 +1537,53 @@ export default function Home() {
   }
   .therapy-goal-icon { width: 40px; height: 40px; object-fit: contain; }
 
+  /* Base hero image / stat cards */
+  .hero-image-wrapper {
+    position: relative;
+  }
+  .hero-image-card {
+    position: relative;
+    max-width: 320px;
+  }
+  .premium-stat-left,
+  .premium-stat-right {
+    position: absolute;
+  }
+  .premium-stat-left {
+    top: -16px;
+    left: -12px;
+  }
+  .premium-stat-right {
+    bottom: -18px;
+    right: -12px;
+  }
+
   /* ------------------------------------------------
-     Responsive rules: merged and de-duplicated below
-     Keep semantics and !important overrides intact
+     Responsive rules
      ------------------------------------------------ */
+
+  /* === 320 - 370px: primary CTA fine-tune (HERO) === */
+  @media (max-width: 370px) {
+    .cta-button-primary {
+      font-size: 0.7rem !important;
+      padding: 0.75rem 1.3rem !important;
+      width: 100% !important;
+      max-width: none !important;
+      margin-left: 0 !important;
+      margin-right: auto !important;
+    }
+    .cta-primary-text {
+      white-space: nowrap !important;
+    }
+    .cta-primary-icon {
+      font-size: 0.85rem !important;
+    }
+  }
 
   /* === Broad tablet/phone breakpoint === */
   @media (max-width: 1024px) {
-    /* Premium stats nudges to avoid off-screen overflow */
-    .premium-stat-left {
-      left: -10px !important;
-      top: -10px !important;
-      transform: none !important;
-    }
+    .premium-stat-left,
     .premium-stat-right {
-      right: -20px !important;
-      bottom: -40px !important;
       transform: none !important;
     }
   }
@@ -1281,8 +1592,8 @@ export default function Home() {
   @media (max-width: 768px) {
     /* Hero heading responsiveness */
     .hero-heading {
-      font-size: 56px !important;
-      line-height: 1.02 !important;
+      font-size: 42px !important;
+      line-height: 1.05 !important;
       white-space: normal !important;
       word-break: break-word !important;
       display: block;
@@ -1294,9 +1605,12 @@ export default function Home() {
       margin-top: .5rem !important;
     }
 
-    .star-hero, .star-sticker, .star-behind { z-index: 0 !important; opacity: 0.95; }
+    .star-hero, .star-sticker, .star-behind {
+      z-index: 0 !important;
+      opacity: 0.9;
+    }
 
-    /* SANAZ container mobile reductions (preserve existing intent) */
+    /* SANAZ container mobile reductions (shared) */
     .sanaz-container { }
     .grid.lg\\:grid-cols-5 { grid-template-columns: 1fr !important; }
     .lg\\:col-span-2, .lg\\:col-span-3 { width: 100% !important; }
@@ -1315,7 +1629,7 @@ export default function Home() {
       font-size: 1rem !important;
     }
 
-    /* Therapy timeline: stacked single-column layout matching screenshot */
+    /* Therapy timeline: stacked single-column layout */
     .therapy-timeline {
       max-width: 360px !important;
       margin-left: auto !important;
@@ -1396,70 +1710,245 @@ export default function Home() {
     .therapy-timeline .flex-1 { width: 100% !important; text-align: right !important; padding: 0 !important; }
     .therapy-timeline .therapy-step:last-child { margin-bottom: 26px !important; }
 
-    /* Keep CTA/testimonial padding reasonable */
     .p-12 { padding: 1rem !important; }
+
+    /* CTA button tweaks for <=768px */
+    .cta-button {
+      width: calc(100% - 2rem) !important;
+      max-width: 520px !important;
+      padding: 0.85rem 1rem !important;
+      font-size: 1.05rem !important;
+      gap: 0.75rem !important;
+      justify-content: center !important;
+      box-sizing: border-box !important;
+    }
+    .cta-button i { font-size: 1.4rem !important; }
   }
 
-  /* === Small tablets / large phones adjustments (481 - 768) === */
-  @media (min-width: 481px) and (max-width: 768px) {
-    .premium-stat-left { left: -10px !important; top: -10px !important; padding: 0.7rem !important; }
-    .premium-stat-right { right: -20px !important; bottom: -40px !important; padding: 0.7rem !important; }
-    .premium-stat-left .text-4xl { font-size: 1.6rem !important; }
-    .premium-stat-right .text-3xl { font-size: 1.3rem !important; }
+  /* === 375 - 480px: slightly larger hero image === */
+  @media (min-width: 375px) and (max-width: 480px) {
+    .hero-image-card {
+      max-width: 360px !important;
+    }
+    .premium-stat-left {
+      top: -18px;
+      left: -10px;
+    }
+    .premium-stat-right {
+      bottom: -20px;
+      right: -10px;
+    }
   }
 
-  /* === Mobile narrow (<= 480px) === */
+  /* === Small tablets / large phones (481 - 639) === */
+  @media (min-width: 481px) and (max-width: 640px) {
+    .hero-image-card {
+      max-width: 420px !important;
+    }
+    .premium-stat-left {
+      top: -22px;
+      left: -10px;
+    }
+    .premium-stat-right {
+      bottom: -26px;
+      right: -10px;
+    }
+  }
+
+  /* === Small tablets / large phones (640 - 768) === */
+  @media (min-width: 640px) and (max-width: 768px) {
+    .hero-image-card {
+      max-width: 520px !important;
+    }
+    .premium-stat-left {
+      top: -22px;
+      left: -18px;
+    }
+    .premium-stat-right {
+      bottom: -26px;
+      right: -18px;
+    }
+  }
+
+  /* === Tablet 768 - 1024px: increase image and adjust stats === */
+  @media (min-width: 768px) and (max-width: 1024px) {
+    .hero-image-card {
+      max-width: 700px !important;
+    }
+    .premium-stat-left {
+      top: -14px;
+      left: -10px;
+    }
+    .premium-stat-right {
+      bottom: -28px;
+      right: -18px;
+    }
+  }
+
+  /* === Desktop 1025 - 1280px === */
+  @media (min-width: 1025px) and (max-width: 1280px) {
+    .hero-section {
+      padding-top: 4.5rem;
+      padding-bottom: 4.5rem;
+    }
+    .hero-image-card {
+      max-width: 580px !important;
+    }
+    .premium-stat-left {
+      top: -26px;
+      left: -22px;
+    }
+    .premium-stat-right {
+      bottom: -30px;
+      right: -18px;
+    }
+  }
+
+  /* === Large desktop 1281px+ === */
+  @media (min-width: 1281px) {
+    .hero-section {
+      padding-top: 5rem;
+      padding-bottom: 5rem;
+    }
+    .hero-image-card {
+      max-width: 640px !important;
+    }
+    .premium-stat-left {
+      top: -30px;
+      left: -26px;
+    }
+    .premium-stat-right {
+      bottom: -34px;
+      right: -18px;
+    }
+  }
+
+  /* === Mobile narrow (<= 480px) general (hero) === */
   @media (max-width: 480px) {
     .hero-heading {
-      font-size: 56px !important;
-      line-height: 1.02 !important;
+      font-size: 38px !important;
+      line-height: 1.06 !important;
       white-space: normal !important;
       word-break: break-word !important;
       display: block;
       max-width: 100%;
     }
-    .hero-heading > span { font-size: 1.0em !important; display: block; margin-top: .5rem !important; }
+    .hero-heading > span {
+      font-size: 1.0em !important;
+      display: block;
+      margin-top: .5rem !important;
+    }
 
     .premium-stat-left,
     .premium-stat-right {
-      padding: 1rem !important;
+      padding: 0.9rem !important;
       border-radius: 14px !important;
     }
-    .premium-stat-left { left: -10px !important; top: -10px !important; }
-    .premium-stat-right { right: -10px !important; bottom: -30px !important; }
   }
 
-  /* === Very narrow mobile fixes (<= 427.98px) - specific Sanaz content fixes === */
-  @media (max-width: 427.98px) {
-    /* content column safe box-sizing already set above */
-
-    /* Reduce RIGHT padding only on the content column so image has room */
-    .sanaz-content {
-      padding-right: 0.75rem !important;
-      padding-left: 1rem !important;
-      padding-top: 1rem !important;
-      padding-bottom: 1rem !important;
-      overflow-x: hidden !important; /* hide any accidental overflow limited to this column */
+  /* === Sanaz section very small screens (<= 369px): 4 stacked, left aligned === */
+  @media (max-width: 370px) {
+    .sanaz-section {
+      padding-top: 2.5rem !important;
+      padding-bottom: 2.5rem !important;
     }
 
-    /* CTA: allow wrapping, center it, and increase width proportionally */
+    .sanaz-container {
+      border-radius: 1.5rem !important;
+    }
+
+    .sanaz-content {
+      padding-right: 1rem !important;
+      padding-left: 1rem !important;
+      padding-top: 1.25rem !important;
+      padding-bottom: 1.5rem !important;
+      overflow-x: hidden !important;
+    }
+
+    .sanaz-content .founder-pill {
+      padding: 0.5rem 0.9rem !important;
+      gap: 0.5rem !important;
+      margin-bottom: 0.9rem !important;
+    }
+    .sanaz-content .founder-pill i {
+      font-size: 1.1rem !important;
+    }
+    .sanaz-content .founder-pill span {
+      font-size: 0.8rem !important;
+      white-space: nowrap !important;
+    }
+
+    .sanaz-content h3 {
+      font-size: 2rem !important;
+      margin-bottom: 0.6rem !important;
+    }
+    .sanaz-content .text-2xl {
+      font-size: 1.25rem !important;
+      margin-bottom: 0.9rem !important;
+    }
+
+    .sanaz-content p {
+      font-size: 0.95rem !important;
+      line-height: 1.5 !important;
+      margin-bottom: 0.9rem !important;
+    }
+
+    .sanaz-content .sanaz-highlights {
+      grid-template-columns: 1fr !important;
+      gap: 0.75rem !important;
+      margin-bottom: 1.2rem !important;
+    }
+
+    .sanaz-content .sanaz-highlights > div {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      text-align: left !important;
+    }
+
+    .sanaz-content .sanaz-highlights .w-12.h-12 {
+      width: 2.5rem !important;
+      height: 2.5rem !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      flex-shrink: 0 !important;
+    }
+
+    .sanaz-content .sanaz-highlights i {
+      font-size: 1.1rem !important;
+    }
+
+    .sanaz-content .sanaz-highlights span {
+      font-size: 0.85rem !important;
+      display: block !important;
+      white-space: normal !important;
+      word-break: break-word !important;
+      overflow-wrap: anywhere !important;
+    }
+
     .sanaz-content .founder-cta {
       white-space: normal !important;
       padding-left: 0.9rem !important;
       padding-right: 0.9rem !important;
-      font-size: 1rem !important;
+      padding-top: 0.8rem !important;
+      padding-bottom: 0.8rem !important;
+      font-size: 0.95rem !important;
       border-width: 3.5px !important;
-      margin-left: auto !important;
-      margin-right: auto !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
       display: flex !important;
       justify-content: center !important;
       text-align: center !important;
-      min-width: 92% !important; /* wider, balanced CTA */
+      min-width: 100% !important;
       max-width: 100% !important;
     }
-    .sanaz-content .founder-cta i { margin-left: 0.5rem; margin-top: 0.12rem; }
+    .sanaz-content .founder-cta i {
+      margin-left: 0.4rem !important;
+      margin-top: 0.05rem !important;
+      font-size: 1.1rem !important;
+    }
 
-    /* Prevent children from creating min-width overflow */
     .sanaz-content p,
     .sanaz-content .feature-card,
     .sanaz-content .feature-card span {
@@ -1468,11 +1957,6 @@ export default function Home() {
       overflow-wrap: anywhere !important;
     }
 
-    /* Slightly reduced grid gap and icon size on tiny screens to fit */
-    .sanaz-content .grid.grid-cols-2 { gap: 0.5rem !important; }
-    .sanaz-content .w-12.h-12 { width: 2.5rem !important; height: 2.5rem !important; }
-
-    /* Inline badge safety */
     .sanaz-content .inline-flex.w-fit {
       max-width: 100% !important;
       white-space: nowrap;
@@ -1481,21 +1965,256 @@ export default function Home() {
     }
   }
 
-  /* === CTA specific mobile adjustments (applies up to 768px) === */
-  @media (max-width: 768px) {
-    .cta-button {
-      width: calc(100% - 2rem) !important;
-      max-width: 520px !important;
-      padding: 0.85rem 1rem !important;
-      font-size: 1.1rem !important;
-      gap: 0.75rem !important;
-      justify-content: center !important;
-      border: none !important;
-      border-width: 0 !important;
-      border-radius: 9999px !important;
-      box-sizing: border-box !important;
+  /* === Sanaz section small mobiles (370px – 440px): 2x2 grid === */
+  @media (min-width: 370px) and (max-width: 440px) {
+    .sanaz-section {
+      padding-top: 2.75rem !important;
+      padding-bottom: 2.75rem !important;
     }
-    .cta-button i { font-size: 1.7rem !important; }
+
+    .sanaz-container {
+      border-radius: 1.7rem !important;
+    }
+
+    .sanaz-content {
+      padding-right: 1.25rem !important;
+      padding-left: 1.25rem !important;
+      padding-top: 1.4rem !important;
+      padding-bottom: 1.6rem !important;
+      overflow-x: hidden !important;
+    }
+
+    .sanaz-content .founder-pill {
+      padding: 0.6rem 1rem !important;
+      gap: 0.55rem !important;
+      margin-bottom: 1rem !important;
+    }
+    .sanaz-content .founder-pill i {
+      font-size: 1.15rem !important;
+    }
+    .sanaz-content .founder-pill span {
+      font-size: 0.85rem !important;
+      white-space: nowrap !important;
+    }
+
+    .sanaz-content h3 {
+      font-size: 2.1rem !important;
+      margin-bottom: 0.7rem !important;
+    }
+    .sanaz-content .text-2xl {
+      font-size: 1.3rem !important;
+      margin-bottom: 1rem !important;
+    }
+
+    .sanaz-content p {
+      font-size: 0.98rem !important;
+      line-height: 1.55 !important;
+      margin-bottom: 1rem !important;
+    }
+
+    .sanaz-content .sanaz-highlights {
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      column-gap: 0.8rem !important;
+      row-gap: 0.8rem !important;
+      margin-bottom: 1.3rem !important;
+    }
+
+    .sanaz-content .sanaz-highlights > div {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      text-align: left !important;
+    }
+
+    .sanaz-content .sanaz-highlights .w-12.h-12 {
+      width: 2.2rem !important;
+      height: 2.2rem !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      flex-shrink: 0 !important;
+    }
+
+    .sanaz-content .sanaz-highlights i {
+      font-size: 1rem !important;
+    }
+
+    .sanaz-content .sanaz-highlights span {
+      font-size: 0.8rem !important;
+      display: block !important;
+      white-space: normal !important;
+      word-break: break-word !important;
+      overflow-wrap: anywhere !important;
+    }
+
+    .sanaz-content .founder-cta {
+      white-space: normal !important;
+      padding-left: 1rem !important;
+      padding-right: 1rem !important;
+      padding-top: 0.85rem !important;
+      padding-bottom: 0.85rem !important;
+      font-size: 1rem !important;
+      border-width: 3.5px !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      display: flex !important;
+      justify-content: center !important;
+      text-align: center !important;
+      min-width: 100% !important;
+      max-width: 100% !important;
+    }
+    .sanaz-content .founder-cta i {
+      margin-left: 0.45rem !important;
+      margin-top: 0.06rem !important;
+      font-size: 1.15rem !important;
+    }
+
+    .sanaz-content p,
+    .sanaz-content .feature-card,
+    .sanaz-content .feature-card span {
+      max-width: 100% !important;
+      word-break: break-word !important;
+      overflow-wrap: anywhere !important;
+    }
+
+    .sanaz-content .inline-flex.w-fit {
+      max-width: 100% !important;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  @media (max-width: 440px) {
+    .sanaz-highlights .check-icon-fix {
+      transform: translateY(7px) !important;
+      display: inline-block !important;
+    }
+  }
+
+  /* === Services section: heading & CTA for very small screens (<320px) === */
+  @media (max-width: 319px) {
+    .services-heading {
+      font-size: 2rem !important;
+      line-height: 1.18 !important;
+      word-break: break-word !important;
+    }
+    .services-heading span {
+      font-size: 1em !important;
+    }
+
+    .services-cta {
+      font-size: 0.9rem !important;
+      padding: 0.8rem 1.8rem !important;
+      gap: 0.5rem !important;
+    }
+    .services-cta i {
+      font-size: 1.1rem !important;
+    }
+  }
+
+  /* === Services section: heading & CTA for 320px – 420px === */
+  @media (min-width: 320px) and (max-width: 420px) {
+    .services-heading {
+      font-size: 2.3rem !important;
+      line-height: 1.2 !important;
+      word-break: break-word !important;
+    }
+    .services-heading span {
+      font-size: 1em !important;
+    }
+
+    .services-cta {
+      font-size: 1rem !important;
+      padding: 0.9rem 2.2rem !important;
+      gap: 0.6rem !important;
+    }
+    .services-cta i {
+      font-size: 1.3rem !important;
+    }
+  }
+
+  /* === Therapy timeline extra-small tuning: cards & alignment (<320px) === */
+  @media (max-width: 319px) {
+    /* Move vertical line further left */
+    .therapy-timeline .center-line {
+      left: 22px !important;
+    }
+
+    /* Pull timeline content a bit left & reduce step gap */
+    .therapy-timeline .therapy-step {
+      padding-left: 78px !important;
+      margin-bottom: 18px !important;
+    }
+
+    /* Move icons a touch more left so they sit on the line nicely */
+    .therapy-timeline .step-icon {
+      left: -14px !important;
+    }
+
+    /* Reduce padding on cards */
+    .therapy-timeline .bg-white.rounded-[30px],
+    .therapy-timeline .step-card {
+      padding: 10px 10px !important;
+      margin: 0 0 10px 12px !important;
+      width: calc(100% - 110px) !important;
+    }
+
+    /* Smaller heading text inside cards */
+    .therapy-timeline .bg-white.rounded-[30px] h3,
+    .therapy-timeline .step-card h3 {
+      font-size: 14px !important;
+      margin-bottom: 5px !important;
+    }
+
+    /* Smaller paragraph text */
+    .therapy-timeline .bg-white.rounded-[30px] p,
+    .therapy-timeline .step-card p {
+      font-size: 12px !important;
+      line-height: 1.3 !important;
+    }
+  }
+
+  /* === Therapy timeline small mobiles: 320px – 400px === */
+  @media (min-width: 320px) and (max-width: 400px) {
+    .therapy-timeline {
+      max-width: 380px !important;
+    }
+
+    /* Move vertical line slightly left */
+    .therapy-timeline .center-line {
+      left: 24px !important;
+    }
+
+    /* Reduce left padding and step gap slightly */
+    .therapy-timeline .therapy-step {
+      padding-left: 84px !important;
+      margin-bottom: 20px !important;
+    }
+
+    /* Nudge icons left to align visually with line */
+    .therapy-timeline .step-icon {
+      left: -12px !important;
+    }
+
+    .therapy-timeline .bg-white.rounded-[30px],
+    .therapy-timeline .step-card {
+      padding: 12px 12px !important;
+      margin: 0 0 12px 14px !important;
+      width: calc(100% - 115px) !important;
+    }
+
+    .therapy-timeline .bg-white.rounded-[30px] h3,
+    .therapy-timeline .step-card h3 {
+      font-size: 15px !important;
+      margin-bottom: 6px !important;
+    }
+
+    .therapy-timeline .bg-white.rounded-[30px] p,
+    .therapy-timeline .step-card p {
+      font-size: 12.5px !important;
+      line-height: 1.35 !important;
+    }
   }
 `}</style>
 
