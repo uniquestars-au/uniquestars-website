@@ -43,11 +43,11 @@ export default function Footer() {
                 aria-label="Unique Stars Instagram"
                 title="Instagram - @uniquestars_earlyintervention"
                 className="
-        w-10 h-10 flex items-center justify-center
-        bg-white rounded-full text-[#0A2A66]
-        transition-all duration-300
-        hover:bg-[#33C8FF] hover:text-white hover:shadow-lg
-      "
+                  w-10 h-10 flex items-center justify-center
+                  bg-white rounded-full text-[#0A2A66]
+                  transition-colors duration-300
+                  hover:bg-[#33C8FF] hover:text-white
+                "
               >
                 <i className="ri-instagram-fill text-xl" />
               </a>
@@ -60,11 +60,11 @@ export default function Footer() {
                 aria-label="Sanaz LinkedIn"
                 title="LinkedIn - Sanaz Montazer"
                 className="
-        w-10 h-10 flex items-center justify-center
-        bg-white rounded-full text-[#0A2A66]
-        transition-all duration-300
-        hover:bg-[#33C8FF] hover:text-white hover:shadow-lg
-      "
+                  w-10 h-10 flex items-center justify-center
+                  bg-white rounded-full text-[#0A2A66]
+                  transition-colors duration-300
+                  hover:bg-[#33C8FF] hover:text-white
+                "
               >
                 <i className="ri-linkedin-fill text-xl" />
               </a>
@@ -77,35 +77,75 @@ export default function Footer() {
                 aria-label="Unique Stars YouTube"
                 title="YouTube - Unique Stars"
                 className="
-        w-10 h-10 flex items-center justify-center
-        bg-white rounded-full text-[#0A2A66]
-        transition-all duration-300
-        hover:bg-[#33C8FF] hover:text-white hover:shadow-lg
-      "
+                  w-10 h-10 flex items-center justify-center
+                  bg-white rounded-full text-[#0A2A66]
+                  transition-colors duration-300
+                  hover:bg-[#33C8FF] hover:text-white
+                "
               >
                 <i className="ri-youtube-fill text-xl" />
               </a>
             </div>
           </div>
 
-
           {/* Quick Links */}
           <div>
-            <h3 className="text-[#0A2A66] font-bold text-lg mb-4" style={{ fontFamily: 'Nunito, sans-serif' }}>
+            <h3
+              className="text-[#0A2A66] font-bold text-lg mb-4"
+              style={{ fontFamily: 'Nunito, sans-serif' }}
+            >
               Quick Links
             </h3>
             <ul className="space-y-2">
-              <li><Link to="/" className="text-[#0A2A66] text-sm hover:text-[#33C8FF] transition-colors">Home</Link></li>
-              <li><Link to="/about" className="text-[#0A2A66] text-sm hover:text-[#33C8FF] transition-colors">About Us</Link></li>
-              <li><Link to="/services" className="text-[#0A2A66] text-sm hover:text-[#33C8FF] transition-colors">Services</Link></li>
-              <li><Link to="/therapy-approach" className="text-[#0A2A66] text-sm hover:text-[#33C8FF] transition-colors">Therapy Approach</Link></li>
-              <li><Link to="/testimonials" className="text-[#0A2A66] text-sm hover:text-[#33C8FF] transition-colors">Testimonials</Link></li>
+              <li>
+                <Link
+                  to="/"
+                  className="text-[#0A2A66] text-sm hover:text-[#33C8FF] transition-colors"
+                >
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/about"
+                  className="text-[#0A2A66] text-sm hover:text-[#33C8FF] transition-colors"
+                >
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/services"
+                  className="text-[#0A2A66] text-sm hover:text-[#33C8FF] transition-colors"
+                >
+                  Services
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/therapy-approach"
+                  className="text-[#0A2A66] text-sm hover:text-[#33C8FF] transition-colors"
+                >
+                  Therapy Approach
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/testimonials"
+                  className="text-[#0A2A66] text-sm hover:text-[#33C8FF] transition-colors"
+                >
+                  Testimonials
+                </Link>
+              </li>
             </ul>
           </div>
 
           {/* Services */}
           <div>
-            <h3 className="text-[#0A2A66] font-bold text-lg mb-4" style={{ fontFamily: 'Nunito, sans-serif' }}>
+            <h3
+              className="text-[#0A2A66] font-bold text-lg mb-4"
+              style={{ fontFamily: 'Nunito, sans-serif' }}
+            >
               Our Services
             </h3>
             <ul className="space-y-2">
@@ -119,7 +159,10 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="text-[#0A2A66] font-bold text-lg mb-4" style={{ fontFamily: 'Nunito, sans-serif' }}>
+            <h3
+              className="text-[#0A2A66] font-bold text-lg mb-4"
+              style={{ fontFamily: 'Nunito, sans-serif' }}
+            >
               Contact Us
             </h3>
             <ul className="space-y-3">
@@ -129,7 +172,10 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-2 text-[#0A2A66] text-sm">
                 <i className="ri-mail-fill text-[#FF8A3D]" />
-                <a href="mailto:admin@uniquestars.com.au" className="hover:text-[#33C8FF] transition-colors">
+                <a
+                  href="mailto:admin@uniquestars.com.au"
+                  className="hover:text-[#33C8FF] transition-colors"
+                >
                   admin@uniquestars.com.au
                 </a>
               </li>
@@ -139,12 +185,16 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="border-t border-[#33C8FF]/20 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-[#0A2A66] text-sm text-center md:text-left">
-            © 2024 Unique Stars. All rights reserved.
-            <span className="mx-2">
-              <i className="ri-star-fill text-[#FFC837] text-xs" />
+          <p className="text-[#0A2A66] text-sm text-center md:text-left leading-relaxed">
+            {/* Line 1 (always first line on mobile) */}
+            <span className="block md:inline">
+              © 2024 Unique Stars. All rights reserved.
             </span>
-            Empowering children through play.
+
+            {/* Line 2 (always second line on mobile) */}
+            <span className="block md:inline">
+              <i className="ri-star-fill text-[#FFC837] text-xs" /> Empowering children through play.
+            </span>
           </p>
         </div>
       </div>

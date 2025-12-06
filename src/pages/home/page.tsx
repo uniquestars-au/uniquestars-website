@@ -2164,7 +2164,7 @@ main img {
     }
 
     .sanaz-content .sanaz-highlights span {
-      font-size: 0.8rem !important;
+      font-size: 0.5rem !important;
       display: block !important;
       white-space: normal !important;
       word-break: break-word !important;

@@ -32,7 +32,7 @@ export default function Testimonials() {
     },
     {
       name: 'Michael',
-      role: 'Mother of 5-year-old',
+      role: 'Father of 5-year-old',
       image: MichaelImg,
       quote: 'In just three sessions, we have seen incredible changes. My daughter is already showing more independence, like brushing her teeth by herself, and she is spending much less time alone in her room. She is significantly more vocal and, best of all, she actively wants to play with her dad and brother now. The progress has been amazing to watch.',
       rating: 5,
@@ -66,7 +66,7 @@ export default function Testimonials() {
       name: 'Andrew W.',
       role: 'Father of 4-year-old',
       image: AndrewImg,
-      quote: 'We are incredibly grateful for Sanaz\'s amazing support. In just a few months, our son has grown, learned, and thrived. She is patient, caring, and genuinely invested in his progress. Sanaz has given us practical strategies and changed the lives of our whole family. Thank you for believing in him! 💛!',
+      quote: 'We are incredibly grateful for Sanaz\'s amazing support. In just a few months, our son has grown, learned, and thrived. She is patient, caring, and genuinely invested in his progress. Sanaz has given us practical strategies and changed the lives of our whole family. Thank you for believing in him! 💛',
       rating: 5,
       color: '#0480E8'
     }
@@ -225,7 +225,11 @@ Thank you,
       <section className="py-24 bg-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-5">
           {[...Array(8)].map((_, i) => (
-            <div key={i} className="absolute w-16 h-16 flex items-center justify-center" style={{ top: `${Math.random() * 100}%`, left: `${Math.random() * 100}%` }}>
+            <div
+              key={i}
+              className="absolute w-16 h-16 flex items-center justify-center"
+              style={{ top: `${Math.random() * 100}%`, left: `${Math.random() * 100}%` }}
+            >
               <i className="ri-star-fill text-6xl text-[#FFC837]"></i>
             </div>
           ))}
@@ -244,26 +248,50 @@ Thank you,
                 >
                   {/* Star Pattern Background */}
                   <div className="absolute top-4 right-4 w-12 h-12 flex items-center justify-center opacity-10">
-                    <i className="ri-star-fill text-5xl" style={{ color: testimonial.color }}></i>
+                    <i
+                      className="ri-star-fill text-5xl"
+                      style={{ color: testimonial.color }}
+                    ></i>
                   </div>
 
                   {/* Gradient Top Border */}
-                  <div className="absolute top-0 left-0 right-0 h-2 rounded-t-[40px]" style={{ backgroundColor: testimonial.color }}></div>
+                  <div
+                    className="absolute top-0 left-0 right-0 h-2 rounded-t-[40px]"
+                    style={{ backgroundColor: testimonial.color }}
+                  ></div>
 
                   {/* Profile Image with Glowing Circle */}
                   <div className="flex justify-center mb-6">
-                    <div className="w-24 h-24 rounded-full overflow-hidden border-4 relative" style={{
-                      borderColor: testimonial.color,
-                      boxShadow: `0 8px 25px ${testimonial.color}60, inset 0 2px 10px ${testimonial.color}20`
-                    }}>
-                      <img src={testimonial.image} alt={testimonial.name} className="w-full h-full object-cover" />
+                    <div
+                      className="w-24 h-24 rounded-full overflow-hidden border-4 relative"
+                      style={{
+                        borderColor: testimonial.color,
+                        boxShadow: `0 8px 25px ${testimonial.color}60, inset 0 2px 10px ${testimonial.color}20`
+                      }}
+                    >
+                      <img
+                        src={testimonial.image}
+                        alt={testimonial.name}
+                        className="w-full h-full object-cover"
+                        /* ⬇️ Move images 2, 4, 6 (indexes 1,3,5) slightly down so faces are clearer */
+                        style={{
+                          objectPosition:
+                            index === 1 || index === 3 || index === 5
+                              ? 'center 15%'
+                              : 'center'
+                        }}
+                      />
                     </div>
                   </div>
 
                   {/* Rating Stars */}
                   <div className="flex justify-center gap-1 mb-4">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <i key={i} className="ri-star-fill text-2xl" style={{ color: testimonial.color }}></i>
+                      <i
+                        key={i}
+                        className="ri-star-fill text-2xl"
+                        style={{ color: testimonial.color }}
+                      ></i>
                     ))}
                   </div>
 
@@ -273,14 +301,24 @@ Thank you,
                   </p>
 
                   {/* Gradient Divider */}
-                  <div className="h-1 w-20 mx-auto rounded-full mb-4" style={{
-                    background: `linear-gradient(90deg, transparent 0%, ${testimonial.color} 50%, transparent 100%)`
-                  }}></div>
+                  <div
+                    className="h-1 w-20 mx-auto rounded-full mb-4"
+                    style={{
+                      background: `linear-gradient(90deg, transparent 0%, ${testimonial.color} 50%, transparent 100%)`
+                    }}
+                  ></div>
 
                   {/* Name & Role */}
                   <div className="text-center">
-                    <h3 className="text-xl font-extrabold text-[#0A2A66] mb-1" style={{ fontFamily: 'Nunito, sans-serif' }}>{testimonial.name}</h3>
-                    <p className="text-[#0A2A66]/70 font-semibold">{testimonial.role}</p>
+                    <h3
+                      className="text-xl font-extrabold text-[#0A2A66] mb-1"
+                      style={{ fontFamily: 'Nunito, sans-serif' }}
+                    >
+                      {testimonial.name}
+                    </h3>
+                    <p className="text-[#0A2A66]/70 font-semibold">
+                      {testimonial.role}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -383,30 +421,66 @@ Thank you,
         {/* Glowing Stars */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           {[...Array(20)].map((_, i) => (
-            <div key={i} className="absolute w-2 h-2 bg-white rounded-full animate-twinkle" style={{ top: `${Math.random() * 100}%`, left: `${Math.random() * 100}%`, animationDelay: `${Math.random() * 3}s`, boxShadow: '0 0 10px rgba(255,255,255,0.8)' }}></div>
+            <div
+              key={i}
+              className="absolute w-2 h-2 bg-white rounded-full animate-twinkle"
+              style={{
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 3}s`,
+                boxShadow: '0 0 10px rgba(255,255,255,0.8)'
+              }}
+            ></div>
           ))}
         </div>
 
         {/* Large Floating Stars */}
         <div className="absolute top-[20%] left-[10%] w-20 h-20 flex items-center justify-center animate-float-slow opacity-20">
-          <i className="ri-star-fill text-7xl text-[#FFC837]" style={{ filter: 'drop-shadow(0 0 20px rgba(255,200,55,0.8))' }}></i>
+          <i
+            className="ri-star-fill text-7xl text-[#FFC837]"
+            style={{ filter: 'drop-shadow(0 0 20px rgba(255,200,55,0.8))' }}
+          ></i>
         </div>
-        <div className="absolute bottom-[15%] right-[8%] w-24 h-24 flex items-center justify-center animate-float-medium opacity-20" style={{ animationDelay: '1s' }}>
-          <i className="ri-star-fill text-8xl text-[#FF4F87]" style={{ filter: 'drop-shadow(0 0 20px rgba(255,79,135,0.8))' }}></i>
+        <div
+          className="absolute bottom-[15%] right-[8%] w-24 h-24 flex items-center justify-center animate-float-medium opacity-20"
+          style={{ animationDelay: '1s' }}
+        >
+          <i
+            className="ri-star-fill text-8xl text-[#FF4F87]"
+            style={{ filter: 'drop-shadow(0 0 20px rgba(255,79,135,0.8))' }}
+          ></i>
         </div>
 
         <div className="max-w-[1280px] mx-auto px-6 text-center relative z-10">
-          <h2 className="text-5xl lg:text-7xl font-extrabold text-white mb-8" style={{ fontFamily: 'Nunito, sans-serif', textShadow: '0 4px 30px rgba(0,0,0,0.3)' }}>
-            Start Your <span className="bg-gradient-to-r from-[#FFC837] to-[#FFDD55] bg-clip-text text-transparent" style={{ filter: 'drop-shadow(0 0 20px rgba(255,200,55,0.6))' }}>Success Story</span>
+          <h2
+            className="text-5xl lg:text-7xl font-extrabold text-white mb-8"
+            style={{
+              fontFamily: 'Nunito, sans-serif',
+              textShadow: '0 4px 30px rgba(0,0,0,0.3)'
+            }}
+          >
+            Start Your{' '}
+            <span
+              className="bg-gradient-to-r from-[#FFC837] to-[#FFDD55] bg-clip-text text-transparent"
+              style={{
+                filter: 'drop-shadow(0 0 20px rgba(255,200,55,0.6))'
+              }}
+            >
+              Success Story
+            </span>
           </h2>
-          <p className="text-white text-2xl mb-12 max-w-2xl mx-auto" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.3)' }}>
+          <p
+            className="text-white text-2xl mb-12 max-w-2xl mx-auto"
+            style={{ textShadow: '0 2px 10px rgba(0,0,0,0.3)' }}
+          >
             Join hundreds of families who have seen incredible progress with our ESDM therapy
           </p>
           <a
             href={mailtoHrefBase}
             className="cta-button testimonials-cta-button bg-gradient-to-r from-[#FFC837] to-[#FFDD55] text-[#0A2A66] px-14 py-7 rounded-full font-extrabold text-2xl hover:scale-110 transition-all inline-flex items-center gap-4 whitespace-nowrap cursor-pointer border-6 border-white mx-auto"
             style={{
-              boxShadow: "0 15px 50px rgba(255, 200, 55, 0.6), inset 0 2px 15px rgba(255,255,255,0.5)"
+              boxShadow:
+                '0 15px 50px rgba(255, 200, 55, 0.6), inset 0 2px 15px rgba(255,255,255,0.5)'
             }}
           >
             <i className="ri-mail-fill text-4xl"></i>
@@ -425,7 +499,7 @@ Thank you,
         @keyframes twinkle { 0%,100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 1; transform: scale(1.5); } }
 
         .animate-float-slow { animation: float-slow 4s ease-in-out infinite; }
-        .animate-float-medium { animation: float-medium 4s ease-in-out infinite; }
+        .animate-float-medium { animation: float-medium 3s ease-in-out infinite; }
         .animate-twinkle { animation: twinkle 3s ease-in-out infinite; }
 
         @media (max-width: 768px) {

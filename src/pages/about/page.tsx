@@ -1053,8 +1053,8 @@ export default function About() {
 
           /* Smaller green circle, icon centered */
           .sanaz-content .sanaz-highlights .w-12.h-12 {
-            width: 2.2rem !important;
-            height: 2.2rem !important;
+            width: 2rem !important;
+            height: 2rem !important;
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
@@ -1067,7 +1067,7 @@ export default function About() {
 
           /* Smaller text, wrapping inside card */
           .sanaz-content .sanaz-highlights span {
-            font-size: 0.8rem !important;
+            font-size: 0.6rem !important;
             display: block !important;
             white-space: normal !important;
             word-break: break-word !important;
