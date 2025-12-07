@@ -6,9 +6,6 @@ import Footer from '../../components/feature/Footer';
 import { useState, useMemo, useEffect, useRef } from 'react';
 import SanazAbout from '../../assets/Sanaz About Section.png';
 import WhiteTarget from "../../assets/icons/white-target.png";
-import TestimonialMarieImg from '../../assets/testimonial-marie.jpg';
-import TestimonialMichaelImg from '../../assets/testimonial-michael.jpg';
-import TestimonialMadhuImg from '../../assets/testimonial-madhu.jpg';
 
 /**
  * Helpers + CountUp component
@@ -205,21 +202,18 @@ export default function Home() {
       location: 'Castle Hill, Sydney',
       text: 'In just four sessions, the progress has been wonderful. My son is making great eye contact and is much more responsive to the educators. He is communicating well and, most importantly, he is now socializing with his peers. We are thrilled with the changes!',
       rating: 5,
-      image: TestimonialMarieImg,
     },
     {
       name: 'Michael',
       location: 'Parramatta, Sydney',
       text: 'In just three sessions, we have seen incredible changes. My daughter is already showing more independence, like brushing her teeth by herself, and she is spending much less time alone in her room. She is significantly more vocal and, best of all, she actively wants to play with her dad and brother now. The progress has been amazing to watch!',
       rating: 5,
-      image: TestimonialMichaelImg,
     },
     {
       name: 'Madhu',
       location: 'Chatswood, Sydney',
       text: 'My son has improved a lot on eye contact, answering questions, listening and understanding as well. He is able to understand and follow instructions better. I am so glad he is learning to play different new games, following the rules of the games as well.Thank you for all your hard work and supporting him in his journey!',
       rating: 5,
-      image: TestimonialMadhuImg,
     },
   ];
 
@@ -1346,35 +1340,19 @@ export default function Home() {
                           }}
                         ></div>
 
-                        {/* Profile Image with Glow */}
-                        <div className="flex justify-center mb-8">
-                          <div className="relative">
-                            <div
-                              className="absolute inset-0 rounded-full"
-                              style={{
-                                background:
-                                  'linear-gradient(135deg, #FFC837, #FF4F87, #33C8FF)',
-                                filter: 'blur(20px)',
-                                opacity: 0.6,
-                              }}
-                            ></div>
-                            <img
-                              src={testimonial.image}
-                              alt={testimonial.name}
-                              className="relative w-24 h-24 rounded-full object-cover border-6 border-white"
-                              style={{
-                                boxShadow: '0 10px 30px rgba(0, 0, 0, 0.2)',
-                                backgroundColor: '#E3E6EB',
-                                // move only the 2nd review image down a bit
-                                objectPosition: index === 1 ? 'center 10%' : 'center',
-                              }}
-                              loading="lazy"
-                              decoding="async"
-                              crossOrigin="anonymous"
-                              onError={handleImgError}
-                            />
+                        <div className="text-center">
+                          <div
+                            className="font-extrabold text-[#0A2A66] text-2xl mb-2"
+                            style={{ fontFamily: 'Nunito, sans-serif' }}
+                          >
+                            {testimonial.name}
+                          </div>
+                          <div className="text-[#A9B1C0] text-lg font-semibold">
+                            {testimonial.location}
                           </div>
                         </div>
+                        
+                        <br />
 
                         <div className="flex justify-center mb-8">
                           {[...Array(testimonial.rating)].map((_, i) => (
@@ -1393,17 +1371,7 @@ export default function Home() {
                           &quot;{testimonial.text}&quot;
                         </p>
 
-                        <div className="text-center">
-                          <div
-                            className="font-extrabold text-[#0A2A66] text-2xl mb-2"
-                            style={{ fontFamily: 'Nunito, sans-serif' }}
-                          >
-                            {testimonial.name}
-                          </div>
-                          <div className="text-[#A9B1C0] text-lg font-semibold">
-                            {testimonial.location}
-                          </div>
-                        </div>
+                       
 
                         <div
                           className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 w-32 h-2 bg-gradient-to-r from-[#33C8FF] via-[#4AD36D] to-[#FF8A3D] rounded-full"
