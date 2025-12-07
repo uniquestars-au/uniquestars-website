@@ -889,7 +889,7 @@ export default function Home() {
                   </p>
 
                   <p className="text-white/95 text-lg leading-relaxed mb-10">
-                    With a Master's in Special and Inclusive Education from the University of Sydney, a Master's in Linguistics, and an ESDM certification, Sanaz has over 5 years of experience helping children with autism have fun while they learn and grow in both India and Australia.
+                    Sanaz is a highly qualified therapist holding a Master of Special and Inclusive Education from the University of Sydney and a Master of Linguistics. With over five years of international experience across Australia and India, she specializes in the Early Start Denver Model (ESDM). Sanaz is passionate about combining evidence-based intervention with play, ensuring that children with autism develop essential skills in a joyful and supportive environment.
                   </p>
 
                   <div className="grid grid-cols-2 gap-5 mb-10 sanaz-highlights">
@@ -1351,7 +1351,7 @@ export default function Home() {
                             {testimonial.location}
                           </div>
                         </div>
-                        
+
                         <br />
 
                         <div className="flex justify-center mb-8">
