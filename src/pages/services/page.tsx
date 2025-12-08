@@ -13,7 +13,7 @@ export default function Services() {
       gradient: 'from-[#FF4F87] to-[#FF8A3D]',
       title: 'Early Intervention',
       description:
-        'Specialized therapy for children aged 12-48 months during the critical early years when intervention is most effective.',
+        'Specialized therapy for children aged 1-8 years during the critical early years when intervention is most effective.',
       image:
         'https://readdy.ai/api/search-image?query=Professional%20female%20therapist%20working%20with%20young%20toddler%20child%20with%20autism%20in%20bright%20modern%20therapy%20room%2C%20engaging%20play-based%20early%20intervention%20activity%20with%20colorful%20educational%20toys%2C%20warm%20natural%20window%20lighting%2C%20child%20smiling%20and%20focused%2C%20professional%20yet%20friendly%20atmosphere%2C%20clean%20simple%20background%2C%20high%20quality%20photography%20showing%20authentic%20moment%20of%20learning%20and%20development&width=600&height=400&seq=service-early-intervention-premium&orientation=landscape',
       benefits: [
