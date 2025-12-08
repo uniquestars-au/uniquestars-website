@@ -268,7 +268,7 @@ export default function Home() {
 
   // --- data arrays ---
   const services = [
-    { icon: 'ri-heart-pulse-fill', color: '#FF4F87', gradient: 'from-[#FF4F87] to-[#FF8A3D]', title: 'Early Intervention', description: 'Evidence-based therapy for children aged 12-48 months to maximize developmental outcomes.' },
+    { icon: 'ri-heart-pulse-fill', color: '#FF4F87', gradient: 'from-[#FF4F87] to-[#FF8A3D]', title: 'Early Intervention', description: 'Evidence-based therapy for children aged 1-8 Years to maximize developmental outcomes.' },
     { icon: 'ri-star-smile-fill', color: '#FFC837', gradient: 'from-[#FFC837] to-[#FFDD55]', title: 'ESDM Therapy', description: 'Specialized Early Start Denver Model approach combining play and learning.' },
     { icon: 'ri-chat-smile-3-fill', color: '#33C8FF', gradient: 'from-[#33C8FF] to-[#0480E8]', title: 'Communication Support', description: 'Building language skills through naturalistic play and social interaction strategies.' },
     { icon: 'ri-emotion-happy-fill', color: '#4AD36D', gradient: 'from-[#4AD36D] to-[#33C8FF]', title: 'Behaviour Support', description: 'Positive behaviour strategies to help children thrive in daily routines and activities.' },
