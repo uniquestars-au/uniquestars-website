@@ -198,6 +198,12 @@ export default function Home() {
 
   const testimonials = [
     {
+      name: 'Jess Marta',
+      location: 'Haberfield, Sydney',
+      text: 'Sanaz is a thoughtful, child-centred therapist who creates a safe, respectful, and supportive environment for every child. She demonstrates patience, empathy, and flexibility, adapts her approaches to individual needs, and works collaboratively with families and professionals, always prioritising each child’s wellbeing and best interests.',
+      rating: 5,
+    },
+    {
       name: 'Marie',
       location: 'Castle Hill, Sydney',
       text: 'In just four sessions, the progress has been wonderful. My son is making great eye contact and is much more responsive to the educators. He is communicating well and, most importantly, he is now socializing with his peers. We are thrilled with the changes!',

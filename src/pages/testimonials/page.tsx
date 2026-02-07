@@ -15,6 +15,14 @@ export default function Testimonials() {
 
   const testimonials = [
     {
+      name: 'Jess Marta',
+      role: 'Centre Director, Rise & Shine Kindergarten™ Haberfield',
+      quote:
+        'Sanaz is a thoughtful, child-centred therapist who creates a safe, respectful, and supportive environment for every child. She demonstrates patience, empathy, and flexibility, adapts her approaches to individual needs, and works collaboratively with families and professionals, always prioritising each child’s wellbeing and best interests.',
+      rating: 5,
+      color: '#57cac7',
+    },
+    {
       name: 'Marie',
       role: 'Mother of 3-year-old',
       quote:
@@ -304,10 +312,6 @@ Thank you,
                   <p className="text-[#0A2A66] leading-relaxed mb-6 text-center italic">
                     "{testimonial.quote}"
                   </p>
-
-                  
-
-                  
                 </div>
               </div>
             ))}
