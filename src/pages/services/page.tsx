@@ -4,6 +4,7 @@ import SEO from '../../components/SEO';
 import Navbar from '../../components/feature/Navbar';
 import Footer from '../../components/feature/Footer';
 import CommSupportImage from '../../assets/Comm-support-Service.jpeg';
+import SOSFeedingTherapyImage from '../../assets/SOS Feeding Therapy.png';
 
 export default function Services() {
   const services = [
@@ -116,6 +117,22 @@ export default function Services() {
         'Build confidence in supporting your child',
         'Implement therapy techniques at home',
         'Strengthen parent-child connection'
+      ]
+    },
+    {
+      icon: 'ri-restaurant-fill',
+      color: '#4AD36D',
+      gradient: 'from-[#4AD36D] to-[#4AD36D]',
+      title: 'SOS Feeding Therapy',
+      description:
+        'Supporting children who experience feeding challenges by helping them build comfort, confidence, and positive relationships with food.',
+      image:
+        SOSFeedingTherapyImage,
+      benefits: [
+        'Builds a child’s comfort with new foods gradually and without pressure',
+        'Supports sensory regulation and oral-motor skill development',
+        'Creates calmer, more positive mealtimes and reduces family stress',
+        'Uses playful, structured strategies to safely expand food variety'
       ]
     }
   ];
