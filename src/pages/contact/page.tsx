@@ -86,14 +86,14 @@ Thank you,
     <div className="min-h-screen bg-white">
       {/* ----- SEO ----- */}
       <SEO
-        title="Contact Unique Stars | Early Intervention Therapy Sydney"
-        description="Book a free consultation for early intervention or ESDM therapy in Sydney. Contact Unique Stars to start your child’s developmental journey."
-        keywords="contact autism therapy Sydney, book early intervention Sydney, ESDM consultation, Unique Stars contact"
+        title="Contact Unique Stars | Book Free Consultation Sydney"
+        description="Ready to start your child's therapy journey? Contact Unique Stars today to book a free consultation for early intervention or feeding therapy in Sydney."
+        keywords="contact Unique Stars, book autism therapy Sydney, ESDM consultation Sydney, feeding therapy contact Sydney, early intervention booking"
         canonical="https://uniquestars.com.au/contact"
         openGraph={{
-          title: 'Contact Unique Stars | Early Intervention Therapy Sydney',
+          title: 'Contact Unique Stars | Book Free Consultation Sydney',
           description:
-            'Book a free consultation for early intervention or ESDM therapy in Sydney. Contact Unique Stars to start your child’s developmental journey.',
+            "Ready to start your child's therapy journey? Contact Unique Stars today to book a free consultation for early intervention or feeding therapy in Sydney.",
           url: 'https://uniquestars.com.au/contact',
           image: '/og-contact.jpg',
         }}

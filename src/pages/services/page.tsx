@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import SEO from '../../components/SEO';
 import Navbar from '../../components/feature/Navbar';
 import Footer from '../../components/feature/Footer';
-import CommSupportImage from '../../assets/Comm-support-Service.jpeg';
-import SOSFeedingTherapyImage from '../../assets/SOS Feeding Therapy.png';
+import CommSupportImage from '@/assets/Comm-support-Service.jpeg';
+import SOSFeedingTherapyImage from '@/assets/SOS Feeding Therapy.png';
 
 export default function Services() {
   const services = [
@@ -14,7 +14,7 @@ export default function Services() {
       gradient: 'from-[#FF4F87] to-[#FF8A3D]',
       title: 'Early Intervention',
       description:
-        'Specialized therapy for children aged 1-8 years during the critical early years when intervention is most effective.',
+        'Comprehensive early intervention therapy Sydney for children aged 1-8 years. Our evidence-based approach focuses on the critical golden window of development, providing tailored support for autistic children and those with developmental delays in Inner West Sydney and beyond.',
       image:
         'https://readdy.ai/api/search-image?query=Professional%20female%20therapist%20working%20with%20young%20toddler%20child%20with%20autism%20in%20bright%20modern%20therapy%20room%2C%20engaging%20play-based%20early%20intervention%20activity%20with%20colorful%20educational%20toys%2C%20warm%20natural%20window%20lighting%2C%20child%20smiling%20and%20focused%2C%20professional%20yet%20friendly%20atmosphere%2C%20clean%20simple%20background%2C%20high%20quality%20photography%20showing%20authentic%20moment%20of%20learning%20and%20development&width=600&height=400&seq=service-early-intervention-premium&orientation=landscape',
       benefits: [
@@ -30,7 +30,7 @@ export default function Services() {
       gradient: 'from-[#FFC837] to-[#FFDD55]',
       title: 'ESDM Therapy',
       description:
-        'Early Start Denver Model - a comprehensive, play-based approach proven effective for young children with autism.',
+        'Certified ESDM therapy Sydney (Early Start Denver Model). This play-based, relationship-focused intervention is internationally recognized for its effectiveness in supporting toddlers and preschool children with autism, focusing on social communication and joint attention.',
       image:
         'https://readdy.ai/api/search-image?query=Joyful%20young%20child%20with%20autism%20playing%20with%20colorful%20building%20blocks%20during%20ESDM%20therapy%20session%2C%20professional%20therapist%20hands%20visible%20guiding%20play%20activity%2C%20bright%20modern%20therapy%20room%20with%20soft%20natural%20lighting%2C%20warm%20welcoming%20atmosphere%2C%20child%20engaged%20and%20happy%2C%20pastel%20colored%20walls%20with%20simple%20clean%20background%2C%20high%20quality%20professional%20photography&width=600&height=400&seq=service-esdm-therapy-premium&orientation=landscape',
       benefits: [
@@ -46,7 +46,7 @@ export default function Services() {
       gradient: 'from-[#33C8FF] to-[#0480E8]',
       title: 'Communication Support',
       description:
-        'Building language and communication skills through naturalistic strategies and social interaction.',
+        'Specialized speech delay support Sydney and social communication therapy. We help children build essential verbal and non-verbal communication skills through naturalistic play, targeting joint attention, turn-taking, and vocabulary development.',
       image: CommSupportImage,
       benefits: [
         'Develop verbal & non-verbal communication',
@@ -61,7 +61,7 @@ export default function Services() {
       gradient: 'from-[#4AD36D] to-[#33C8FF]',
       title: 'Behaviour Support',
       description:
-        'Positive behavior strategies to help children thrive in daily routines and manage challenging behaviors.',
+        'Positive behaviour support through play. Our child-led strategies help children with autism and developmental delays manage emotional regulation difficulties and transition challenges, fostering independence and confidence in daily routines.',
       image:
         'https://readdy.ai/api/search-image?query=Professional%20therapist%20helping%20young%20child%20with%20autism%20learn%20emotional%20regulation%20and%20positive%20behavior%2C%20using%20colorful%20emotion%20cards%20and%20visual%20supports%2C%20bright%20modern%20therapy%20room%20with%20natural%20lighting%2C%20child%20calm%20and%20engaged%2C%20warm%20supportive%20atmosphere%2C%20clean%20simple%20background%2C%20high%20quality%20professional%20photography&width=600&height=400&seq=service-behaviour-premium&orientation=landscape',
       benefits: [
@@ -77,7 +77,7 @@ export default function Services() {
       gradient: 'from-[#FF8A3D] to-[#FFC837]',
       title: 'Play-Based Learning',
       description:
-        'Fun, engaging activities that promote learning through natural play experiences and child-led exploration.',
+        'Naturalistic play-based learning for children in Sydney. We use fun, engaging routines to promote developmental growth, building play skills, social engagement, and cognitive abilities in a safe, supportive environment.',
       image:
         'https://readdy.ai/api/search-image?query=Young%20child%20with%20autism%20engaged%20in%20fun%20play-based%20learning%20activity%20with%20colorful%20toys%20and%20educational%20games%2C%20professional%20therapist%20facilitating%20play%2C%20bright%20modern%20therapy%20room%20with%20natural%20lighting%2C%20child%20laughing%20and%20enjoying%20activity%2C%20warm%20welcoming%20atmosphere%2C%20clean%20simple%20background%2C%20high%20quality%20professional%20photography&width=600&height=400&seq=service-play-based-premium&orientation=landscape',
       benefits: [
@@ -93,7 +93,7 @@ export default function Services() {
       gradient: 'from-[#0480E8] to-[#33C8FF]',
       title: 'Motor Skills Development',
       description:
-        'Developing fine and gross motor skills through playful movement activities and structured exercises.',
+        'Targeted motor skills development for children with developmental delays in Sydney. We support fine and gross motor challenges through playful physical activities, helping children build coordination and confidence.',
       image:
         'https://readdy.ai/api/search-image?query=Young%20child%20with%20autism%20practicing%20motor%20skills%20development%20with%20colorful%20movement%20activities%20and%20coordination%20exercises%2C%20professional%20therapist%20guiding%20physical%20activity%2C%20bright%20modern%20therapy%20room%20with%20natural%20lighting%2C%20child%20active%20and%20smiling%2C%20warm%20supportive%20atmosphere%2C%20clean%20simple%20background%2C%20high%20quality%20professional%20photography&width=600&height=400&seq=service-motor-skills-premium&orientation=landscape',
       benefits: [
@@ -109,7 +109,7 @@ export default function Services() {
       gradient: 'from-[#FF4F87] to-[#FFC837]',
       title: 'Parent Coaching',
       description:
-        "Empowering parents with strategies and techniques to support their child's development at home and in daily routines.",
+        "Empowering parent coaching autism Sydney. We provide families with practical strategies and evidence-based techniques to support their child's learning and development at home, helping parents feel confident in their everyday routines.",
       image:
         'https://readdy.ai/api/search-image?query=Professional%20therapist%20coaching%20parents%20of%20child%20with%20autism%20in%20bright%20modern%20therapy%20room%2C%20showing%20techniques%20and%20strategies%2C%20parents%20taking%20notes%20and%20engaged%2C%20warm%20supportive%20atmosphere%20with%20colorful%20educational%20materials%20on%20table%2C%20natural%20window%20lighting%2C%20clean%20simple%20background%2C%20high%20quality%20professional%20photography%20showing%20collaborative%20learning%20moment&width=600&height=400&seq=service-parent-coaching-premium&orientation=landscape',
       benefits: [
@@ -125,7 +125,7 @@ export default function Services() {
       gradient: 'from-[#4AD36D] to-[#4AD36D]',
       title: 'SOS Feeding Therapy',
       description:
-        'Supporting children who experience feeding challenges by helping them build comfort, confidence, and positive relationships with food.',
+        'Specialized feeding therapy Sydney and SOS Feeding support. We provide child-led, relationship-based support for picky eating, fussy eating, food refusal, and sensory food aversions, helping families reduce mealtime stress and expand food variety.',
       image:
         SOSFeedingTherapyImage,
       benefits: [
@@ -220,14 +220,14 @@ Thank you,
     <div className="min-h-screen bg-white">
       {/* ----- SEO: page-specific meta ----- */}
       <SEO
-        title="Autism Therapy Services in Sydney | Early Intervention & ESDM Therapy"
-        description="Explore therapy services including ESDM therapy, early intervention, communication support, behaviour support, play-based learning, and motor skills development for children in Sydney."
-        keywords="autism services Sydney, therapy services for autism, early intervention programs, ESDM services Sydney, child development therapy"
+        title="Autism & Feeding Therapy Services Sydney | Unique Stars ESDM"
+        description="Specialized autism therapy, ESDM-informed support, SOS feeding therapy, and parent coaching for toddlers and preschool children in Sydney Inner West."
+        keywords="feeding therapy Sydney, paediatric feeding therapy Sydney, SOS Feeding Sydney, SOS Approach to Feeding Sydney, picky eating support Sydney, fussy eating support Sydney, feeding difficulties children Sydney, autism and feeding difficulties Sydney, sensory feeding therapy autism, food refusal support children Sydney, mealtime support children Sydney, speech delay support Sydney, social communication therapy Sydney"
         canonical="https://uniquestars.com.au/services"
         openGraph={{
-          title: 'Autism Therapy Services in Sydney | Early Intervention & ESDM Therapy',
+          title: 'Autism & Feeding Therapy Services Sydney | Unique Stars ESDM',
           description:
-            'Explore therapy services including ESDM therapy, early intervention, communication support, behaviour support, play-based learning, and motor skills development for children in Sydney.',
+            'Specialized autism therapy, ESDM-informed support, SOS feeding therapy, and parent coaching for toddlers and preschool children in Sydney Inner West.',
           url: 'https://uniquestars.com.au/services',
           image: '/og-services.jpg'
         }}
@@ -311,8 +311,8 @@ Thank you,
             </span>
           </h1>
           <p className="text-xl text-[#0A2A66] max-w-3xl mx-auto leading-relaxed">
-            Evidence-based early intervention programs designed to help your child reach their full potential
-            through play-based learning.
+            Evidence-based early intervention programs and feeding therapy designed to help your child reach their full potential
+            through play-based learning in Sydney Inner West.
           </p>
         </div>
       </section>
@@ -379,6 +379,53 @@ Thank you,
                     </a>
                   </div>
                 </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Comprehensive Services List for SEO/AEO */}
+      <section className="py-24 bg-[#F6F8FA] relative overflow-hidden">
+        <div className="max-w-[1280px] mx-auto px-6 relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-extrabold text-[#0A2A66] mb-6" style={{ fontFamily: 'Nunito, sans-serif' }}>
+              Our Specialized <span className="text-[#33C8FF]">Support Includes</span>
+            </h2>
+            <p className="text-[#0A2A66] text-xl max-w-3xl mx-auto">
+              We provide a wide range of evidence-based therapies tailored to each child's unique developmental journey.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              'Early intervention therapy',
+              'ESDM-informed autism support',
+              'Autism therapy for toddlers and preschool children',
+              'Developmental therapy for children',
+              'Parent coaching',
+              'Social communication support',
+              'Joint attention building',
+              'Turn-taking and sharing',
+              'Play skills development',
+              'Emotional regulation support',
+              'Transition support',
+              'Behaviour support through play',
+              'School readiness support',
+              'Speech and communication delay support',
+              'Feeding therapy',
+              'SOS Feeding support',
+              'Picky eating support',
+              'Fussy eating support',
+              'Sensory feeding support',
+              'Food refusal support',
+              'Mealtime support for families'
+            ].map((item, index) => (
+              <div key={index} className="flex items-center gap-4 bg-white p-6 rounded-3xl border-2 border-[#EAF7FF] hover:border-[#33C8FF] transition-all group">
+                <div className="w-10 h-10 flex items-center justify-center rounded-full bg-[#EAF7FF] group-hover:bg-[#33C8FF] transition-colors">
+                  <i className="ri-star-smile-fill text-[#33C8FF] group-hover:text-white text-xl"></i>
+                </div>
+                <span className="text-[#0A2A66] font-bold">{item}</span>
               </div>
             ))}
           </div>
@@ -463,7 +510,7 @@ Thank you,
             className="text-white text-2xl mb-12 max-w-2xl mx-auto"
             style={{ textShadow: '0 2px 10px rgba(0, 0, 0, 0.3)' }}
           >
-            Book a free consultation to discuss which services are right for your child
+            Book a free consultation to discuss which services are right for your child in Sydney
           </p>
           <a
             href={mailtoFor()}

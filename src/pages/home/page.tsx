@@ -4,8 +4,8 @@ import SEO from '../../components/SEO';
 import Navbar from '../../components/feature/Navbar';
 import Footer from '../../components/feature/Footer';
 import { useState, useMemo, useEffect, useRef } from 'react';
-import SanazAbout from '../../assets/Sanaz About Section.png';
-import WhiteTarget from "../../assets/icons/white-target.png";
+import SanazAbout from '@/assets/Sanaz About Section.png';
+import WhiteTarget from "@/assets/icons/white-target.png";
 
 /**
  * Helpers + CountUp component
@@ -309,13 +309,13 @@ export default function Home() {
     <div className="min-h-screen bg-white">
       {/* ----- SEO: page-specific meta ----- */}
       <SEO
-        title="Early Intervention & ESDM Therapy for Children | Unique Stars Sydney"
-        description="Unique Stars provides early intervention and ESDM therapy for young children with autism in Sydney. Play-based, evidence-based sessions designed to support communication, behaviour, social skills, and emotional development."
-        keywords="early intervention Sydney, ESDM therapy Sydney, autism therapy Sydney, child autism support, early childhood intervention, play-based autism therapy, Unique Stars"
+        title="Unique Stars Early Intervention Therapy | ESDM, Autism & Feeding Therapy Sydney"
+        description="Play-based early intervention, ESDM-informed autism support, parent coaching, and feeding therapy for children in Sydney and Inner West."
+        keywords="early intervention therapy Sydney, autism early intervention Sydney, ESDM therapy Sydney, feeding therapy Sydney, SOS Feeding Sydney, NDIS early intervention provider Sydney, Inner West Sydney autism therapy, Balmain autism support, Sydney CBD child therapy"
         canonical="https://uniquestars.com.au/"
         openGraph={{
-          title: "Early Intervention & ESDM Therapy for Children | Unique Stars Sydney",
-          description: "Unique Stars provides early intervention and ESDM therapy for young children with autism in Sydney. Play-based, evidence-based sessions designed to support communication, behaviour, social skills, and emotional development.",
+          title: "Unique Stars Early Intervention Therapy | ESDM, Autism & Feeding Therapy Sydney",
+          description: "Play-based early intervention, ESDM-informed autism support, parent coaching, and feeding therapy for children in Sydney and Inner West.",
           url: "https://uniquestars.com.au/",
           image: "/og-home.jpg"
         }}
@@ -521,8 +521,9 @@ export default function Home() {
                 >
                   <img
                     src="https://readdy.ai/api/search-image?query=Joyful%20young%20child%20with%20autism%20playing%20with%20colorful%20building%20blocks%20and%20educational%20toys%20during%20therapy%20session%2C%20bright%20modern%20therapy%20room%20with%20soft%20natural%20window%20lighting%2C%20warm%20welcoming%20atmosphere%2C%20child%20smiling%20with%20genuine%20happiness%20and%20engagement%2C%20professional%20therapist%20hands%20visible%20guiding%20play%20activity%2C%20pastel%20colored%20walls%20with%20simple%20clean%20background%2C%20high%20quality%20professional%20photography%20showing%20authentic%20moment%20of%20learning%20and%20development&width=600&height=700&seq=hero-home-premium-1&orientation=portrait"
-                    alt="Child in therapy"
-                    loading="lazy"
+                    alt="Young child with autism playing with educational toys during ESDM therapy session Sydney"
+                    loading="eager"
+                    fetchPriority="high"
                     decoding="async"
                     crossOrigin="anonymous"
                     onError={handleImgError}
@@ -728,9 +729,14 @@ export default function Home() {
                   }}
                 ></div>
               </h2>
-              <p className="text-[#0A2A66] text-xl leading-relaxed max-w-3xl mx-auto mt-8">
-                Unique Stars provides specialized early intervention therapy for young children with autism in Sydney. We create personalized, play-based programs that help children develop essential skills while having fun.
-              </p>
+              <div className="text-[#0A2A66] text-xl leading-relaxed max-w-4xl mx-auto mt-8 space-y-6">
+                <p>
+                  Unique Stars Early Intervention Therapy provides play-based, family-centred early intervention therapy for young children in Sydney and Inner West Sydney. We support autistic children, children with developmental delays, speech and communication delays, social communication challenges, emotional regulation difficulties, transition challenges, sensory differences, and feeding concerns. Our therapy is ESDM-informed and focuses on building communication, play skills, social engagement, joint attention, turn-taking, emotional regulation, independence, and confidence through natural play-based routines.
+                </p>
+                <p>
+                  We also provide feeding therapy and SOS Feeding support for children who experience picky eating, fussy eating, food refusal, limited food variety, sensory food aversions, oral motor challenges, mealtime stress, or feeding difficulties related to autism and developmental delays. Our sessions are child-led, relationship-based, and practical for families, helping parents feel confident to support their child’s learning, development, and everyday routines at home.
+                </p>
+              </div>
             </div>
           </div>
         </section>
@@ -855,7 +861,7 @@ export default function Home() {
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#0A2A66]/50 z-10"></div>
                   <img
                     src={SanazAbout}
-                    alt="Sanaz - Therapist"
+                    alt="Sanaz - ESDM Certified Therapist and Founder of Unique Stars Sydney"
                     className="w-full h-full object-cover object-top"
                     loading="lazy"
                     decoding="async"
@@ -1221,7 +1227,7 @@ export default function Home() {
                           {step.icon === 'custom-target' ? (
                             <img
                               src={WhiteTarget}
-                              alt="Goal Icon"
+                              alt="Therapy Goal Icon - Unique Stars"
                               className="therapy-goal-icon"
                             />
                           ) : (
@@ -1248,7 +1254,7 @@ export default function Home() {
                           {step.icon === 'custom-target' ? (
                             <img
                               src={WhiteTarget}
-                              alt="Goal Icon"
+                              alt="Therapy Goal Icon - Unique Stars"
                               className="therapy-goal-icon"
                             />
                           ) : (

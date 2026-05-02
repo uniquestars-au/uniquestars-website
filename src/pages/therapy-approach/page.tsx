@@ -147,14 +147,14 @@ Thank you,
     <div className="min-h-screen bg-white">
       {/* ----- SEO: page-specific meta ----- */}
       <SEO
-        title="Our Therapy Approach | Play-Based & ESDM Autism Therapy in Sydney"
-        description="Discover how Unique Stars uses play-based therapy, ESDM, and personalised learning plans to help children with autism build communication, behaviour, social, and motor skills."
-        keywords="therapy approach Sydney, ESDM method, play-based autism therapy, developmental therapy, child behaviour therapy Sydney"
+        title="ESDM & Play-Based Autism Therapy Sydney | Unique Stars Method"
+        description="Learn about the Early Start Denver Model (ESDM) and our play-based therapy approach for autism and developmental delays in Sydney Inner West."
+        keywords="ESDM therapy Sydney, Early Start Denver Model, play-based autism therapy Sydney, naturalistic intervention, joint attention, social communication therapy, evidence-based autism therapy"
         canonical="https://uniquestars.com.au/therapy-approach"
         openGraph={{
-          title: 'Our Therapy Approach | Play-Based & ESDM Autism Therapy in Sydney',
+          title: 'ESDM & Play-Based Autism Therapy Sydney | Unique Stars Method',
           description:
-            'Discover how Unique Stars uses play-based therapy, ESDM, and personalised learning plans to help children with autism build communication, behaviour, social, and motor skills.',
+            'Learn about the Early Start Denver Model (ESDM) and our play-based therapy approach for autism and developmental delays in Sydney Inner West.',
           url: 'https://uniquestars.com.au/therapy-approach',
           image: '/og-therapy-approach.jpg'
         }}
@@ -165,12 +165,12 @@ Thank you,
             {
               '@type': 'Article',
               headline: 'Our Therapy Approach',
-              description: 'Play-based and ESDM early intervention approach used at Unique Stars.'
+              description: 'Play-based and ESDM early intervention approach used at Unique Stars in Sydney.'
             },
             {
               '@type': 'MedicalTherapy',
               name: 'Early Start Denver Model (ESDM)',
-              description: 'ESDM supports young children with autism through structured play, communication building and behavioural development.'
+              description: 'ESDM supports young children with autism through structured play, communication building and behavioural development in a naturalistic setting.'
             }
           ]
         }}

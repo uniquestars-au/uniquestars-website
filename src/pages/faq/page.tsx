@@ -139,14 +139,14 @@ export default function FAQ() {
     <div className="min-h-screen bg-white">
       {/* ----- SEO: page-specific meta ----- */}
       <SEO
-        title="ESDM Therapy FAQ | Early Intervention Questions | Unique Stars Sydney"
-        description="Find answers to frequently asked questions about ESDM therapy, early intervention, funding, costs, progress timelines, and how to get started."
-        keywords="ESDM FAQ, early intervention FAQ, autism therapy questions, child therapy FAQ, NDIS autism support"
+        title="Autism Therapy FAQ Sydney | Early Intervention & Feeding Therapy"
+        description="Find answers to common questions about early intervention, ESDM therapy, feeding support, and how to start your child&apos;s developmental journey in Sydney."
+        keywords="autism therapy FAQ Sydney, early intervention questions, ESDM therapy cost Sydney, NDIS autism support Sydney, feeding therapy FAQ children"
         canonical="https://uniquestars.com.au/faq"
         openGraph={{
-          title: 'ESDM Therapy FAQ | Early Intervention Questions | Unique Stars Sydney',
+          title: 'Autism Therapy FAQ Sydney | Early Intervention & Feeding Therapy',
           description:
-            'Find answers to frequently asked questions about ESDM therapy, early intervention, funding, costs, progress timelines, and how to get started.',
+            "Find answers to common questions about early intervention, ESDM therapy, feeding support, and how to start your child's developmental journey in Sydney.",
           url: 'https://uniquestars.com.au/faq',
           image: '/og-faq.jpg'
         }}

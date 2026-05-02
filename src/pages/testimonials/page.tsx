@@ -132,14 +132,14 @@ Thank you,
     <div className="min-h-screen bg-white">
       {/* ----- SEO: page-specific meta ----- */}
       <SEO
-        title="Parent Testimonials | Autism Therapy Sydney | Unique Stars"
-        description="Hear from parents whose children have flourished with Unique Stars' early intervention and ESDM therapy programs in Sydney."
-        keywords="autism therapy reviews Sydney, parent testimonials, early intervention feedback, ESDM therapy results"
+        title="Success Stories & Parent Reviews | Unique Stars Autism Therapy"
+        description="Read success stories from Sydney families who have experienced the transformative power of our play-based early intervention and feeding therapy."
+        keywords="autism therapy success stories, ESDM therapy reviews Sydney, feeding therapy success Sydney, parent feedback autism support, Unique Stars reviews"
         canonical="https://uniquestars.com.au/testimonials"
         openGraph={{
-          title: 'Parent Testimonials | Autism Therapy Sydney | Unique Stars',
+          title: 'Success Stories & Parent Reviews | Unique Stars Autism Therapy',
           description:
-            "Hear from parents whose children have flourished with Unique Stars' early intervention and ESDM therapy programs in Sydney.",
+            'Read success stories from Sydney families who have experienced the transformative power of our play-based early intervention and feeding therapy.',
           url: 'https://uniquestars.com.au/testimonials',
           image: '/og-testimonials.jpg',
         }}

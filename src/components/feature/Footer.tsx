@@ -13,7 +13,7 @@ export default function Footer() {
               <div className="w-14 h-14 flex items-center justify-center">
                 <img
                   src={logo}
-                  alt="Unique Stars Logo"
+                  alt="Unique Stars Early Intervention Therapy Sydney Logo"
                   className="w-14 h-14 object-contain pointer-events-none"
                   loading="lazy"
                   decoding="async"

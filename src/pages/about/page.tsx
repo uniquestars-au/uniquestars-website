@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import SEO from '../../components/SEO';
 import Navbar from '../../components/feature/Navbar';
 import Footer from '../../components/feature/Footer';
-import SanazAbout from '../../assets/Sanaz About Section.png';
+import SanazAbout from '@/assets/Sanaz About Section.png';
 
 // inline SVG fallback used when an <img> fails to load
 const placeholderSvg = `data:image/svg+xml;utf8,${encodeURIComponent(
@@ -310,9 +310,9 @@ export default function About() {
     <div className="min-h-screen bg-white">
       {/* ----- SEO: page-specific meta ----- */}
       <SEO
-        title="About Unique Stars | Early Intervention Therapy in Sydney"
-        description="Learn about Unique Stars and Sanaz, an ESDM-certified therapist helping young children with autism through early intervention, play-based learning, and compassionate care in Sydney."
-        keywords="about Unique Stars, ESDM therapist Sydney, early intervention specialist, autism care Sydney, Sanaz therapist"
+        title="About Unique Stars | ESDM Therapist & Autism Support Sydney"
+        description="Meet Sanaz, an ESDM-certified therapist in Sydney. Learn about our story, mission, and how we help young children with autism reach their potential through play."
+        keywords="about Unique Stars, ESDM therapist Sydney, early intervention specialist Sydney, autism care Sydney, Sanaz therapist, Sydney Inner West autism support"
         canonical="https://uniquestars.com.au/about"
       />
 

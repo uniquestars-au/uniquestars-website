@@ -28,7 +28,7 @@ export default function Navbar() {
             <div className="w-12 h-12 flex items-center justify-center">
               <img
                 src={logo}
-                alt="Unique Stars Logo"
+                alt="Unique Stars Early Intervention Therapy Sydney Logo"
                 className="w-12 h-12 object-contain pointer-events-none"
                 loading="lazy"
                 decoding="async"
