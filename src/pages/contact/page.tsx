@@ -98,6 +98,24 @@ Thank you,
           image: '/og-contact.jpg',
         }}
         faviconHref="/favicon.ico"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://uniquestars.com.au/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Contact",
+              "item": "https://uniquestars.com.au/contact"
+            }
+          ]
+        }}
       />
 
       <Navbar />

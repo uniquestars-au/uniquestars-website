@@ -157,6 +157,29 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* Service Area */}
+          <div>
+            <h3
+              className="text-[#0A2A66] font-bold text-lg mb-4"
+              style={{ fontFamily: 'Nunito, sans-serif' }}
+            >
+              Service Area
+            </h3>
+            <p className="text-[#0A2A66] text-sm leading-relaxed mb-4">
+              Proudly serving families across Sydney, including:
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {['Inner West', 'Sydney CBD', 'Balmain', 'Haberfield', 'Five Dock', 'Leichhardt'].map((area) => (
+                <span 
+                  key={area}
+                  className="bg-white/50 px-2 py-1 rounded text-xs text-[#0A2A66] border border-[#33C8FF]/20"
+                >
+                  {area}
+                </span>
+              ))}
+            </div>
+          </div>
+
           {/* Contact */}
           <div>
             <h3

@@ -163,14 +163,35 @@ Thank you,
           '@context': 'https://schema.org',
           '@graph': [
             {
-              '@type': 'Article',
-              headline: 'Our Therapy Approach',
-              description: 'Play-based and ESDM early intervention approach used at Unique Stars in Sydney.'
-            },
-            {
               '@type': 'MedicalTherapy',
               name: 'Early Start Denver Model (ESDM)',
-              description: 'ESDM supports young children with autism through structured play, communication building and behavioural development in a naturalistic setting.'
+              description:
+                'ESDM is a play-based, evidence-based early intervention for toddlers with autism.',
+              provider: { '@type': 'LocalBusiness', name: 'Unique Stars' }
+            },
+            {
+              '@type': 'Article',
+              headline: 'ESDM Therapy & Play-Based Early Intervention',
+              description:
+                'How the Early Start Denver Model helps young children with autism reach their potential through naturalistic play-based therapy.',
+              author: { '@type': 'Organization', name: 'Unique Stars' }
+            },
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://uniquestars.com.au/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Therapy Approach",
+                  "item": "https://uniquestars.com.au/therapy-approach"
+                }
+              ]
             }
           ]
         }}

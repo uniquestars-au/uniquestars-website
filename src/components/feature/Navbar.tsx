@@ -20,7 +20,11 @@ export default function Navbar() {
 
   return (
     <nav className="bg-white shadow-md sticky top-0 z-50">
-      <div className="max-w-[1280px] mx-auto px-6 py-4">
+      <div 
+        className="max-w-[1280px] mx-auto px-6 py-4"
+        itemScope 
+        itemType="https://schema.org/SiteNavigationElement"
+      >
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3">

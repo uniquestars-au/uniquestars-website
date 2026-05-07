@@ -179,6 +179,23 @@ export default function Services() {
         description:
           'Unique Stars provides early intervention and ESDM therapy for young children with autism in Sydney.'
       },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://uniquestars.com.au/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Services",
+            "item": "https://uniquestars.com.au/services"
+          }
+        ]
+      },
       // one Service node per service
       ...services.map((s) => ({
         '@type': 'Service',
@@ -192,8 +209,10 @@ export default function Services() {
   };
 
   // helper to produce a safe mailto href (no raw newlines)
-  function mailtoFor(serviceTitle: string) {
-    const subject = `Request for Free Consultation – Unique Stars (${serviceTitle})`;
+  function mailtoFor(serviceTitle?: string) {
+    const subject = serviceTitle
+      ? `Request for Free Consultation – Unique Stars (${serviceTitle})`
+      : `Request for Free Consultation – Unique Stars`;
     const body = `Hi Sanaz,
 
 I would like to book a free consultation for my child.

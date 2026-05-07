@@ -320,6 +320,48 @@ export default function Home() {
           image: "/og-home.jpg"
         }}
         faviconHref="/favicon.ico"
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@graph': [
+            {
+              '@type': 'WebSite',
+              '@id': 'https://uniquestars.com.au/#website',
+              'url': 'https://uniquestars.com.au/',
+              'name': 'Unique Stars Early Intervention Therapy',
+              'description': 'Play-based early intervention, ESDM-informed autism support, parent coaching, and feeding therapy for children in Sydney.',
+              'publisher': { '@id': 'https://uniquestars.com.au/#organization' }
+            },
+            {
+              '@type': 'LocalBusiness',
+              '@id': 'https://uniquestars.com.au/#organization',
+              'name': 'Unique Stars',
+              'url': 'https://uniquestars.com.au/',
+              'logo': 'https://uniquestars.com.au/favicon.ico',
+              'image': 'https://uniquestars.com.au/og-home.jpg',
+              'description': 'Specialized early intervention therapy for young children with autism in Sydney.',
+              'address': {
+                '@type': 'PostalAddress',
+                'addressLocality': 'Sydney',
+                'addressRegion': 'NSW',
+                'addressCountry': 'AU'
+              },
+              'geo': {
+                '@type': 'GeoCoordinates',
+                'latitude': '-33.8688',
+                'longitude': '151.2093'
+              },
+              'telephone': '+61 412 345 678', // Placeholder, update with real if available
+              'openingHoursSpecification': [
+                {
+                  '@type': 'OpeningHoursSpecification',
+                  'dayOfWeek': ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+                  'opens': '09:00',
+                  'closes': '17:00'
+                }
+              ]
+            }
+          ]
+        }}
       />
 
       <Navbar />

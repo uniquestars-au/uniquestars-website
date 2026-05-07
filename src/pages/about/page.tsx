@@ -314,6 +314,43 @@ export default function About() {
         description="Meet Sanaz, an ESDM-certified therapist in Sydney. Learn about our story, mission, and how we help young children with autism reach their potential through play."
         keywords="about Unique Stars, ESDM therapist Sydney, early intervention specialist Sydney, autism care Sydney, Sanaz therapist, Sydney Inner West autism support"
         canonical="https://uniquestars.com.au/about"
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@graph': [
+            {
+              '@type': 'Person',
+              '@id': 'https://uniquestars.com.au/about/#sanaz',
+              'name': 'Sanaz',
+              'jobTitle': 'ESDM Certified Therapist & Founder',
+              'worksFor': { '@id': 'https://uniquestars.com.au/#organization' },
+              'description': 'ESDM-certified therapist with over 5 years of experience in early intervention therapy for children with autism.'
+            },
+            {
+              '@type': 'LocalBusiness',
+              '@id': 'https://uniquestars.com.au/#organization',
+              'name': 'Unique Stars',
+              'url': 'https://uniquestars.com.au/',
+              'logo': 'https://uniquestars.com.au/favicon.ico'
+            },
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://uniquestars.com.au/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "About Us",
+                  "item": "https://uniquestars.com.au/about"
+                }
+              ]
+            }
+          ]
+        }}
       />
 
       <Navbar />

@@ -135,6 +135,40 @@ export default function FAQ() {
     }))
   );
 
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqCategories.flatMap(cat => 
+      cat.questions.map(q => ({
+        "@type": "Question",
+        "name": q.question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": q.answer
+        }
+      }))
+    )
+  };
+
+  const breadcrumbsJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://uniquestars.com.au/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "FAQ",
+        "item": "https://uniquestars.com.au/faq"
+      }
+    ]
+  };
+
   return (
     <div className="min-h-screen bg-white">
       {/* ----- SEO: page-specific meta ----- */}
@@ -149,6 +183,10 @@ export default function FAQ() {
             "Find answers to common questions about early intervention, ESDM therapy, feeding support, and how to start your child's developmental journey in Sydney.",
           url: 'https://uniquestars.com.au/faq',
           image: '/og-faq.jpg'
+        }}
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@graph": [faqJsonLd, breadcrumbsJsonLd]
         }}
         faviconHref="/favicon.ico"
       />

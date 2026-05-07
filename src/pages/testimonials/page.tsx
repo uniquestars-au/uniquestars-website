@@ -3,15 +3,6 @@ import Navbar from '../../components/feature/Navbar';
 import Footer from '../../components/feature/Footer';
 
 export default function Testimonials() {
-  const testimonialsJsonLd = [
-    {
-      "@type": "Review",
-      "author": { "@type": "Person", "name": "Parent Name" },
-      "datePublished": "2024-09-10",
-      "reviewBody": "Our child made great progress after ESDM sessions at Unique Stars...",
-      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
-    }
-  ];
 
   const testimonials = [
     {
@@ -71,6 +62,27 @@ export default function Testimonials() {
       color: '#0480E8',
     },
   ];
+
+  const testimonialsJsonLd = testimonials.map((t) => ({
+    "@type": "Review",
+    "author": { "@type": "Person", "name": t.name },
+    "datePublished": "2024-09-10",
+    "reviewBody": t.quote,
+    "reviewRating": { "@type": "Rating", "ratingValue": t.rating.toString(), "bestRating": "5" },
+    "itemReviewed": {
+      "@type": "LocalBusiness",
+      "name": "Unique Stars",
+      "image": "https://uniquestars.com.au/favicon.ico",
+      "url": "https://uniquestars.com.au",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Sydney",
+        "addressRegion": "NSW",
+        "addressCountry": "AU"
+      }
+    }
+  }));
+
 
   const impactStories = [
     {
@@ -147,12 +159,44 @@ Thank you,
           '@context': 'https://schema.org',
           '@graph': [
             {
+              "@type": "LocalBusiness",
+              "@id": "https://uniquestars.com.au/#organization",
+              "name": "Unique Stars",
+              "url": "https://uniquestars.com.au",
+              "image": "https://uniquestars.com.au/favicon.ico",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Sydney",
+                "addressRegion": "NSW",
+                "addressCountry": "AU"
+              }
+            },
+            {
               '@type': 'CollectionPage',
-              name: 'Testimonials & Success Stories - Unique Stars',
-              description:
+              "@id": "https://uniquestars.com.au/testimonials/#webpage",
+              "url": "https://uniquestars.com.au/testimonials",
+              "name": 'Success Stories & Parent Reviews | Unique Stars Autism Therapy',
+              "isPartOf": { "@id": "https://uniquestars.com.au/#website" },
+              'description':
                 'Parent testimonials and success stories from Unique Stars ESDM therapy.',
             },
-            // embed individual reviews (use your dynamic array)
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://uniquestars.com.au/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Testimonials",
+                  "item": "https://uniquestars.com.au/testimonials"
+                }
+              ]
+            },
             ...testimonialsJsonLd,
           ],
         }}
