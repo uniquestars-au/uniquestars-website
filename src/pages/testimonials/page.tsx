@@ -6,12 +6,20 @@ export default function Testimonials() {
 
   const testimonials = [
     {
+      name: 'Saylvana',
+      role: 'Mother of 4-year-old',
+      quote:
+        'Sanaz Montazer has been such a godsend! She has absolutely helped me and my 4 year old son in ways I never knew I needed! She is so knowledgeable, and patience and calm, and experienced at what she does...but the beauty of it all is that she goes above and beyond, and does it so much from the heart. She has such a love for what she does, and the children are her world, and everything shes helped me with and guided me with has been amazing! I\'ve seen growth in my son in the last few months since having Sanaz with us, more than i\'ve seen before in him. Shes given me confidence when in doubt, and her connections and referrals with others in her circle have also been amazing! I cant thank Sanaz enough for all she does and continues to do! highly recommend her to anyone.',
+      rating: 5,
+      color: '#57cac7',
+    },
+    {
       name: 'Jess Marta',
       role: 'Centre Director, Rise & Shine Kindergarten™ Haberfield',
       quote:
         'Sanaz is a thoughtful, child-centred therapist who creates a safe, respectful, and supportive environment for every child. She demonstrates patience, empathy, and flexibility, adapts her approaches to individual needs, and works collaboratively with families and professionals, always prioritising each child’s wellbeing and best interests.',
       rating: 5,
-      color: '#57cac7',
+      color: '#FF4F87',
     },
     {
       name: 'Marie',
@@ -19,7 +27,7 @@ export default function Testimonials() {
       quote:
         'In just four sessions, the progress has been wonderful. My son is making great eye contact and is much more responsive to the educators. He is communicating well and, most importantly, he is now socializing with his peers. We are thrilled with the changes.',
       rating: 5,
-      color: '#FF4F87',
+      color: '#2276f5',
     },
     {
       name: 'Michael',
@@ -293,17 +301,22 @@ Thank you,
         </div>
 
         <div className="max-w-[1280px] mx-auto px-6 relative z-10">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16 items-stretch">
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="group">
+              <div key={index} className="group h-full">
                 <div
-                  className="bg-white rounded-[40px] p-10 hover:scale-105 transition-all duration-300 border-6 h-full cursor-pointer relative overflow-hidden"
+                  className="bg-white rounded-[40px] h-[520px] p-8 md:p-10 flex flex-col relative overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
                   style={{
-                    borderColor: testimonial.color,
-                    boxShadow: `0 20px 50px ${testimonial.color}30, inset 0 -5px 20px ${testimonial.color}10`,
+                    boxShadow: `0 20px 50px ${testimonial.color}30, 0 10px 40px rgba(10, 42, 102, 0.08)`,
                   }}
                 >
-                  {/* Star Pattern Background */}
+                  {/* Color Accent Top */}
+                  <div
+                    className="absolute top-0 left-0 right-0 h-2"
+                    style={{ backgroundColor: testimonial.color }}
+                  ></div>
+
+                  {/* Star Pattern Background (Top Right) */}
                   <div className="absolute top-4 right-4 w-12 h-12 flex items-center justify-center opacity-10">
                     <i
                       className="ri-star-fill text-5xl"
@@ -311,39 +324,32 @@ Thank you,
                     ></i>
                   </div>
 
-                  {/* Gradient Top Border */}
-                  <div
-                    className="absolute top-0 left-0 right-0 h-2 rounded-t-[40px]"
-                    style={{ backgroundColor: testimonial.color }}
-                  ></div>
-
-                  {/* Name & Role */}
-                  <div className="text-center">
+                  {/* Header: Name & Role (Centered) */}
+                  <div className="text-center mb-1">
                     <h3
-                      className="text-xl font-extrabold text-[#0A2A66] mb-1"
+                      className="text-2xl font-black text-[#0A2A66] mb-1"
                       style={{ fontFamily: 'Nunito, sans-serif' }}
                     >
                       {testimonial.name}
                     </h3>
-                    <p className="text-[#0A2A66]/70 font-semibold">
+                    <p className="text-[#0A2A66]/50 font-bold text-xs uppercase tracking-wider">
                       {testimonial.role}
                     </p>
                   </div>
-                  
-                  <br/>
+
+                  <br />
 
                   {/* Gradient Divider */}
                   <div
-                    className="h-1 w-20 mx-auto rounded-full mb-4"
+                    className="h-1 w-20 mx-auto rounded-full mb-6"
                     style={{
                       background: `linear-gradient(90deg, transparent 0%, ${testimonial.color} 50%, transparent 100%)`,
                     }}
                   ></div>
 
-                  
-                  {/* Rating Stars */}
-                  <div className="flex justify-center gap-1 mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
+                  {/* Rating (Centered) */}
+                  <div className="flex justify-center gap-1 mb-6">
+                    {[...Array(5)].map((_, i) => (
                       <i
                         key={i}
                         className="ri-star-fill text-2xl"
@@ -352,10 +358,21 @@ Thank you,
                     ))}
                   </div>
 
-                  {/* Quote */}
-                  <p className="text-[#0A2A66] leading-relaxed mb-6 text-center italic">
-                    "{testimonial.quote}"
-                  </p>
+                  {/* Quote Content (Scrollable, Centered Text) */}
+                  <div className="relative flex-grow overflow-hidden">
+                    <div className="h-full overflow-y-auto pr-2 custom-testimonial-scrollbar">
+                      <p className="text-[#0A2A66]/80 leading-relaxed text-lg pb-10 text-center italic">
+                        "{testimonial.quote}"
+                      </p>
+                    </div>
+                    {/* Fade Gradient Overlay */}
+                    <div
+                      className="absolute bottom-0 left-0 right-0 h-16 pointer-events-none"
+                      style={{
+                        background: `linear-gradient(to top, white 0%, transparent 100%)`,
+                      }}
+                    ></div>
+                  </div>
                 </div>
               </div>
             ))}
@@ -538,6 +555,21 @@ Thank you,
         .animate-float-slow { animation: float-slow 4s ease-in-out infinite; }
         .animate-float-medium { animation: float-medium 4s ease-in-out infinite; }
         .animate-twinkle { animation: twinkle 3s ease-in-out infinite; }
+
+        .custom-testimonial-scrollbar::-webkit-scrollbar {
+          width: 4px;
+        }
+        .custom-testimonial-scrollbar::-webkit-scrollbar-track {
+          background: #f1f5f9;
+          border-radius: 10px;
+        }
+        .custom-testimonial-scrollbar::-webkit-scrollbar-thumb {
+          background: #cbd5e1;
+          border-radius: 10px;
+        }
+        .custom-testimonial-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: #94a3b8;
+        }
 
         @media (max-width: 768px) {
           .cta-button {
