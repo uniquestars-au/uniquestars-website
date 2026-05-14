@@ -4,6 +4,7 @@ import Navbar from '../../components/feature/Navbar';
 import Footer from '../../components/feature/Footer';
 import React from 'react';
 import yellowTarget from '../../assets/icons/yellow-target.png';
+import Breadcrumbs from '../../components/feature/Breadcrumbs';
 
 export default function TherapyApproach() {
   const esdmFeatures = [
@@ -199,6 +200,7 @@ Thank you,
       />
 
       <Navbar />
+      <Breadcrumbs />
 
       {/* Premium Hero Section */}
       <section

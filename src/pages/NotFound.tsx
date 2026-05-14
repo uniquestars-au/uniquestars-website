@@ -1,6 +1,7 @@
 import SEO from '../components/SEO';
 import Navbar from '../components/feature/Navbar';
 import Footer from '../components/feature/Footer';
+import Breadcrumbs from '../components/feature/Breadcrumbs';
 
 export default function NotFound() {
   return (
@@ -10,6 +11,7 @@ export default function NotFound() {
         description="The page you are looking for does not exist. Return to Unique Stars home for early intervention and autism therapy services."
       />
       <Navbar />
+      <Breadcrumbs />
       <main className="flex-grow flex flex-col items-center justify-center text-center px-4 py-20">
         <h1 className="text-8xl font-extrabold text-[#33C8FF] mb-4">404</h1>
         <h2 className="text-3xl md:text-4xl font-bold text-[#0A2A66] mb-6" style={{ fontFamily: 'Nunito, sans-serif' }}>

@@ -5,6 +5,7 @@ import Navbar from '../../components/feature/Navbar';
 import Footer from '../../components/feature/Footer';
 import CommSupportImage from '@/assets/Comm-support-Service.jpeg';
 import SOSFeedingTherapyImage from '@/assets/SOS Feeding Therapy.png';
+import Breadcrumbs from '../../components/feature/Breadcrumbs';
 
 export default function Services() {
   const services = [
@@ -255,6 +256,7 @@ Thank you,
       />
 
       <Navbar />
+      <Breadcrumbs />
 
       <section
         className="relative overflow-hidden"

@@ -6,6 +6,7 @@ import SEO from '../../components/SEO';
 import Navbar from '../../components/feature/Navbar';
 import Footer from '../../components/feature/Footer';
 import SanazAbout from '@/assets/Sanaz About Section.png';
+import Breadcrumbs from '../../components/feature/Breadcrumbs';
 
 // inline SVG fallback used when an <img> fails to load
 const placeholderSvg = `data:image/svg+xml;utf8,${encodeURIComponent(
@@ -354,6 +355,7 @@ export default function About() {
       />
 
       <Navbar />
+      <Breadcrumbs />
 
       {/* Premium Hero Section */}
       <section

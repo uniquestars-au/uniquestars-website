@@ -3,6 +3,7 @@ import { useState } from 'react';
 import SEO from '../../components/SEO';
 import Navbar from '../../components/feature/Navbar';
 import Footer from '../../components/feature/Footer';
+import Breadcrumbs from '../../components/feature/Breadcrumbs';
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -192,6 +193,7 @@ export default function FAQ() {
       />
 
       <Navbar />
+      <Breadcrumbs />
 
       {/* Premium Hero Section */}
       <section

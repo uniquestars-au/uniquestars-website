@@ -1,6 +1,7 @@
 import SEO from '../../components/SEO';
 import Navbar from '../../components/feature/Navbar';
 import Footer from '../../components/feature/Footer';
+import Breadcrumbs from '../../components/feature/Breadcrumbs';
 
 export default function Testimonials() {
 
@@ -220,6 +221,7 @@ Thank you,
       />
 
       <Navbar />
+      <Breadcrumbs />
 
       {/* Premium Hero Section */}
       <section

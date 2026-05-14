@@ -338,6 +338,17 @@ export default function Home() {
               }
             },
             {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://uniquestars.com.au/"
+                }
+              ]
+            },
+            {
               '@type': 'LocalBusiness',
               '@id': 'https://uniquestars.com.au/#organization',
               'name': 'Unique Stars',

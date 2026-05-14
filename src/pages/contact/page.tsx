@@ -3,6 +3,7 @@ import Navbar from '../../components/feature/Navbar';
 import Footer from '../../components/feature/Footer';
 import SEO from '../../components/SEO';
 import React from 'react';
+import Breadcrumbs from '../../components/feature/Breadcrumbs';
 
 export default function Contact() {
   const buildMailto = (to: string, subject: string, body: string) => {
@@ -153,6 +154,7 @@ Thank you,
       />
 
       <Navbar />
+      <Breadcrumbs />
 
       {/* HERO */}
       <section
