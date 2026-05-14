@@ -14,6 +14,7 @@ type SEOProps = {
     description?: string;
     keywords?: string;
     canonical?: string;
+    robots?: string;
     openGraph?: OpenGraph;
     twitterCard?: boolean;
     jsonLd?: object | null;
@@ -64,6 +65,7 @@ export default function SEO({
     description = "",
     keywords,
     canonical,
+    robots,
     openGraph,
     twitterCard = true,
     jsonLd,
@@ -79,6 +81,7 @@ export default function SEO({
         // Standard meta
         setMeta("description", description || "");
         if (keywords) setMeta("keywords", keywords);
+        if (robots) setMeta("robots", robots);
 
         // canonical
         if (canonical) setOrCreateLink("canonical", canonical);
@@ -143,6 +146,7 @@ export default function SEO({
         description,
         keywords,
         canonical,
+        robots,
         JSON.stringify(openGraph || {}),
         twitterCard,
         JSON.stringify(jsonLd || {}),

@@ -6,6 +6,14 @@ export default function Testimonials() {
 
   const testimonials = [
     {
+      name: 'Samantha',
+      role: 'Mother of 3-year-old',
+      quote:
+        'We\'ve had such a wonderful experience with Sanaz. Our son is only 3 years old, and the care, patience and professionalism she shows in every session is truly incredible. She has built such a warm and trusting connection with him, making him feel safe, supported and excited to learn. We\'ve already noticed positive changes in his confidence, engagement and overall development. We are so grateful for the dedication, compassion and support she provides to both our son and our family. Highly recommend her services!!!',
+      rating: 5,
+      color: '#F3A633',
+    },
+    {
       name: 'Saylvana',
       role: 'Mother of 4-year-old',
       quote:
