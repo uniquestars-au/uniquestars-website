@@ -8,7 +8,6 @@ export default function NotFound() {
       <SEO 
         title="Page Not Found | Unique Stars Sydney"
         description="The page you are looking for does not exist. Return to Unique Stars home for early intervention and autism therapy services."
-        robots="noindex, nofollow"
       />
       <Navbar />
       <main className="flex-grow flex flex-col items-center justify-center text-center px-4 py-20">

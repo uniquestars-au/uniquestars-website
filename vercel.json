@@ -1,17 +1,4 @@
 {
-    "redirects": [
-        {
-            "source": "/:path*",
-            "has": [
-                {
-                    "type": "host",
-                    "value": "www.uniquestars.com.au"
-                }
-            ],
-            "destination": "https://uniquestars.com.au/:path*",
-            "permanent": true
-        }
-    ],
     "rewrites": [
         {
             "source": "/(.*)",
@@ -22,10 +9,6 @@
         {
             "source": "/(.*)",
             "headers": [
-                {
-                    "key": "X-Robots-Tag",
-                    "value": "index, follow"
-                },
                 {
                     "key": "X-Frame-Options",
                     "value": "DENY"
