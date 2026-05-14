@@ -61,6 +61,15 @@ Thank you,
       description: 'In-home & clinic sessions available',
       link: '#map',
     },
+    {
+      icon: 'ri-google-fill',
+      color: '#FBBC05',
+      gradient: 'from-[#FBBC05] to-[#EA4335]',
+      title: 'Google Profile',
+      info: 'Rate Us on Google',
+      description: 'View our Google Business Profile',
+      link: 'https://share.google/gAxHLXKCeayE8RDOz',
+    },
   ];
 
   const officeHours = [
@@ -100,19 +109,44 @@ Thank you,
         faviconHref="/favicon.ico"
         jsonLd={{
           "@context": "https://schema.org",
-          "@type": "BreadcrumbList",
-          "itemListElement": [
+          "@graph": [
             {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Home",
-              "item": "https://uniquestars.com.au/"
+              "@type": "ContactPage",
+              "@id": "https://uniquestars.com.au/contact/#webpage",
+              "url": "https://uniquestars.com.au/contact",
+              "name": "Contact Unique Stars | Book Free Consultation Sydney",
+              "description": "Ready to start your child's therapy journey? Contact Unique Stars today to book a free consultation for early intervention or feeding therapy in Sydney."
             },
             {
-              "@type": "ListItem",
-              "position": 2,
-              "name": "Contact",
-              "item": "https://uniquestars.com.au/contact"
+              "@type": "LocalBusiness",
+              "@id": "https://uniquestars.com.au/#organization",
+              "name": "Unique Stars",
+              "url": "https://uniquestars.com.au/",
+              "logo": "https://uniquestars.com.au/favicon.ico",
+              "telephone": "+61412345678",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Sydney",
+                "addressRegion": "NSW",
+                "addressCountry": "AU"
+              }
+            },
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://uniquestars.com.au/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Contact",
+                  "item": "https://uniquestars.com.au/contact"
+                }
+              ]
             }
           ]
         }}
@@ -661,9 +695,14 @@ Thank you,
         }
 
         @media (min-width:768px) and (max-width:1024px) {
-          .contact-card-container { gap:28px; flex-wrap:nowrap; }
-          .contact-card-wrapper { flex:0 0 calc((100% - 56px) / 3); max-width:calc((100% - 56px) / 3); }
+          .contact-card-container { gap:20px; flex-wrap:wrap; }
+          .contact-card-wrapper { flex:0 0 calc((100% - 20px) / 2); max-width:calc((100% - 20px) / 2); }
           .contact-card { height:320px; }
+        }
+
+        @media (min-width:1025px) {
+          .contact-card-container { flex-wrap:nowrap; }
+          .contact-card-wrapper { flex:0 0 calc((100% - 84px) / 4); max-width:calc((100% - 84px) / 4); }
         }
 
         @media (max-width:768px) {

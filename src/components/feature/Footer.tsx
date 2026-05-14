@@ -85,6 +85,23 @@ export default function Footer() {
               >
                 <i className="ri-youtube-fill text-xl" />
               </a>
+
+              {/* Google Business Profile */}
+              <a
+                href="https://share.google/gAxHLXKCeayE8RDOz"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Unique Stars Google Business Profile"
+                title="Google Business Profile - Unique Stars"
+                className="
+                  w-10 h-10 flex items-center justify-center
+                  bg-white rounded-full text-[#0A2A66]
+                  transition-colors duration-300
+                  hover:bg-[#FBBC05] hover:text-white
+                "
+              >
+                <i className="ri-google-fill text-xl" />
+              </a>
             </div>
           </div>
 

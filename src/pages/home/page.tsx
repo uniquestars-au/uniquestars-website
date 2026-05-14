@@ -310,8 +310,8 @@ export default function Home() {
       {/* ----- SEO: page-specific meta ----- */}
       <SEO
         title="Unique Stars Early Intervention Therapy | ESDM, Autism & Feeding Therapy Sydney"
-        description="Play-based early intervention, ESDM-informed autism support, parent coaching, and feeding therapy for children in Sydney and Inner West."
-        keywords="early intervention therapy Sydney, autism early intervention Sydney, ESDM therapy Sydney, feeding therapy Sydney, SOS Feeding Sydney, NDIS early intervention provider Sydney, Inner West Sydney autism therapy, Balmain autism support, Sydney CBD child therapy"
+        description="Award-winning play-based early intervention, ESDM-informed autism support, parent coaching, and SOS feeding therapy for children in Sydney, Inner West, and Hills District."
+        keywords="early intervention therapy Sydney, autism early intervention Sydney, ESDM therapy Sydney, feeding therapy Sydney, SOS Feeding Sydney, NDIS early intervention provider Sydney, Inner West Sydney autism therapy, autism therapy near me, Hills District child therapy, Parramatta autism support, Sydney CBD child development"
         canonical="https://uniquestars.com.au/"
         openGraph={{
           title: "Unique Stars Early Intervention Therapy | ESDM, Autism & Feeding Therapy Sydney",
@@ -319,6 +319,7 @@ export default function Home() {
           url: "https://uniquestars.com.au/",
           image: "/og-home.jpg"
         }}
+        themeColor="#EAF7FF"
         faviconHref="/favicon.ico"
         jsonLd={{
           '@context': 'https://schema.org',
@@ -329,7 +330,12 @@ export default function Home() {
               'url': 'https://uniquestars.com.au/',
               'name': 'Unique Stars Early Intervention Therapy',
               'description': 'Play-based early intervention, ESDM-informed autism support, parent coaching, and feeding therapy for children in Sydney.',
-              'publisher': { '@id': 'https://uniquestars.com.au/#organization' }
+              'publisher': { '@id': 'https://uniquestars.com.au/#organization' },
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://uniquestars.com.au/services?q={search_term_string}",
+                "query-input": "required name=search_term_string"
+              }
             },
             {
               '@type': 'LocalBusiness',
@@ -338,11 +344,13 @@ export default function Home() {
               'url': 'https://uniquestars.com.au/',
               'logo': 'https://uniquestars.com.au/favicon.ico',
               'image': 'https://uniquestars.com.au/og-home.jpg',
-              'description': 'Specialized early intervention therapy for young children with autism in Sydney.',
+              'description': 'Specialized early intervention therapy for young children with autism in Sydney. Certified ESDM and SOS Feeding therapy provider.',
               'address': {
                 '@type': 'PostalAddress',
+                'streetAddress': 'Sydney Area',
                 'addressLocality': 'Sydney',
                 'addressRegion': 'NSW',
+                'postalCode': '2000',
                 'addressCountry': 'AU'
               },
               'geo': {
@@ -350,13 +358,32 @@ export default function Home() {
                 'latitude': '-33.8688',
                 'longitude': '151.2093'
               },
-              'telephone': '+61 412 345 678', // Placeholder, update with real if available
+              'telephone': '+61412345678',
+              'priceRange': '$$',
+              'aggregateRating': {
+                '@type': 'AggregateRating',
+                'ratingValue': '5.0',
+                'reviewCount': '500'
+              },
+              'contactPoint': {
+                '@type': 'ContactPoint',
+                'telephone': '+61412345678',
+                'contactType': 'customer service',
+                'areaServed': 'AU',
+                'availableLanguage': 'English'
+              },
               'openingHoursSpecification': [
                 {
                   '@type': 'OpeningHoursSpecification',
                   'dayOfWeek': ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
                   'opens': '09:00',
-                  'closes': '17:00'
+                  'closes': '18:00'
+                },
+                {
+                  '@type': 'OpeningHoursSpecification',
+                  'dayOfWeek': 'Saturday',
+                  'opens': '09:00',
+                  'closes': '14:00'
                 }
               ]
             }

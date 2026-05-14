@@ -6,7 +6,7 @@ export default function Testimonials() {
 
   const testimonials = [
     {
-      name: 'Samantha',
+      name: 'Samantha Hadi',
       role: 'Mother of 3-year-old',
       quote:
         'We\'ve had such a wonderful experience with Sanaz. Our son is only 3 years old, and the care, patience and professionalism she shows in every session is truly incredible. She has built such a warm and trusting connection with him, making him feel safe, supported and excited to learn. We\'ve already noticed positive changes in his confidence, engagement and overall development. We are so grateful for the dedication, compassion and support she provides to both our son and our family. Highly recommend her services!!!',
@@ -384,6 +384,78 @@ Thank you,
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Google Reviews Verification Section */}
+      <section className="py-12 bg-white relative">
+        <div className="max-w-[1280px] mx-auto px-6">
+          <div 
+            className="bg-gradient-to-br from-white to-[#F8FAFC] rounded-[50px] p-10 md:p-16 border-4 border-[#E2E8F0] relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-10"
+            style={{ boxShadow: '0 30px 60px rgba(10, 42, 102, 0.05), inset 0 2px 15px rgba(255,255,255,1)' }}
+          >
+            {/* Decorative Stars */}
+            <div className="absolute -top-10 -right-10 w-40 h-40 bg-[#FBBC05]/5 rounded-full blur-3xl"></div>
+            <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-[#33C8FF]/5 rounded-full blur-3xl"></div>
+
+            {/* Corner Animated Stars */}
+            <div className="absolute top-8 left-8 animate-float-slow opacity-20 hidden md:block">
+              <i className="ri-star-fill text-4xl text-[#FBBC05]" style={{ filter: 'drop-shadow(0 0 10px rgba(251, 188, 5, 0.8))' }}></i>
+            </div>
+            <div className="absolute bottom-8 right-8 animate-float-medium opacity-20 hidden md:block" style={{ animationDelay: '1s' }}>
+              <i className="ri-star-fill text-4xl text-[#33C8FF]" style={{ filter: 'drop-shadow(0 0 10px rgba(51, 200, 255, 0.8))' }}></i>
+            </div>
+            <div className="absolute top-12 right-12 animate-float-slow opacity-10 hidden md:block" style={{ animationDelay: '2s' }}>
+              <i className="ri-star-fill text-3xl text-[#FF4F87]" style={{ filter: 'drop-shadow(0 0 8px rgba(255, 79, 135, 0.6))' }}></i>
+            </div>
+
+            <div className="flex-1 text-center lg:text-left z-10">
+              <div className="flex items-center justify-center lg:justify-start gap-3 mb-6">
+                <div className="w-14 h-14 bg-white rounded-2xl shadow-lg flex items-center justify-center border-2 border-[#FBBC05]/20">
+                  <i className="ri-google-fill text-4xl text-[#FBBC05]"></i>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-[#0A2A66] font-black text-2xl leading-none">Google</span>
+                  <span className="text-[#0A2A66]/50 font-bold text-sm uppercase tracking-widest">Business Profile</span>
+                </div>
+              </div>
+              
+              <h2 className="text-4xl md:text-5xl font-black text-[#0A2A66] mb-6 leading-tight" style={{ fontFamily: 'Nunito, sans-serif' }}>
+                Verified Trust from <br className="hidden md:block" />
+                <span className="text-[#FBBC05]">Our Community</span>
+              </h2>
+              
+              <p className="text-[#0A2A66]/70 text-xl max-w-2xl leading-relaxed">
+                We are incredibly proud to serve the Sydney community. Browse through all our verified 5-star reviews on Google to see why families trust Unique Stars for their child's therapy journey.
+              </p>
+            </div>
+
+            <div className="flex flex-col items-center lg:items-end gap-8 z-10">
+              <div className="bg-white p-6 rounded-3xl shadow-xl border-2 border-[#E2E8F0] flex flex-col items-center gap-2">
+                <div className="flex gap-1">
+                  {[...Array(5)].map((_, i) => (
+                    <i 
+                      key={i} 
+                      className="ri-star-fill text-3xl text-[#FBBC05] animate-pulse" 
+                      style={{ animationDelay: `${i * 0.15}s` }}
+                    ></i>
+                  ))}
+                </div>
+                <span className="text-[#0A2A66] font-black text-xl">5.0 Rating</span>
+              </div>
+
+              <a 
+                href="https://share.google/gAxHLXKCeayE8RDOz" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="group relative inline-flex items-center gap-4 bg-[#0A2A66] text-white px-12 py-6 rounded-full font-black text-xl transition-all hover:scale-105 hover:shadow-2xl active:scale-95 overflow-hidden"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-[#FBBC05] to-[#FF8A3D] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <span className="relative z-10">View All Google Reviews</span>
+                <i className="ri-external-link-line relative z-10 text-2xl group-hover:rotate-12 transition-transform"></i>
+              </a>
+            </div>
           </div>
         </div>
       </section>

@@ -17,7 +17,8 @@ type SEOProps = {
     openGraph?: OpenGraph;
     twitterCard?: boolean;
     jsonLd?: object | null;
-    faviconHref?: string; // e.g. '/favicon.ico' (public folder) or imported path
+    faviconHref?: string;
+    themeColor?: string;
 };
 
 function setMeta(nameOrProp: string, value: string, useProperty = false) {
@@ -68,6 +69,7 @@ export default function SEO({
     twitterCard = true,
     jsonLd,
     faviconHref,
+    themeColor,
 }: SEOProps) {
     useEffect(() => {
         // guard for SSR / non-browser environment
@@ -97,8 +99,20 @@ export default function SEO({
         setMeta("twitter:description", openGraph?.description ?? description ?? "");
         if (openGraph?.image) setMeta("twitter:image", openGraph.image);
 
-        // favicon
-        if (faviconHref) setOrCreateLink("icon", faviconHref);
+        // favicon & apple touch icon
+        if (faviconHref) {
+            setOrCreateLink("icon", faviconHref);
+            setOrCreateLink("apple-touch-icon", faviconHref);
+        }
+
+        // theme color
+        if (themeColor) setMeta("theme-color", themeColor);
+
+        // Security / Performance Headers (Fallbacks)
+        setMeta("format-detection", "telephone=no");
+        setMeta("mobile-web-app-capable", "yes");
+        setMeta("apple-mobile-web-app-capable", "yes");
+        setMeta("apple-mobile-web-app-status-bar-style", "default");
 
         // JSON-LD: put into a single script tag with id so we can update/replace reliably
         const jsonLdId = "seo-json-ld";
@@ -147,6 +161,7 @@ export default function SEO({
         twitterCard,
         JSON.stringify(jsonLd || {}),
         faviconHref,
+        themeColor,
     ]);
 
     return null;
