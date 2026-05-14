@@ -28,7 +28,7 @@ export default function Breadcrumbs() {
   return (
     <nav 
       aria-label="Breadcrumb" 
-      className="py-4 px-6 max-w-[1280px] mx-auto w-full flex items-center gap-2 text-sm font-medium"
+      className="flex items-center justify-center gap-2 text-sm font-medium mb-8"
       style={{ fontFamily: 'Nunito, sans-serif' }}
     >
       {breadcrumbs.map((breadcrumb, index) => {
@@ -37,17 +37,17 @@ export default function Breadcrumbs() {
         return (
           <React.Fragment key={breadcrumb.path}>
             {index > 0 && (
-              <i className="ri-arrow-right-s-line text-[#A9B1C0] text-lg"></i>
+              <i className="ri-arrow-right-s-line text-[#0A2A66]/30 text-lg"></i>
             )}
             
             {isLast ? (
-              <span className="text-[#33C8FF] bg-[#EAF7FF] px-4 py-1.5 rounded-full border-2 border-[#33C8FF]/20">
+              <span className="text-[#33C8FF] bg-white/60 backdrop-blur-sm px-4 py-1.5 rounded-full border-2 border-[#33C8FF]/30">
                 {breadcrumb.name}
               </span>
             ) : (
               <Link
                 to={breadcrumb.path}
-                className="text-[#0A2A66] hover:text-[#33C8FF] transition-colors flex items-center gap-1.5 px-3 py-1.5 rounded-full hover:bg-[#EAF7FF]/50"
+                className="text-[#0A2A66] hover:text-[#33C8FF] transition-colors flex items-center gap-1.5 px-3 py-1.5 rounded-full hover:bg-white/40"
               >
                 {index === 0 && <i className="ri-home-4-fill"></i>}
                 {breadcrumb.name}
