@@ -209,6 +209,7 @@ Thank you,
           minHeight: '60vh'
         }}
       >
+        <Breadcrumbs />
         {/* Floating ESDM-themed icons */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-[15%] left-[8%] w-16 h-16 flex items-center justify-center animate-float-slow opacity-30">
@@ -226,7 +227,6 @@ Thank you,
         </div>
 
         <div className="max-w-[1280px] mx-auto px-6 py-24 relative z-10 text-center">
-          <Breadcrumbs />
           <div className="inline-flex items-center gap-3 bg-white px-6 py-4 rounded-full mb-8 border-4 border-[#FF4F87]" style={{ boxShadow: '0 8px 30px rgba(255, 79, 135, 0.4), inset 0 2px 10px rgba(255, 79, 135, 0.2)' }}>
             <div className="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-[#FF4F87] to-[#FF8A3D] rounded-full" style={{ boxShadow: '0 4px 15px rgba(255, 79, 135, 0.5)' }}>
               <i className="ri-lightbulb-flash-fill text-2xl text-white"></i>

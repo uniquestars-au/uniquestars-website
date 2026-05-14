@@ -264,6 +264,7 @@ Thank you,
           minHeight: '60vh'
         }}
       >
+        <Breadcrumbs />
         {/* Floating Stars */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div
@@ -302,7 +303,6 @@ Thank you,
         </div>
 
         <div className="max-w-[1280px] mx-auto px-6 py-24 relative z-10 text-center">
-          <Breadcrumbs />
           <div
             className="inline-flex items-center gap-3 bg-white px-6 py-4 rounded-full mb-8 border-4 border-[#33C8FF]"
             style={{

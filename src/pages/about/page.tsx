@@ -364,6 +364,7 @@ export default function About() {
           minHeight: '60vh',
         }}
       >
+        <Breadcrumbs />
         {/* Floating Stars */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-[20%] left-[10%] w-16 h-16 flex items-center justify-center animate-float-slow opacity-30">
@@ -381,7 +382,6 @@ export default function About() {
         </div>
 
         <div className="max-w-[1280px] mx-auto px-6 py-24 relative z-10 text-center">
-          <Breadcrumbs />
           <div
             className="inline-flex items-center gap-3 bg-white px-6 py-4 rounded-full mb-8 border-4 border-[#FFC837]"
             style={{

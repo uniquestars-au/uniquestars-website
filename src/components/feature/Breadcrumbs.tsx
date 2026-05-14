@@ -26,11 +26,12 @@ export default function Breadcrumbs() {
   ];
 
   return (
-    <nav 
-      aria-label="Breadcrumb" 
-      className="flex items-center justify-center gap-2 text-sm font-medium mb-8"
-      style={{ fontFamily: 'Nunito, sans-serif' }}
-    >
+    <div className="max-w-[1280px] mx-auto px-6 pt-8">
+      <nav 
+        aria-label="Breadcrumb" 
+        className="flex items-center gap-2 text-sm font-medium"
+        style={{ fontFamily: 'Nunito, sans-serif' }}
+      >
       {breadcrumbs.map((breadcrumb, index) => {
         const isLast = index === breadcrumbs.length - 1;
 
@@ -56,6 +57,7 @@ export default function Breadcrumbs() {
           </React.Fragment>
         );
       })}
-    </nav>
+      </nav>
+    </div>
   );
 }
